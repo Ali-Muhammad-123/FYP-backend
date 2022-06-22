@@ -21,22 +21,36 @@ class SignupController {
                 password: "dummy password"
             })
 
-            await Client.save((err) => {
-                if (err) {
-                    return res.status(400).send(err);
-                }
-                else {
-                    res.status(200).json({
-                        message: `Client Signup sucessfull`,
-                    });
-                }
-            })
+            const existingUser = await client.find({
+                email: email
+            });
+
+            if (existingUser.length > 0) {
+                res.status(400).json({
+                    message: `Email Address is already registered`,
+                });
+            }
+            else {
+                await Client.save((err) => {
+                    if (err) {
+                        return res.status(400).send(err);
+                    }
+                    else {
+                        res.status(200).json({
+                            message: `Client Signup sucessfull`,
+                        });
+                    }
+                })
+
+            }
 
         } else {
             res.status(400).json({
                 message: `Invalid Request`,
             });
         }
+
+
 
     }
 }

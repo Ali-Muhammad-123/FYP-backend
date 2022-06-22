@@ -1,18 +1,11 @@
 const mongoose = require("mongoose");
 
 const visaSchema = mongoose.Schema({
-    _Client_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Client"
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Client"
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
+
   companyName: {
     type: String,
     required: true,
@@ -24,28 +17,28 @@ const visaSchema = mongoose.Schema({
   visaUID: {
     type: Number,
     required: true,
-  },    
+  },
   visaType: {
     type: String,
     required: true,
-  }, 
+  },
   jobTitle: {
     type: String,
     required: true,
-  }, 
+  },
   dateOfIssue: {
-    type: String,
+    type: date,
     required: true,
   },
   expiryDate: {
-    type: String,
+    type: date,
     required: true,
   },
-  visa:{
-    type : Buffer,
-    require : true,
+  visa: {
+    type: Buffer,
+    require: true,
   }
-  
+
 });
 
 module.exports = mongoose.model("visa", visaSchema);

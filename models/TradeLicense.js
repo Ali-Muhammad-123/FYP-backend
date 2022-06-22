@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const TradeLicenseSchema = mongoose.Schema({
-  clientName: {
-    type: String,
-    required: true,
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Client"
   },
   licenseNo: {
     type: Number,
@@ -35,6 +35,10 @@ const TradeLicenseSchema = mongoose.Schema({
   },
   request: {
     type: String,
+    required: true,
+  },
+  license: {
+    type: Buffer,
     required: true,
   },
 });

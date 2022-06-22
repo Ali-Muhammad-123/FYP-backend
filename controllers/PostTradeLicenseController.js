@@ -5,10 +5,10 @@ class PostTradeLicenseController {
     static async Execute(req, res) {
 
 
-        const { clientName, licenseNo, code, companyName, judiciary, establishmentDate, dateOfIssue,
-            expiryDate, request } = req.body;
+        const { client, licenseNo, code, companyName, judiciary, establishmentDate, dateOfIssue,
+            expiryDate, request, license } = req.body;
 
-        if (clientName != undefined &&
+        if (client != undefined &&
             licenseNo != undefined &&
             code != undefined &&
             companyName != undefined &&
@@ -16,18 +16,20 @@ class PostTradeLicenseController {
             establishmentDate != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
-            request != undefined) {
+            request != undefined &&
+            license != undefined) {
 
             const TradeLicense = new tradeLicense({
-                clientName: clientName,
+                client: client,
                 licenseNo: licenseNo,
                 code: code,
                 companyName: companyName,
                 judiciary: judiciary,
-                establishmentDate: ISO(establishmentDate),
+                establishmentDate: establishmentDate,
                 dateOfIssue: dateOfIssue,
                 expiryDate: expiryDate,
-                request: request
+                request: request,
+                license: license
             })
 
             await TradeLicense.save((err) => {

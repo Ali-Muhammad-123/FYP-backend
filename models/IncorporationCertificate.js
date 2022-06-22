@@ -1,19 +1,11 @@
 const mongoose = require("mongoose");
 
 const IncorporationCertificateSchema = mongoose.Schema({
-  Client_id:{
+  client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client"
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  clientName: {
-    type: mongoose.Schema.Types.String,
-    ref: "Client"
-  },
-  certificate: {
+  incorporationCertificate: {
     type: Buffer,
     required: true,
   }

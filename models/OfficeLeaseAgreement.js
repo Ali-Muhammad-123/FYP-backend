@@ -1,12 +1,8 @@
 const mongoose = require("mongoose");
 
 const OfficeLeaseAgreementSchema = mongoose.Schema({
-  Client_id:{
+  client: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
-  },
-  clientName: {
-    type: mongoose.Schema.Types.String,
     ref: "Client"
   },
   dateOfIssue: {
@@ -15,6 +11,10 @@ const OfficeLeaseAgreementSchema = mongoose.Schema({
   },
   expiryDate: {
     type: String,
+    required: true,
+  },
+  leaseAgreement: {
+    type: Buffer,
     required: true,
   }
 });

@@ -1,16 +1,8 @@
 const mongoose = require("mongoose");
 
-const IncorporationCertificateSchema = mongoose.Schema({
-  Client_id:{
+const ImmigrationCardSchema = mongoose.Schema({
+  clinet: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  clientName: {
-    type: mongoose.Schema.Types.String,
     ref: "Client"
   },
   dateOfIssue: {
@@ -27,4 +19,4 @@ const IncorporationCertificateSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("incorporationCertificate", IncorporationCertificateSchema);
+module.exports = mongoose.model("immigrationCard", ImmigrationCardSchema);

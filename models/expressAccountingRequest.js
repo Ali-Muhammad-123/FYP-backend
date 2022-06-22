@@ -1,12 +1,8 @@
 const mongoose = require("mongoose");
 
 const requestSchema = mongoose.Schema({
-  Client_id:{
+  client: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
-  },
-  clientName: {
-    type: mongoose.Schema.Types.String,
     ref: "Client"
   },
   requestType: {
@@ -15,4 +11,4 @@ const requestSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("officeLeaseAgreements", OfficeLeaseAgreementSchema);
+module.exports = mongoose.model("expressAccountingRequest", requestSchema);
