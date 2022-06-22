@@ -17,7 +17,10 @@ class GetClientController {
                     if (result) {
                         res.status(200).send({
                             message: "Successfull",
-                            client: result
+                            _id: result._id,
+                            email: result.email,
+                            firstName: result.firstName,
+                            lastName: result.lastName
                         });
                     } else {
                         res.status(400).send({
@@ -31,11 +34,11 @@ class GetClientController {
             });
 
         } else {
-            const client = await Client.find();
+            const client = await Client.find().select("_id, email, firstName, lastName");
 
             if (client && client.length > 0) {
+                console.log(client);
                 res.status(200).send({
-                    message: "Successfull",
                     client: client
                 });
             } else {

@@ -34,10 +34,10 @@ const visaSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  visa: {
+  visa: [{
     type: Buffer,
     require: true,
-  }
+  }]
 
 });
 

@@ -5,14 +5,14 @@ const SalaryCertificateSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client"
   },
-  Visa: {
+  visa: {
     type: String,
     required: true,
   },
-  certificate: {
+  salaryCertificate: {
     type: Buffer,
     required: true,
   }
 });
 
-module.exports = mongoose.model("officeLeaseAgreements", OfficeLeaseAgreementSchema);
+module.exports = mongoose.model("salaryCertificate", SalaryCertificateSchema);

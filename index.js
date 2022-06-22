@@ -1,7 +1,17 @@
 const express = require('express');
 const app = express();
 const dotenv = require("dotenv");
+var cors = require('cors')
+
 dotenv.config();
+
+const corsOptions = {
+  origin: '*',
+  exposedHeaders: "x-auth-token"
+
+};
+
+//app.use(cors(corsOptions, { credentials: true, origin: true }));
 
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -17,10 +27,12 @@ const immigrationCardRouter = require('./routes/immigrationCard')
 const expressAccountingRequest = require('./routes/expressAccountingRequest')
 const visaRouter = require('./routes/visa')
 const client = require('./routes/Client')
+const salaryCertificate = require('./routes/salaryCertificate')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 
 app.use(tradeLicenseRouter);
 app.use(officeLeaseAgreementRouter);
@@ -33,6 +45,11 @@ app.use(immigrationCardRouter);
 app.use(expressAccountingRequest);
 app.use(visaRouter);
 app.use(client);
+app.use(salaryCertificate);
+
+
+app.use(cors(corsOptions, { credentials: true, origin: true }));
+
 
 app.listen(process.env.API_PORT, (error) => {
   if (error) {
