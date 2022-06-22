@@ -15,7 +15,8 @@ const sharecertificateRouter = require('./routes/shareCertificate');
 const incorporationCertificateRouter = require('./routes/incorporationCertificate')
 const immigrationCardRouter = require('./routes/immigrationCard')
 const expressAccountingRequest = require('./routes/expressAccountingRequest')
-
+const visaRouter = require('./routes/visa')
+const client = require('./routes/Client')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
@@ -30,6 +31,8 @@ app.use(sharecertificateRouter);
 app.use(incorporationCertificateRouter);
 app.use(immigrationCardRouter);
 app.use(expressAccountingRequest);
+app.use(visaRouter);
+app.use(client);
 
 app.listen(process.env.API_PORT, (error) => {
   if (error) {

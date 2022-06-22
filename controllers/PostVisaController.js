@@ -6,7 +6,7 @@ class PostVisaController {
 
 
         const { client, companyName, visaApplicant, visaUID, visaType, jobTitle, dateOfIssue,
-            expiryDate, visa } = req.query;
+            expiryDate, visa } = req.body;
 
         if (client != undefined &&
             companyName != undefined &&
