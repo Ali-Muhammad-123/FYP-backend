@@ -13,10 +13,10 @@ const OfficeLeaseAgreementSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  leaseAgreement: {
-    type: Buffer,
-    required: true,
-  }
+  file: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: "File",
+  },
 });
 
 module.exports = mongoose.model("officeLeaseAgreements", OfficeLeaseAgreementSchema);

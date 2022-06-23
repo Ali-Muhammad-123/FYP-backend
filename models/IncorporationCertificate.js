@@ -5,10 +5,10 @@ const IncorporationCertificateSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  incorporationCertificate: {
-    type: Buffer,
-    required: true,
-  }
+  file: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: "File",
+  },
 });
 
 module.exports = mongoose.model("incorporationCertificate", IncorporationCertificateSchema);

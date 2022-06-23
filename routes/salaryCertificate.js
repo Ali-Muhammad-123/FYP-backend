@@ -4,13 +4,19 @@ const PostSalarycertificateController = require("../controllers/PostSalarycertif
 const Router = require("express").Router();
 const auth = require("../middleware/adminAuth");
 
+module.exports = (upload) => {
+    Router.post(
+        "/salarycertificate",
+        auth,
+        upload.single("file"),
+        async (req, res, next) => {
 
-Router.post("/salarycertificate", auth, async (req, res) => {
+            PostSalarycertificateController.Execute(req, res, next);
 
-    PostSalarycertificateController.Execute(req, res);
-
-});
+        });
 
 
 
-module.exports = Router;
+    return Router;
+
+}

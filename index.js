@@ -3,8 +3,6 @@ const app = express();
 const dotenv = require("dotenv");
 var cors = require("cors");
 const path = require("path");
-const fs = require("fs");
-const multer = require("multer");
 dotenv.config();
 
 const corsOptions = {
@@ -29,35 +27,24 @@ const visaRouter = require("./routes/visa");
 const client = require("./routes/Client");
 const salaryCertificate = require("./routes/salaryCertificate");
 const filesRouter = require("./routes/Files");
+const upload = require("./middleware/upload");
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// SET STORAGE
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now());
-  },
-});
-
-var upload = multer({ storage: storage });
-
 app.use(tradeLicenseRouter(upload));
-app.use(officeLeaseAgreementRouter);
+app.use(officeLeaseAgreementRouter(upload));
 app.use(signupRouter);
 app.use(loginRouter);
-app.use(articleOfIncoporationRouter);
-app.use(sharecertificateRouter);
-app.use(incorporationCertificateRouter);
-app.use(immigrationCardRouter);
+app.use(articleOfIncoporationRouter(upload));
+app.use(sharecertificateRouter(upload));
+app.use(incorporationCertificateRouter(upload));
+app.use(immigrationCardRouter(upload));
 app.use(expressAccountingRequest);
-app.use(visaRouter);
+app.use(visaRouter(upload));
 app.use(client);
-app.use(salaryCertificate);
+app.use(salaryCertificate(upload));
 app.use(filesRouter);
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));

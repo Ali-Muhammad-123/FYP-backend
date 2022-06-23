@@ -13,10 +13,9 @@ const Schema = mongoose.Schema({
     },
 
 
-    img: {
-        data: Buffer,
-        contentType: String
-
+    file: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: "File",
     },
 
     description: {

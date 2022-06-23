@@ -1,5 +1,5 @@
 const ArticlesOfIncorporation = require("../models/ArticleOfIncoporation");
-
+const File = require("../models/file");
 
 class PostArticleOfIncoporationController {
 
@@ -8,26 +8,33 @@ class PostArticleOfIncoporationController {
         const { user, article, message } = req.body;
 
         if (user != undefined &&
-            article != undefined &&
             message != undefined) {
 
-            const articlesOfIncorporation = new ArticlesOfIncorporation({
-                user: user,
-                article: article,
-                message: message
-            })
-
-            await articlesOfIncorporation.save((err) => {
+            var final_file = {
+                file: req.file.filename,
+                contentType: req.file.mimetype,
+            };
+            File.create(final_file, function (err, result) {
                 if (err) {
-                    return res.status(400).send(err);
-                }
-                else {
-                    res.status(200).json({
-                        message: `article saved`,
-                    });
-                }
-            })
+                    console.log(err);
+                } else {
+                    ArticlesOfIncorporation.create(
+                        {
+                            user: user,
+                            file: result._id,
+                            message: message,
 
+                        },
+                        (err, res) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log("saved");
+                            }
+                        }
+                    );
+                }
+            });
         } else {
             res.status(400).json({
                 message: `Invalid Request`,

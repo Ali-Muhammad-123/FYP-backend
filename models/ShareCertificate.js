@@ -5,9 +5,9 @@ const shareCertificateSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  shareCertificate: {
-    type: Buffer,
-    required: true,
+  file: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: "File",
   },
 
 });

@@ -3,18 +3,25 @@ const auth = require("../middleware/adminAuth");
 const PostArticleOfIncorporation = require("../controllers/PostArticleOfIncorporation");
 const GetArticleOfIncorporation = require("../controllers/GetArticleOfnIncorporation");
 
-Router.post('/articleofincorporation', auth, async (req, res) => {
+module.exports = (upload) => {
 
-  PostArticleOfIncorporation.Execute(req, res);
+  Router.post(
+    '/articleofincorporation',
+    auth,
+    upload.single("file"),
+    async (req, res, next) => {
+
+      PostArticleOfIncorporation.Execute(req, res, next);
 
 
-});
+    });
 
 
-Router.get("/articlesofincorporation", auth, async (req, res) => {
+  Router.get("/articlesofincorporation", auth, async (req, res) => {
 
-  GetArticleOfIncorporation.Execute(req, res);
+    GetArticleOfIncorporation.Execute(req, res);
 
-});
+  });
 
-module.exports = Router;
+  return Router;
+}

@@ -1,36 +1,44 @@
 const ImmigrationCard = require("../models/ImmigrationCard");
-
+const File = require("../models/file");
 
 class PostImmigrationCardController {
 
     static async Execute(req, res) {
 
-        const { user, dateOfIssue, expiryDate, immigrationCard } = req.body;
+        const { user, dateOfIssue, expiryDate } = req.body;
 
         if (user != undefined &&
             dateOfIssue != undefined &&
-            expiryDate != undefined &&
-            immigrationCard != undefined
+            expiryDate != undefined
         ) {
 
-            const immigrationCardObj = new ImmigrationCard({
-                user: user,
-                dateOfIssue: dateOfIssue,
-                expiryDate: expiryDate,
-                immigrationCard: immigrationCard
-            })
 
-            await immigrationCardObj.save((err) => {
+
+            var final_file = {
+                file: req.file.filename,
+                contentType: req.file.mimetype,
+            };
+            File.create(final_file, function (err, result) {
                 if (err) {
-                    return res.status(400).send(err);
+                    console.log(err);
+                } else {
+                    ImmigrationCard.create(
+                        {
+                            user: user,
+                            dateOfIssue: dateOfIssue,
+                            expiryDate: expiryDate,
+                            file: result._id,
+                        },
+                        (err, res) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log("saved");
+                            }
+                        }
+                    );
                 }
-                else {
-                    res.status(200).json({
-                        message: `immigration Card saved`,
-                    });
-                }
-            })
-
+            });
         } else {
             res.status(400).json({
                 message: `Invalid Request`,

@@ -5,12 +5,20 @@ const shareCertificateRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
 
 
-shareCertificateRouter.post("/sharecertificate", auth, async (req, res) => {
+module.exports = (upload) => {
 
-    PostShareCertificateController.Execute(req, res);
+    shareCertificateRouter.post(
+        "/sharecertificate",
+        auth,
+        upload.single("file"),
+        async (req, res, next) => {
 
-});
+            PostShareCertificateController.Execute(req, res, next);
+
+        });
 
 
 
-module.exports = shareCertificateRouter;
+    return shareCertificateRouter;
+
+}

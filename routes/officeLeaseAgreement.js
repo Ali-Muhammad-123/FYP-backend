@@ -3,16 +3,21 @@ const GetOfficeLeaseAgreementController = require("../controllers/GetOfficeLease
 const officeLeaseAgreementRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
 
-officeLeaseAgreementRouter.get("/officeleaseagreements", auth, async (req, res) => {
 
-  GetOfficeLeaseAgreementController.Execute(req, res);
-});
+module.exports = (upload) => {
 
-officeLeaseAgreementRouter.post('/officeleaseagreements', auth, async (req, res) => {
+  officeLeaseAgreementRouter.get("/officeleaseagreements", auth, async (req, res) => {
 
-  PostOfficeLeaseAgreementController.Execute(req, res);
+    GetOfficeLeaseAgreementController.Execute(req, res);
+  });
 
+  officeLeaseAgreementRouter.post(
+    '/officeleaseagreements',
+    auth,
+    upload.single("file"),
+    async (req, res, next) => {
+      PostOfficeLeaseAgreementController.Execute(req, res, next);
+    });
 
-})
-
-module.exports = officeLeaseAgreementRouter;
+  return officeLeaseAgreementRouter;
+}

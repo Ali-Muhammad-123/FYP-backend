@@ -2,16 +2,19 @@ const Router = require("express").Router();
 const auth = require("../middleware/adminAuth");
 const PostImmigrationCard = require("../controllers/PostImmigrationCard");
 
-
-Router.post('/immigrationcard', auth, async (req, res) => {
-
-    PostImmigrationCard.Execute(req, res);
+module.exports = (upload) => {
 
 
-});
+    Router.post(
+        '/immigrationcard',
+        auth,
+        upload.single("file"),
+        async (req, res, next) => {
 
+            PostImmigrationCard.Execute(req, res, next);
 
+        });
 
+    return Router;
 
-
-module.exports = Router;
+}   

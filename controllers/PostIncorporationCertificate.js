@@ -1,29 +1,39 @@
 const IncorporationCertificate = require("../models/IncorporationCertificate");
+const File = require("../models/file");
 
 class PostIncorporationCertificateController {
 
     static async Execute(req, res) {
 
-        const { user, incorporationCertificate } = req.body;
+        const { user } = req.body;
 
-        if (user != undefined &&
-            incorporationCertificate != undefined) {
+        if (user != undefined) {
 
-            const incorporationCertificateobj = new IncorporationCertificate({
-                user: user,
-                incorporationCertificate: incorporationCertificate,
-            })
 
-            await incorporationCertificateobj.save((err) => {
+            var final_file = {
+                file: req.file.filename,
+                contentType: req.file.mimetype,
+            };
+            File.create(final_file, function (err, result) {
                 if (err) {
-                    return res.status(400).send(err);
+                    console.log(err);
+                } else {
+                    IncorporationCertificate.create(
+                        {
+                            user: user,
+                            file: result._id,
+                        },
+                        (err, res) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log("saved");
+                            }
+                        }
+                    );
                 }
-                else {
-                    return res.status(200).json({
-                        message: `incorporation certifcate added successfully`
-                    });
-                }
-            })
+            });
+
 
 
         } else {

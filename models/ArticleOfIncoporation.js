@@ -6,9 +6,9 @@ const Schema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  article: {
-    type: Buffer,
-    required: true,
+  file: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: "File",
   },
   message: {
     type: String,

@@ -9,10 +9,10 @@ const SalaryCertificateSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  salaryCertificate: {
-    type: Buffer,
-    required: true,
-  }
+  file: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: "File",
+  },
 });
 
 module.exports = mongoose.model("salaryCertificate", SalaryCertificateSchema);
