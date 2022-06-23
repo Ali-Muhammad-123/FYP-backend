@@ -15,8 +15,8 @@ const Schema = mongoose.Schema({
 
     img: {
         data: Buffer,
-        contentType: String,
-        required: true,
+        contentType: String
+
     },
 
     description: {

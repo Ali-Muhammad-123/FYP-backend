@@ -5,16 +5,16 @@ class PostImmigrationCardController {
 
     static async Execute(req, res) {
 
-        const { client, dateOfIssue, expiryDate, immigrationCard } = req.body;
+        const { user, dateOfIssue, expiryDate, immigrationCard } = req.body;
 
-        if (client != undefined &&
+        if (user != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
             immigrationCard != undefined
         ) {
 
             const immigrationCardObj = new ImmigrationCard({
-                client: client,
+                user: user,
                 dateOfIssue: dateOfIssue,
                 expiryDate: expiryDate,
                 immigrationCard: immigrationCard

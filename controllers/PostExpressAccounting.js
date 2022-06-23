@@ -1,17 +1,16 @@
-const ImmigrationCard = require("../models/ImmigrationCard");
 const ExpressAccountingRequest = require("../models/expressAccountingRequest");
 
 class PostExpressAccountingController {
 
     static async Execute(req, res) {
 
-        const { client, requestType } = req.body;
+        const { user, requestType } = req.body;
 
-        if (client != undefined &&
+        if (user != undefined &&
             requestType != undefined) {
 
             const expressAccountingRequestObj = new ExpressAccountingRequest({
-                client: client,
+                user: user,
                 requestType: requestType
             })
 

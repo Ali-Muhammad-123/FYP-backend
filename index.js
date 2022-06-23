@@ -26,6 +26,12 @@ const expressAccountingRequest = require("./routes/expressAccountingRequest");
 const visaRouter = require("./routes/visa");
 const client = require("./routes/Client");
 const salaryCertificate = require("./routes/salaryCertificate");
+const feedback = require("./routes/feedback");
+const feedbackReply = require("./routes/feedbackReply");
+const calculator = require("./routes/calculator");
+const mainland = require("./routes/mainland");
+const emirates = require("./routes/emirates");
+const appointment = require("./routes/appointment");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
@@ -43,6 +49,13 @@ app.use(expressAccountingRequest);
 app.use(visaRouter);
 app.use(client);
 app.use(salaryCertificate);
+app.use(feedback);
+app.use(feedbackReply);
+app.use(calculator);
+app.use(mainland);
+app.use(emirates);
+app.use(appointment);
+
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));
 

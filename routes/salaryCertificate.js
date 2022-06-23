@@ -2,7 +2,7 @@ const PostSalarycertificateController = require("../controllers/PostSalarycertif
 
 
 const Router = require("express").Router();
-const auth = require("../middleware/auth");
+const auth = require("../middleware/adminAuth");
 
 
 Router.post("/salarycertificate", auth, async (req, res) => {

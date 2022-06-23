@@ -5,7 +5,7 @@ class GetOfficeLeaseAgreementController {
     static async Execute(req, res) {
 
         var agreements = await OfficeLeaseAgreement.find().populate({
-            path: 'client',
+            path: 'user',
             select:
                 'firstName lastName',
         });

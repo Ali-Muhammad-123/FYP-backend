@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const OfficeLeaseAgreementSchema = mongoose.Schema({
-  client: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
+    ref: "User"
   },
   dateOfIssue: {
     type: String,

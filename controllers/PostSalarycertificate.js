@@ -5,15 +5,15 @@ class PostSalaryCertificateController {
 
     static async Execute(req, res) {
 
-        const { client, visa, salaryCertificate } = req.body;
+        const { user, visa, salaryCertificate } = req.body;
 
 
-        if (client != undefined &&
+        if (user != undefined &&
             visa != undefined &&
             salaryCertificate != undefined) {
 
             const salaryCertificateobj = new SalaryCertificate({
-                client: client,
+                user: user,
                 visa: visa,
                 salaryCertificate: salaryCertificate,
             })

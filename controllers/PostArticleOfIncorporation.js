@@ -5,14 +5,14 @@ class PostArticleOfIncoporationController {
 
     static async Execute(req, res) {
 
-        const { client, article, message } = req.body;
+        const { user, article, message } = req.body;
 
-        if (client != undefined &&
+        if (user != undefined &&
             article != undefined &&
             message != undefined) {
 
             const articlesOfIncorporation = new ArticlesOfIncorporation({
-                client: client,
+                user: user,
                 article: article,
                 message: message
             })

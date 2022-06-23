@@ -5,10 +5,10 @@ class PostVisaController {
     static async Execute(req, res) {
 
 
-        const { client, companyName, visaApplicant, visaUID, visaType, jobTitle, dateOfIssue,
+        const { user, companyName, visaApplicant, visaUID, visaType, jobTitle, dateOfIssue,
             expiryDate, visa } = req.body;
 
-        if (client != undefined &&
+        if (user != undefined &&
             companyName != undefined &&
             visaApplicant != undefined &&
             visaUID != undefined &&
@@ -20,7 +20,7 @@ class PostVisaController {
         ) {
 
             const visaObj = new Visa({
-                client: client,
+                user: user,
                 companyName: companyName,
                 visaApplicant: visaApplicant,
                 visaUID: visaUID,

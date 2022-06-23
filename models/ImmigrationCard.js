@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const ImmigrationCardSchema = mongoose.Schema({
-  clinet: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
+    ref: "User"
   },
   dateOfIssue: {
     type: String,

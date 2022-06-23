@@ -1,5 +1,5 @@
 const Router = require("express").Router();
-const auth = require("../middleware/auth");
+const auth = require("../middleware/adminAuth");
 const PostExpressAccounting = require("../controllers/PostExpressAccounting");
 
 

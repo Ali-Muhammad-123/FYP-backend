@@ -1,5 +1,7 @@
-const client = require("../models/Client");
+const user = require("../models/user");
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+
 
 
 class LoginController {
@@ -10,30 +12,46 @@ class LoginController {
 
         if (email != undefined && password != undefined) {
 
-            const existingUser = await client.find({
+
+            const existingUser = await user.findOne({
                 email: email,
-                password: password,
             });
 
-            if (existingUser && existingUser.length > 0) {
-                const token = jwt.sign(
-                    JSON.stringify({ email: existingUser[0].email }),
-                    process.env.ACCESS_TOKEN_JWT
-                );
-                res.setHeader("x-auth-token", token);
-                res.status(200).send({
-                    message: "Login Successfull",
-                    email: existingUser[0].email,
-                    _id: existingUser[0]._id
+
+
+
+
+            if (existingUser) {
+
+                await bcrypt.compare(password, existingUser.password).then(function (result) {
+
+                    if (result == true) {
+                        const token = jwt.sign(
+                            JSON.stringify({ email: existingUser.email, role: existingUser.role }),
+                            process.env.ACCESS_TOKEN_JWT
+                        );
+                        res.setHeader("x-auth-token", token);
+                        res.status(200).send({
+                            message: "Login Successfull",
+                            email: existingUser.email,
+                            _id: existingUser._id
+                        });
+                    } else {
+                        res.status(400).send({
+                            message: "Invaild credentials",
+                        });
+                    }
                 });
+
+
             } else {
                 res.status(400).send({
-                    message: "Invalid credencial",
+                    message: "No user found",
                 });
             }
         } else {
             res.status(400).send({
-                message: "Login Unsuccessfull",
+                message: "Invalid request",
             });
         }
 

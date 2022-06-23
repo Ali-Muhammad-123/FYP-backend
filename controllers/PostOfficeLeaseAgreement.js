@@ -5,15 +5,15 @@ class PostOfficeLeaseAgreementController {
 
     static async Execute(req, res) {
 
-        const { client, dateOfIssue, expiryDate, leaseAgreement } = req.body;
+        const { user, dateOfIssue, expiryDate, leaseAgreement } = req.body;
 
-        if (client != undefined &&
+        if (user != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
             leaseAgreement != undefined) {
 
             const officeLeaseAgreement = new OfficeLeaseAgreement({
-                client: client,
+                user: user,
                 dateOfIssue: dateOfIssue,
                 expiryDate: expiryDate,
                 leaseAgreement: leaseAgreement

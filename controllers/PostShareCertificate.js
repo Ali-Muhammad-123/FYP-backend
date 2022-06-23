@@ -5,14 +5,14 @@ class PostShareCertificateController {
 
     static async Execute(req, res) {
 
-        const { client, shareCertificate } = req.body;
+        const { user, shareCertificate } = req.body;
 
 
-        if (client != undefined &&
+        if (user != undefined &&
             shareCertificate != undefined) {
 
             const shareCertificateobj = new ShareCertificate({
-                client: client,
+                user: user,
                 shareCertificate: shareCertificate,
             })
 

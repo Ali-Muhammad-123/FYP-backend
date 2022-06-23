@@ -4,7 +4,7 @@ class PostTradeLicenseController {
     static async Execute(req, res) {
 
         const tradeLicense = await TradeLicense.find().populate({
-            path: 'client',
+            path: 'user',
             select:
                 'firstName lastName',
         });

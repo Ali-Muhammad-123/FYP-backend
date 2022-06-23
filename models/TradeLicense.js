@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const TradeLicenseSchema = mongoose.Schema({
-  client: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
+    ref: "User"
   },
   licenseNo: {
     type: Number,

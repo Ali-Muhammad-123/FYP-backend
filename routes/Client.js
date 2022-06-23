@@ -1,12 +1,12 @@
-const GetClientController = require("../controllers/GetClientController");
-const clientRouter = require("express").Router();
-const auth = require("../middleware/auth");
+const GetUserController = require("../controllers/GetuserController");
+const userRouter = require("express").Router();
+const auth = require("../middleware/adminAuth");
 
-clientRouter.get("/client", auth, async (req, res) => {
+userRouter.get("/user", auth, async (req, res) => {
 
-  GetClientController.Execute(req, res);
+  GetUserController.Execute(req, res);
 
 });
 
 
-module.exports = clientRouter;
+module.exports = userRouter;

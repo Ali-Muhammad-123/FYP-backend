@@ -1,6 +1,6 @@
-const Client = require("../models/Client");
+const User = require("../models/user");
 
-class GetClientController {
+class GetUserController {
 
     static async Execute(req, res) {
 
@@ -9,7 +9,7 @@ class GetClientController {
         if (id != undefined) {
 
 
-            const client = Client.findById(id, function (err, result) {
+            const user = User.findById(id, function (err, result) {
                 if (err) {
                     res.status(400).send(err);
                 } else {
@@ -34,12 +34,11 @@ class GetClientController {
             });
 
         } else {
-            const client = await Client.find().select("_id, email, firstName, lastName");
+            const user = await User.find().select("_id email firstName lastName");
 
-            if (client && client.length > 0) {
-                console.log(client);
+            if (user && user.length > 0) {
                 res.status(200).send({
-                    client: client
+                    user: user
                 });
             } else {
                 res.status(400).send({
@@ -53,4 +52,4 @@ class GetClientController {
 }
 
 
-module.exports = GetClientController;
+module.exports = GetUserController;

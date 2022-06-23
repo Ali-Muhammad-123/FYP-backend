@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ClinetSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
   firstName: {
     type: String,
     required: true,
@@ -12,6 +12,7 @@ const ClinetSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true
   },
   mobile: {
     type: String,
@@ -20,8 +21,12 @@ const ClinetSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  role: {
+    type: String,
+    required: true
   }
-  
+
 });
 
-module.exports = mongoose.model("Client", ClinetSchema);
+module.exports = mongoose.model("User", UserSchema);

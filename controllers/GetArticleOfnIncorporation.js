@@ -4,17 +4,17 @@ class GetArticleOfIncoporationController {
 
     static async Execute(req, res) {
 
-        const { client } = req.body;
+        const { user } = req.body;
 
-        if (client != undefined) {
+        if (user != undefined) {
 
 
 
             var articlesOfIncorporation = await ArticlesOfIncorporation.find({
 
-                client: client
+                user: user
             }).populate({
-                path: 'client',
+                path: 'user',
                 select:
                     'firstName lastName',
             });

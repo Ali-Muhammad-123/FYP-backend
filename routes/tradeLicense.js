@@ -1,6 +1,6 @@
 const posttradeLicenseController = require("../controllers/PostTradeLicenseController");
 const gettradeLicenseController = require("../controllers/GetTradeLicenseController");
-const auth = require("../middleware/auth");
+const auth = require("../middleware/adminAuth");
 const tradeLicenseRouter = require("express").Router();
 const { body, validationResult } = require('express-validator');
 

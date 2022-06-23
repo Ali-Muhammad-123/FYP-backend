@@ -1,25 +1,9 @@
 const mongoose = require("mongoose");
 
 const FeedbackSchema = mongoose.Schema({
-  firstname:{
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
-  },
-  lastname:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  code: {
-    type: String,
-    required: true,
-  },
-  number: {
-    type: Number,
-    required: true,
+    ref: "User"
   },
   feedback: {
     type: String,
