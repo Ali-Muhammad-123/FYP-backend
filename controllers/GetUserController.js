@@ -46,10 +46,9 @@ class GetUserController {
                 });
             }
         }
-
-
-    }
+    };
 }
+
 
 
 module.exports = GetUserController;
