@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const TradeLicenseSchema = mongoose.Schema({
   client: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
+    ref: "Client",
   },
   licenseNo: {
     type: Number,
@@ -37,9 +37,9 @@ const TradeLicenseSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  license: {
-    type: Buffer,
-    required: true,
+  file: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: "File",
   },
 });
 
