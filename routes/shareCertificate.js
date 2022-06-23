@@ -2,7 +2,7 @@ const PostShareCertificateController = require("../controllers/PostShareCertific
 
 
 const shareCertificateRouter = require("express").Router();
-const auth = require("../middleware/auth");
+const auth = require("../middleware/adminAuth");
 
 
 shareCertificateRouter.post("/sharecertificate", auth, async (req, res) => {

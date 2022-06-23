@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const SalaryCertificateSchema = mongoose.Schema({
-  client: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
+    ref: "User"
   },
   visa: {
     type: String,

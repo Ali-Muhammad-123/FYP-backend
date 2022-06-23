@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const calculatorSchema = mongoose.Schema({
-   
+
   calculatorActivity: {
     type: String,
     required: true,
@@ -10,34 +10,34 @@ const calculatorSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  clientName: {
-    type:String,
+  name: {
+    type: String,
     required: true,
   },
   noOfShareholders: {
-    type:Number,
+    type: Number,
     required: true,
   },
   visaAllocation: {
-    type:String,
+    type: String,
     required: true,
   },
   freeZoneType: {
-    type:String,
+    type: String,
     required: true,
   },
   freeZone: {
-    type:String,
+    type: String,
     required: true,
   },
   price: {
-    type:String,
+    type: String,
     required: true,
   },
   description: {
-    type:String,
+    type: String,
     required: true,
-  }  
+  }
 });
 
 module.exports = mongoose.model("calculator", calculatorSchema);

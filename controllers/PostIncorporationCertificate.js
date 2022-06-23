@@ -4,13 +4,13 @@ class PostIncorporationCertificateController {
 
     static async Execute(req, res) {
 
-        const { client, incorporationCertificate } = req.body;
+        const { user, incorporationCertificate } = req.body;
 
-        if (client != undefined &&
+        if (user != undefined &&
             incorporationCertificate != undefined) {
 
             const incorporationCertificateobj = new IncorporationCertificate({
-                client: client,
+                user: user,
                 incorporationCertificate: incorporationCertificate,
             })
 

@@ -1,9 +1,9 @@
 const Router = require("express").Router();
-const auth = require("../middleware/auth");
+const auth = require("../middleware/clientAuth");
 const PostFeedback = require("../controllers/PostFeedback");
 
 
-Router.post('/Feedback', auth, async (req, res) => {
+Router.post('/feedback', auth, async (req, res) => {
 
     PostFeedback.Execute(req, res);
 

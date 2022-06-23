@@ -1,7 +1,7 @@
 const PostOfficeLeaseAgreementController = require("../controllers/PostOfficeLeaseAgreement");
 const GetOfficeLeaseAgreementController = require("../controllers/GetOfficeLeaseAgreement");
 const officeLeaseAgreementRouter = require("express").Router();
-const auth = require("../middleware/auth");
+const auth = require("../middleware/adminAuth");
 
 officeLeaseAgreementRouter.get("/officeleaseagreements", auth, async (req, res) => {
 

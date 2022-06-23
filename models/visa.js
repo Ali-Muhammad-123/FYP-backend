@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const visaSchema = mongoose.Schema({
-  client: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Client"
+    ref: "User"
   },
 
   companyName: {
