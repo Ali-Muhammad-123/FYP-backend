@@ -31,6 +31,7 @@ const calculator = require("./routes/calculator");
 const feedback = require("./routes/feedback")
 const mainland = require("./routes/mainland")
 const emirates = require("./routes/emirates")
+const appointment = require("./routes/appointment")
 const filesRouter = require("./routes/Files");
 const upload = require("./middleware/upload");
 
@@ -57,6 +58,7 @@ app.use(feedback);
 app.use(calculator);
 app.use(mainland);
 app.use(emirates);
+app.use(appointment(upload));
 app.use(filesRouter);
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));

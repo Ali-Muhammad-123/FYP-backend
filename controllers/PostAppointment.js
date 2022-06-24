@@ -1,35 +1,48 @@
 const Appointment = require("../models/appointment");
+const File = require("../models/file");
 
 
 class PostArticleOfIncoporationController {
 
     static async Execute(req, res) {
 
-        const { name, email, img, description } = req.body;
+        const { user, description } = req.body;
 
-        if (name != undefined &&
-            email != undefined &&
-            img != undefined &&
+        if (user != undefined &&
             description != undefined) {
 
-            const appointmentObj = new Appointment({
-                name: name,
-                email: email,
-                img: img,
-                description: description
-            })
 
-            await appointmentObj.save((err) => {
+            var final_file = {
+                file: req.file.filename,
+                contentType: req.file.mimetype,
+            };
+            File.create(final_file, function (err, result) {
                 if (err) {
-                    return res.status(400).send(err);
-                }
-                else {
-                    res.status(200).json({
-                        message: `appointment booked`,
+                    res.status(400).json({
+                        message: `Error: ${err}`,
                     });
-                }
-            })
+                } else {
+                    Appointment.create(
+                        {
+                            user: user,
+                            file: result._id,
+                            description: description,
 
+                        },
+                        (err, response) => {
+                            if (err) {
+                                res.status(400).json({
+                                    message: `Error: ${err}`,
+                                });
+                            } else {
+                                res.status(200).json({
+                                    message: `appointment booked.`,
+                                });
+                            }
+                        }
+                    );
+                }
+            });
         } else {
             res.status(400).json({
                 message: `Invalid Request`,
