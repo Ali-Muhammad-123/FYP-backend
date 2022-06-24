@@ -1,6 +1,7 @@
 const Router = require("express").Router();
 const auth = require("../middleware/adminAuth");
 const PostIncorporationCertificate = require("../controllers/PostIncorporationCertificate");
+const GetIncorporationCertificate = require("../controllers/GetIncorporationCertificate");
 
 module.exports = (upload) => {
 
@@ -14,6 +15,10 @@ module.exports = (upload) => {
 
 
         });
+
+    Router.get("/incorporationCertificate", auth, async (req, res) => {
+        GetIncorporationCertificate.Execute(req, res);
+    });
 
     return Router;
 
