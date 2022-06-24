@@ -34,9 +34,25 @@ class GetArticleOfIncoporationController {
 
 
         } else {
-            res.status(404).json({
-                message: "Invalid Reqest",
+
+            var articlesOfIncorporation = await ArticlesOfIncorporation.find().populate({
+                path: 'user',
+                select:
+                    'firstName lastName',
             });
+
+            if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {
+
+                res.status(200).json({
+                    message: "Sucess",
+                    articlesOfIncorporation: articlesOfIncorporation
+                });
+
+            } else {
+                res.status(404).json({
+                    message: "No Record found",
+                });
+            }
         }
 
     }
