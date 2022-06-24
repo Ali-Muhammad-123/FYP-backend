@@ -1,4 +1,4 @@
-const FeedbackReply = require("../models/feedbackreply");
+const FeedbackReply = require("../models/feedbackReply");
 
 
 class PostfeedbackReplyController {

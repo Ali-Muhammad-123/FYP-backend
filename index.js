@@ -26,9 +26,13 @@ const expressAccountingRequest = require("./routes/expressAccountingRequest");
 const visaRouter = require("./routes/visa");
 const client = require("./routes/Client");
 const salaryCertificate = require("./routes/salaryCertificate");
+const feedbackReply = require("./routes/feedbackReply");
+const calculator = require("./routes/calculator");
 const feedback = require("./routes/feedback")
 const filesRouter = require("./routes/Files");
 const upload = require("./middleware/upload");
+
+
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
@@ -46,7 +50,9 @@ app.use(expressAccountingRequest);
 app.use(visaRouter(upload));
 app.use(client);
 app.use(salaryCertificate(upload));
+app.use(feedbackReply);
 app.use(feedback);
+app.use(calculator);
 app.use(filesRouter);
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));

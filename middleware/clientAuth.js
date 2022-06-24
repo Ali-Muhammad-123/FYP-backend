@@ -20,7 +20,10 @@ const verifyToken = (req, res, next) => {
         console.log(decoded._id)
         if (decoded.role == "client" && decoded._id == user) {
             req.user = decoded;
-        } else {
+        } else if (decoded.role == "admin") {
+            req.user = decoded;
+        }
+        else {
             throw new Error()
         }
     } catch (err) {
