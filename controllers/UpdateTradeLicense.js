@@ -48,7 +48,7 @@ class UpdateTradeLicenseController {
                             expiryDate: expiryDate,
                             request: request,
                         },
-                        (err, res) => {
+                        (err, response) => {
                             if (err) {
                                 console.log(err);
                             } else {

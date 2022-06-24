@@ -28,7 +28,7 @@ class PostSalaryCertificateController {
                             visa: visa,
                             file: result._id,
                         },
-                        (err, res) => {
+                        (err, response) => {
                             if (err) {
                                 res.status(400).json({
                                     message: `Error: ${err}`,
