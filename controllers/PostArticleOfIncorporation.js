@@ -3,7 +3,7 @@ const File = require("../models/file");
 
 class PostArticleOfIncoporationController {
   static async Execute(req, res) {
-    const { user, message } = req.body;
+    const { user, article, message } = req.body;
 
     if (user != undefined && message != undefined) {
       var final_file = {
@@ -22,7 +22,7 @@ class PostArticleOfIncoporationController {
               file: result._id,
               message: message,
             },
-            (err, res) => {
+            (err, response) => {
               if (err) {
                 res.status(400).json({
                   message: `Error: ${err}`,

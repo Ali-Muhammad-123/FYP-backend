@@ -8,7 +8,7 @@ module.exports = (upload) => {
     Router.post(
         '/immigrationcard',
         auth,
-        upload.single("immigration-dard"),
+        upload.single("immigration-card"),
         async (req, res, next) => {
 
             PostImmigrationCard.Execute(req, res, next);
