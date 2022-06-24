@@ -27,7 +27,7 @@ class LoginController {
 
                     if (result == true) {
                         const token = jwt.sign(
-                            JSON.stringify({ email: existingUser.email, role: existingUser.role }),
+                            JSON.stringify({ _id: existingUser._id, role: existingUser.role }),
                             process.env.ACCESS_TOKEN_JWT
                         );
                         res.setHeader("x-auth-token", token);

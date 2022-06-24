@@ -17,7 +17,9 @@ class PostOfficeLeaseAgreementController {
             };
             File.create(final_file, function (err, result) {
                 if (err) {
-                    console.log(err);
+                    res.status(400).json({
+                        message: `Error: ${err}`,
+                    });
                 } else {
                     OfficeLeaseAgreement.create(
                         {
@@ -28,9 +30,13 @@ class PostOfficeLeaseAgreementController {
                         },
                         (err, res) => {
                             if (err) {
-                                console.log(err);
+                                res.status(400).json({
+                                    message: `Error: ${err}`,
+                                });
                             } else {
-                                console.log("saved");
+                                res.status(200).json({
+                                    message: `Office Lease Agreement Saved.`,
+                                });
                             }
                         }
                     );

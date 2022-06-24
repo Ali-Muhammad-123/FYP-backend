@@ -26,7 +26,9 @@ class PostVisaController {
             };
             File.create(final_file, function (err, result) {
                 if (err) {
-                    console.log(err);
+                    res.status(400).json({
+                        message: `Error: ${err}`,
+                    });
                 } else {
                     Visa.create(
                         {
@@ -40,11 +42,15 @@ class PostVisaController {
                             expiryDate: expiryDate,
                             file: result._id,
                         },
-                        (err, res) => {
+                        (err, response) => {
                             if (err) {
-                                console.log(err);
+                                res.status(400).json({
+                                    message: `Error: ${err}`,
+                                });
                             } else {
-                                console.log("saved");
+                                res.status(200).json({
+                                    message: `Visa Saved.`,
+                                });
                             }
                         }
                     );

@@ -27,11 +27,11 @@ const visaSchema = mongoose.Schema({
     required: true,
   },
   dateOfIssue: {
-    type: String,
+    type: Date,
     required: true,
   },
   expiryDate: {
-    type: String,
+    type: Date,
     required: true,
   },
   visa: [{

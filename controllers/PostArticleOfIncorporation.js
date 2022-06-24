@@ -16,7 +16,9 @@ class PostArticleOfIncoporationController {
             };
             File.create(final_file, function (err, result) {
                 if (err) {
-                    console.log(err);
+                    res.status(400).json({
+                        message: `Error: ${err}`,
+                    });
                 } else {
                     ArticlesOfIncorporation.create(
                         {
@@ -27,9 +29,13 @@ class PostArticleOfIncoporationController {
                         },
                         (err, res) => {
                             if (err) {
-                                console.log(err);
+                                res.status(400).json({
+                                    message: `Error: ${err}`,
+                                });
                             } else {
-                                console.log("saved");
+                                res.status(200).json({
+                                    message: `Article of Incorporation Saved.`,
+                                });
                             }
                         }
                     );

@@ -26,6 +26,7 @@ const expressAccountingRequest = require("./routes/expressAccountingRequest");
 const visaRouter = require("./routes/visa");
 const client = require("./routes/Client");
 const salaryCertificate = require("./routes/salaryCertificate");
+const feedback = require("./routes/feedback")
 const filesRouter = require("./routes/Files");
 const upload = require("./middleware/upload");
 
@@ -45,6 +46,7 @@ app.use(expressAccountingRequest);
 app.use(visaRouter(upload));
 app.use(client);
 app.use(salaryCertificate(upload));
+app.use(feedback);
 app.use(filesRouter);
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));
