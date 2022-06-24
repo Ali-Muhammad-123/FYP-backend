@@ -15,7 +15,7 @@ module.exports = (upload) => {
   officeLeaseAgreementRouter.post(
     "/officeleaseagreements",
     auth,
-    upload.single("officeLease"),
+    upload.single("office-lease-agreement"),
     async (req, res, next) => {
       PostOfficeLeaseAgreementController.Execute(req, res, next);
     }

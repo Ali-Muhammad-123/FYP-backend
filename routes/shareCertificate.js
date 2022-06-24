@@ -10,7 +10,7 @@ module.exports = (upload) => {
     shareCertificateRouter.post(
         "/sharecertificate",
         auth,
-        upload.single("file"),
+        upload.single("share-certificate"),
         async (req, res, next) => {
 
             PostShareCertificateController.Execute(req, res, next);

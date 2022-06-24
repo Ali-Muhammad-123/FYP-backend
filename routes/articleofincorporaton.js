@@ -8,7 +8,7 @@ module.exports = (upload) => {
   Router.post(
     '/articleofincorporation',
     auth,
-    upload.single("file"),
+    upload.single("article-of-incorporation"),
     async (req, res, next) => {
 
       PostArticleOfIncorporation.Execute(req, res, next);

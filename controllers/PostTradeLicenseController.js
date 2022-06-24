@@ -5,7 +5,7 @@ const fs = require("fs");
 class PostTradeLicenseController {
   static async Execute(req, res, next) {
     const {
-      client,
+      user,
       licenseNo,
       code,
       companyName,
@@ -17,7 +17,7 @@ class PostTradeLicenseController {
     } = req.body;
 
     if (
-      client != undefined &&
+      user != undefined &&
       licenseNo != undefined &&
       code != undefined &&
       companyName != undefined &&
@@ -34,11 +34,13 @@ class PostTradeLicenseController {
       };
       File.create(final_file, function (err, result) {
         if (err) {
-          console.log(err);
+          res.status(400).json({
+            message: `Error: ${err}`,
+          });
         } else {
           tradeLicense.create(
             {
-              client: client,
+              user: user,
               licenseNo: licenseNo,
               code: code,
               companyName: companyName,
@@ -49,11 +51,15 @@ class PostTradeLicenseController {
               request: request,
               file: result._id,
             },
-            (err, res) => {
+            (err, response) => {
               if (err) {
-                console.log(err);
+                res.status(400).json({
+                  message: `Error: ${err}`,
+                });
               } else {
-                console.log("saved");
+                res.status(200).json({
+                  message: `Trade License Saved.`,
+                });
               }
             }
           );

@@ -8,7 +8,7 @@ module.exports = (upload) => {
     Router.post(
         "/salarycertificate",
         auth,
-        upload.single("file"),
+        upload.single("salary-certificate"),
         async (req, res, next) => {
 
             PostSalarycertificateController.Execute(req, res, next);

@@ -7,7 +7,7 @@ module.exports = (upload) => {
     Router.post(
         '/incorporationCertificate',
         auth,
-        upload.single("file"),
+        upload.single("incorporation-certificate"),
         async (req, res, next) => {
 
             PostIncorporationCertificate.Execute(req, res, next);

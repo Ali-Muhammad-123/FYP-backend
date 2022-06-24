@@ -6,11 +6,11 @@ const OfficeLeaseAgreementSchema = mongoose.Schema({
     ref: "User"
   },
   dateOfIssue: {
-    type: String,
+    type: Date,
     required: true,
   },
   expiryDate: {
-    type: String,
+    type: Date,
     required: true,
   },
   file: {

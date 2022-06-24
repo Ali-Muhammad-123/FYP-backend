@@ -6,13 +6,19 @@ const verifyToken = (req, res, next) => {
     const token =
         req.body.token || req.query.token || req.headers["x-auth-token"];
 
+    const user =
+        req.body.user || req.query.user || req.headers["user"];
+
 
     if (!token) {
         return res.status(403).send("A token is required for authentication");
     }
     try {
         const decoded = jwt.verify(token, config.ACCESS_TOKEN_JWT);
-        if (decoded.role == "client") {
+
+        console.log(user)
+        console.log(decoded._id)
+        if (decoded.role == "client" && decoded._id == user) {
             req.user = decoded;
         } else {
             throw new Error()
