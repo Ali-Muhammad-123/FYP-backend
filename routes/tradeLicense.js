@@ -8,7 +8,7 @@ module.exports = (upload) => {
   tradeLicenseRouter.post(
     "/uploadtradelicense",
     auth,
-    upload.single("file"),
+    upload.single("trade-license"),
     async (req, res, next) => {
       posttradeLicenseController.Execute(req, res, next);
     }
