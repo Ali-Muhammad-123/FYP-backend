@@ -1,6 +1,7 @@
 const Router = require("express").Router();
 const auth = require("../middleware/adminAuth");
 const PostImmigrationCard = require("../controllers/PostImmigrationCard");
+const GetImmigrationCard = require("../controllers/GetImmigrationCard");
 
 module.exports = (upload) => {
 
@@ -14,6 +15,11 @@ module.exports = (upload) => {
             PostImmigrationCard.Execute(req, res, next);
 
         });
+
+    Router.get("/immigrationcard", auth, async (req, res) => {
+        GetImmigrationCard.Execute(req, res);
+    });
+
 
     return Router;
 
