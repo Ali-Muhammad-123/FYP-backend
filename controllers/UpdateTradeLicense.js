@@ -32,7 +32,9 @@ class UpdateTradeLicenseController {
             };
             File.create(final_file, function (err, result) {
                 if (err) {
-                    console.log(err);
+                    res.status(400).json({
+                        message: `Error: ${err}`,
+                    });
                 } else {
                     var query = { 'user': req.user };
 
@@ -48,11 +50,16 @@ class UpdateTradeLicenseController {
                             expiryDate: expiryDate,
                             request: request,
                         },
+                        { upsert: true },
                         (err, response) => {
                             if (err) {
-                                console.log(err);
+                                res.status(400).json({
+                                    message: `Error: ${err}`,
+                                });
                             } else {
-                                console.log("saved");
+                                res.status(200).json({
+                                    message: `Trade License updated.`,
+                                });
                             }
                         }
                     );

@@ -4,23 +4,54 @@ class GetOfficeLeaseAgreementController {
 
     static async Execute(req, res) {
 
-        var agreements = await OfficeLeaseAgreement.find().populate({
-            path: 'user',
-            select:
-                'firstName lastName',
-        });
+        const { user } = req.body;
 
-        if (agreements && agreements.length > 0) {
+        if (user != undefined) {
 
-            res.status(200).json({
-                message: "Sucess",
-                agreements: agreements
+            var agreements = await OfficeLeaseAgreement.find({
+                user: user
+            }).populate({
+                path: 'user',
+                select:
+                    'firstName lastName',
             });
+
+            if (agreements && agreements.length > 0) {
+
+                res.status(200).json({
+                    message: "Sucess",
+                    agreements: agreements
+                });
+
+            } else {
+                res.status(404).json({
+                    message: "No Record found",
+                });
+            }
 
         } else {
-            res.status(404).json({
-                message: "No Record found",
+
+
+            var agreements = await OfficeLeaseAgreement.find().populate({
+                path: 'user',
+                select:
+                    'firstName lastName',
             });
+
+            if (agreements && agreements.length > 0) {
+
+                res.status(200).json({
+                    message: "Sucess",
+                    agreements: agreements
+                });
+
+            } else {
+                res.status(404).json({
+                    message: "No Record found",
+                });
+            }
+
+
         }
 
 

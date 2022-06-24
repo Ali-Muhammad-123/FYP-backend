@@ -1,5 +1,5 @@
-const TradeLicense = require("../models/TradeLicense");
-class GetTradeLicenseController {
+const ShareCertificate = require("../models/ShareCertificate");
+class GetShareCertificateController {
 
     static async Execute(req, res) {
 
@@ -8,7 +8,7 @@ class GetTradeLicenseController {
         if (user != undefined) {
 
 
-            const tradeLicense = await TradeLicense.find({
+            const shareCertificate = await ShareCertificate.find({
                 user: user
             }).populate({
                 path: 'user',
@@ -16,10 +16,10 @@ class GetTradeLicenseController {
                     'firstName lastName',
             });
 
-            if (tradeLicense && tradeLicense.length > 0) {
+            if (shareCertificate && shareCertificate.length > 0) {
                 res.status(200).send({
                     message: "Successfull",
-                    tradeLicense: tradeLicense
+                    shareCertificate: shareCertificate
                 });
             } else {
                 res.status(400).send({
@@ -28,16 +28,16 @@ class GetTradeLicenseController {
             }
 
         } else {
-            const tradeLicense = await TradeLicense.find().populate({
+            const shareCertificate = await ShareCertificate.find().populate({
                 path: 'user',
                 select:
                     'firstName lastName',
             });
 
-            if (tradeLicense && tradeLicense.length > 0) {
+            if (shareCertificate && shareCertificate.length > 0) {
                 res.status(200).send({
                     message: "Successfull",
-                    tradeLicense: tradeLicense
+                    shareCertificate: shareCertificate
                 });
             } else {
                 res.status(400).send({
@@ -52,4 +52,4 @@ class GetTradeLicenseController {
 
 
 
-module.exports = GetTradeLicenseController;
+module.exports = GetShareCertificateController;
