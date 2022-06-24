@@ -5,7 +5,7 @@ const auth = require("../middleware/adminAuth");
 module.exports = (upload) => {
     visaRouter.post("/visa",
         auth,
-        upload.single("file"),
+        upload.single("visa"),
         async (req, res, next) => {
 
             postVisaController.Execute(req, res, next);
