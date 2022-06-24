@@ -1,4 +1,5 @@
 const postVisaController = require("../controllers/PostVisaController");
+const GetVisaController = require("../controllers/GetVisaController");
 const visaRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
 
@@ -12,6 +13,9 @@ module.exports = (upload) => {
 
         });
 
+    visaRouter.get("/visa", auth, async (req, res) => {
+        GetVisaController.Execute(req, res);
+    });
 
 
     return visaRouter;
