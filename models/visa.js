@@ -6,10 +6,6 @@ const visaSchema = mongoose.Schema({
     ref: "User",
   },
 
-  companyName: {
-    type: String,
-    required: true,
-  },
   visaApplicant: {
     type: String,
     required: true,

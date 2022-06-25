@@ -1,21 +1,25 @@
-const ExpressAccountingRequest = require("../models/expressAccountingRequest");
+const Mainland = require("../models/mainland");
 
-class PostExpressAccountingController {
+
+class PostMainlandController {
 
     static async Execute(req, res) {
 
-        const { user, requestType } = req.body;
+        const { name, emirates_id } = req.body;
+        const { _id } = req.query;
 
-        if (user != undefined &&
-            requestType != undefined) {
+        if (name != undefined &&
+            emirates_id != undefined &&
+            _id != undefined) {
 
-            ExpressAccountingRequest.findOneAndUpdate(
-                { 'user': user },
+
+            Mainland.findOneAndUpdate(
+                { '_id': _id },
                 {
                     $set:
                     {
-                        user: user,
-                        requestType: requestType
+                        name: name,
+                        emirates_id: emirates_id,
                     }
                 },
                 { upsert: true },
@@ -26,20 +30,20 @@ class PostExpressAccountingController {
                         });
                     } else {
                         res.status(200).json({
-                            message: `Express Accountng Updated.`,
+                            message: `Incorporation Certificate Updated.`,
                         });
                     }
                 }
-            );
+            )
         } else {
             res.status(400).json({
                 message: `Invalid Request`,
             });
         }
 
+
+
     }
 }
 
-
-
-module.exports = PostExpressAccountingController;
+module.exports = PostMainlandController;

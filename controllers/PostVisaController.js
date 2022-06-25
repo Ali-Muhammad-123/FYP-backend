@@ -5,7 +5,6 @@ class PostVisaController {
   static async Execute(req, res) {
     const {
       user,
-      companyName,
       visaApplicant,
       visaUID,
       visaType,
@@ -16,7 +15,6 @@ class PostVisaController {
 
     if (
       user != undefined &&
-      companyName != undefined &&
       visaApplicant != undefined &&
       visaUID != undefined &&
       visaType != undefined &&

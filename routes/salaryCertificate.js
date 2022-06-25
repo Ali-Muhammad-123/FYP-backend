@@ -1,5 +1,6 @@
 const PostSalarycertificateController = require("../controllers/PostSalarycertificate");
 const GetSalaryCertificateController = require("../controllers/GetSalaryCertificate");
+const UpdateSalaryCertificate = require("../controllers/UpdateSalaryCertificate");
 
 
 const Router = require("express").Router();
@@ -13,6 +14,17 @@ module.exports = (upload) => {
         async (req, res, next) => {
 
             PostSalarycertificateController.Execute(req, res, next);
+
+        });
+
+
+    Router.put(
+        "/salarycertificate",
+        auth,
+        upload.single("salary-certificate"),
+        async (req, res, next) => {
+
+            UpdateSalaryCertificate.Execute(req, res, next);
 
         });
 

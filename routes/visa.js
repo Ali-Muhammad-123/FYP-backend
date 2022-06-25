@@ -1,5 +1,6 @@
 const postVisaController = require("../controllers/PostVisaController");
 const GetVisaController = require("../controllers/GetVisaController");
+const UpdateVisaController = require("../controllers/UpdateVisa");
 const visaRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
 
