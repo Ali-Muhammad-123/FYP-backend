@@ -8,7 +8,8 @@ const Schema = mongoose.Schema({
   },
   file: {
     type: mongoose.Schema.Types.ObjectId,
-    required: "File",
+    ref: "File",
+    required: true,
   },
   message: {
     type: String,

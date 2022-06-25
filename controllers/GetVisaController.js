@@ -32,7 +32,7 @@ class GetVisaController {
                 path: 'user',
                 select:
                     'firstName lastName companyName',
-            });
+            })
 
             if (visa && visa.length > 0) {
                 res.status(200).send({

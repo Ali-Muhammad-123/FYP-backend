@@ -1,6 +1,7 @@
 const PostOfficeLeaseAgreementController = require("../controllers/PostOfficeLeaseAgreement");
 const GetOfficeLeaseAgreementController = require("../controllers/GetOfficeLeaseAgreement");
 const UpdateOfficeLeaseAgreementController = require("../controllers/UpdateOfficeLeaseAgreement");
+const DeleteOfficeLeaseAgreementController = require("../controllers/DeleteOfficeLeaseAgreement");
 
 const officeLeaseAgreementRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
@@ -13,6 +14,14 @@ module.exports = (upload) => {
       GetOfficeLeaseAgreementController.Execute(req, res);
     }
   );
+
+  // officeLeaseAgreementRouter.delete(
+  //   "/officeleaseagreements",
+  //   auth,
+  //   async (req, res) => {
+  //     DeleteOfficeLeaseAgreementController.Execute(req, res);
+  //   }
+  // );
 
   officeLeaseAgreementRouter.post(
     "/officeleaseagreements",
@@ -33,5 +42,5 @@ module.exports = (upload) => {
     }
   );
 
-  return officeLeaseAgreementRouter;
+  return DeleteOfficeLeaseAgreementController;
 };

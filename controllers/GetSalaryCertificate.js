@@ -14,6 +14,10 @@ class GetSalaryCertificateController {
                 path: 'user',
                 select:
                     'firstName lastName',
+            }).populate({
+                path: 'file',
+                select:
+                    'file',
             });
 
             if (salaryCertificate && salaryCertificate.length > 0) {
@@ -36,6 +40,10 @@ class GetSalaryCertificateController {
                 path: 'user',
                 select:
                     'firstName lastName',
+            }).populate({
+                path: 'file',
+                select:
+                    'file',
             });
 
             if (salaryCertificate && salaryCertificate.length > 0) {

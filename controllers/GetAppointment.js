@@ -17,6 +17,10 @@ class GetAppointmentController {
                 path: 'user',
                 select:
                     'firstName lastName',
+            }).populate({
+                path: 'file',
+                select:
+                    'file',
             });
 
             if (appointment && appointment.length > 0) {
@@ -39,6 +43,11 @@ class GetAppointmentController {
                 path: 'user',
                 select:
                     'firstName lastName',
+            }).populate({
+                path: 'file',
+                select:
+                    'file',
+
             });
 
             if (appointment && appointment.length > 0) {
