@@ -1,17 +1,16 @@
-const Appointment = require("../models/appointment");
+const OfficeLeaseAgreement = require("../models/OfficeLeaseAgreement");
 const File = require("../models/file");
 
-
-class PostArticleOfIncoporationController {
+class UpdateOfficeLeaseAgreementController {
 
     static async Execute(req, res) {
 
-        const { user, description } = req.body;
+        const { user, dateOfIssue, expiryDate } = req.body;
 
         if (user != undefined &&
-            description != undefined &&
+            dateOfIssue != undefined &&
+            expiryDate != undefined &&
             req.file != undefined) {
-
 
             var final_file = {
                 file: req.file.filename,
@@ -23,13 +22,19 @@ class PostArticleOfIncoporationController {
                         message: `Error: ${err}`,
                     });
                 } else {
-                    Appointment.create(
-                        {
-                            user: user,
-                            file: result._id,
-                            description: description,
 
+                    OfficeLeaseAgreement.findOneAndUpdate(
+                        { 'user': user },
+                        {
+                            $set:
+                            {
+                                user: user,
+                                dateOfIssue: dateOfIssue,
+                                expiryDate: expiryDate,
+                                file: result._id,
+                            }
                         },
+                        { upsert: true },
                         (err, response) => {
                             if (err) {
                                 res.status(400).json({
@@ -37,11 +42,11 @@ class PostArticleOfIncoporationController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `appointment booked.`,
+                                    message: `Office Lease Agreement updated.`,
                                 });
                             }
                         }
-                    );
+                    )
                 }
             });
         } else {
@@ -50,8 +55,9 @@ class PostArticleOfIncoporationController {
             });
         }
 
+
+
     }
 }
 
-
-module.exports = PostArticleOfIncoporationController;
+module.exports = UpdateOfficeLeaseAgreementController;

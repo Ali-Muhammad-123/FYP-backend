@@ -9,7 +9,8 @@ class PostOfficeLeaseAgreementController {
 
         if (user != undefined &&
             dateOfIssue != undefined &&
-            expiryDate != undefined) {
+            expiryDate != undefined &&
+            req.file != undefined) {
 
             var final_file = {
                 file: req.file.filename,

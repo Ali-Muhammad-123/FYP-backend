@@ -16,7 +16,8 @@ class PostVisaController {
             visaType != undefined &&
             jobTitle != undefined &&
             dateOfIssue != undefined &&
-            expiryDate != undefined
+            expiryDate != undefined &&
+            req.file != undefined
         ) {
 
 

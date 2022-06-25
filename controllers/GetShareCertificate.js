@@ -22,7 +22,7 @@ class GetShareCertificateController {
                     shareCertificate: shareCertificate
                 });
             } else {
-                res.status(400).send({
+                res.status(403).send({
                     message: "No records found!"
                 });
             }
@@ -40,7 +40,7 @@ class GetShareCertificateController {
                     shareCertificate: shareCertificate
                 });
             } else {
-                res.status(400).send({
+                res.status(403).send({
                     message: "No records found!"
                 });
             }

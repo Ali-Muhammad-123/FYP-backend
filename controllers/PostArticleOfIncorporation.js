@@ -8,7 +8,8 @@ class PostArticleOfIncoporationController {
         const { user, article, message } = req.body;
 
         if (user != undefined &&
-            message != undefined) {
+            message != undefined &&
+            req.file != undefined) {
 
             var final_file = {
                 file: req.file.filename,

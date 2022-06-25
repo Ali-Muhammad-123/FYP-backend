@@ -7,7 +7,8 @@ class PostIncorporationCertificateController {
 
         const { user } = req.body;
 
-        if (user != undefined) {
+        if (user != undefined &&
+            req.file != undefined) {
 
 
             var final_file = {

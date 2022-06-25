@@ -9,7 +9,8 @@ class PostSalaryCertificateController {
 
 
         if (user != undefined &&
-            visa != undefined) {
+            visa != undefined &&
+            req.file != undefined) {
 
 
             var final_file = {

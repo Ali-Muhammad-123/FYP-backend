@@ -23,7 +23,7 @@ class GetUserController {
                             lastName: result.lastName
                         });
                     } else {
-                        res.status(400).send({
+                        res.status(403).send({
                             message: "No records found!"
                         });
                     }
@@ -41,7 +41,7 @@ class GetUserController {
                     user: user
                 });
             } else {
-                res.status(400).send({
+                res.status(403).send({
                     message: "No records found!"
                 });
             }
