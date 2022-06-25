@@ -42,7 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(tradeLicenseRouter(upload));
-//app.use(officeLeaseAgreementRouter(upload));
+app.use(officeLeaseAgreementRouter(upload));
 app.use(signupRouter);
 app.use(loginRouter);
 app.use(articleOfIncoporationRouter(upload));

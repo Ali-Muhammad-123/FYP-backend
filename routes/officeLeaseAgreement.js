@@ -15,13 +15,13 @@ module.exports = (upload) => {
     }
   );
 
-  // officeLeaseAgreementRouter.delete(
-  //   "/officeleaseagreements",
-  //   auth,
-  //   async (req, res) => {
-  //     DeleteOfficeLeaseAgreementController.Execute(req, res);
-  //   }
-  // );
+  officeLeaseAgreementRouter.delete(
+    "/officeleaseagreements",
+    auth,
+    async (req, res) => {
+      DeleteOfficeLeaseAgreementController.Execute(req, res);
+    }
+  );
 
   officeLeaseAgreementRouter.post(
     "/officeleaseagreements",

@@ -14,10 +14,6 @@ class GetOfficeLeaseAgreementController {
                 path: 'user',
                 select:
                     'firstName lastName',
-            }).populate({
-                path: 'file',
-                select:
-                    'file',
             });
 
             if (agreements && agreements.length > 0) {
@@ -40,11 +36,6 @@ class GetOfficeLeaseAgreementController {
                 path: 'user',
                 select:
                     'firstName lastName',
-            }).populate({
-                path: 'file',
-                select:
-                    'file',
-
             });
 
             if (agreements && agreements.length > 0) {

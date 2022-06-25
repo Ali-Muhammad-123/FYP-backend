@@ -17,10 +17,6 @@ class GetArticleOfIncoporationController {
                 path: 'user',
                 select:
                     'firstName lastName',
-            }).populate({
-                path: 'file',
-                select:
-                    'file',
             });
 
             if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {
@@ -43,11 +39,6 @@ class GetArticleOfIncoporationController {
                 path: 'user',
                 select:
                     'firstName lastName',
-            }).populate({
-                path: 'file',
-                select:
-                    'file',
-
             });
 
             if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {

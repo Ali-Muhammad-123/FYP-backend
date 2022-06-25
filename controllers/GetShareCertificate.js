@@ -14,10 +14,6 @@ class GetShareCertificateController {
                 path: 'user',
                 select:
                     'firstName lastName',
-            }).populate({
-                path: 'file',
-                select:
-                    'file',
             });
 
             if (shareCertificate && shareCertificate.length > 0) {
@@ -36,11 +32,6 @@ class GetShareCertificateController {
                 path: 'user',
                 select:
                     'firstName lastName',
-            }).populate({
-                path: 'file',
-                select:
-                    'file',
-
             });
 
             if (shareCertificate && shareCertificate.length > 0) {
