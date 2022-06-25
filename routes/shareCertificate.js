@@ -1,5 +1,6 @@
 const PostShareCertificateController = require("../controllers/PostShareCertificate");
 const GetShareCertificateController = require("../controllers/GetShareCertificate");
+const UpdateShareCertificateController = require("../controllers/UpdateShareCertificate");
 
 
 const shareCertificateRouter = require("express").Router();
@@ -15,6 +16,16 @@ module.exports = (upload) => {
         async (req, res, next) => {
 
             PostShareCertificateController.Execute(req, res, next);
+
+        });
+
+    shareCertificateRouter.put(
+        "/sharecertificate",
+        auth,
+        upload.single("share-certificate"),
+        async (req, res, next) => {
+
+            UpdateShareCertificateController.Execute(req, res, next);
 
         });
 

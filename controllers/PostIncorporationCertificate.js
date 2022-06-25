@@ -33,7 +33,7 @@ class PostIncorporationCertificateController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `Incorporation License Saved.`,
+                                    message: `Incorporation Certificate Saved.`,
                                 });
                             }
                         }

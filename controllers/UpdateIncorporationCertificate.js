@@ -1,15 +1,15 @@
-const ArticlesOfIncorporation = require("../models/ArticleOfIncoporation");
+const IncorporationCertificate = require("../models/IncorporationCertificate");
 const File = require("../models/file");
 
-class PostArticleOfIncoporationController {
+class UpdateIncorporationCertificateController {
 
     static async Execute(req, res) {
 
-        const { user, message } = req.body;
+        const { user } = req.body;
 
         if (user != undefined &&
-            message != undefined &&
             req.file != undefined) {
+
 
             var final_file = {
                 file: req.file.filename,
@@ -21,13 +21,17 @@ class PostArticleOfIncoporationController {
                         message: `Error: ${err}`,
                     });
                 } else {
-                    ArticlesOfIncorporation.create(
-                        {
-                            user: user,
-                            file: result._id,
-                            message: message,
 
+                    IncorporationCertificate.findOneAndUpdate(
+                        { 'user': user },
+                        {
+                            $set:
+                            {
+                                user: user,
+                                file: result._id,
+                            }
                         },
+                        { upsert: true },
                         (err, response) => {
                             if (err) {
                                 res.status(400).json({
@@ -35,13 +39,16 @@ class PostArticleOfIncoporationController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `Article of Incorporation Saved.`,
+                                    message: `Incorporation Certificate Updated.`,
                                 });
                             }
                         }
-                    );
+                    )
                 }
             });
+
+
+
         } else {
             res.status(400).json({
                 message: `Invalid Request`,
@@ -51,5 +58,4 @@ class PostArticleOfIncoporationController {
     }
 }
 
-
-module.exports = PostArticleOfIncoporationController;
+module.exports = UpdateIncorporationCertificateController

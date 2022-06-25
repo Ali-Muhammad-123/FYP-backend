@@ -1,7 +1,7 @@
 const ArticlesOfIncorporation = require("../models/ArticleOfIncoporation");
 const File = require("../models/file");
 
-class PostArticleOfIncoporationController {
+class UpdateArticleOfIncoporationController {
 
     static async Execute(req, res) {
 
@@ -21,13 +21,18 @@ class PostArticleOfIncoporationController {
                         message: `Error: ${err}`,
                     });
                 } else {
-                    ArticlesOfIncorporation.create(
-                        {
-                            user: user,
-                            file: result._id,
-                            message: message,
 
+                    ArticlesOfIncorporation.findOneAndUpdate(
+                        { 'user': user },
+                        {
+                            $set:
+                            {
+                                user: user,
+                                file: result._id,
+                                message: message,
+                            }
                         },
+                        { upsert: true },
                         (err, response) => {
                             if (err) {
                                 res.status(400).json({
@@ -35,11 +40,13 @@ class PostArticleOfIncoporationController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `Article of Incorporation Saved.`,
+                                    message: `Article of Incorporation Updated.`,
                                 });
                             }
                         }
-                    );
+                    )
+
+
                 }
             });
         } else {
@@ -52,4 +59,4 @@ class PostArticleOfIncoporationController {
 }
 
 
-module.exports = PostArticleOfIncoporationController;
+module.exports = UpdateArticleOfIncoporationController;

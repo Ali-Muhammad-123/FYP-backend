@@ -1,15 +1,17 @@
-const ArticlesOfIncorporation = require("../models/ArticleOfIncoporation");
+const ShareCertificate = require("../models/ShareCertificate");
 const File = require("../models/file");
 
-class PostArticleOfIncoporationController {
+
+class PostShareCertificateController {
 
     static async Execute(req, res) {
 
-        const { user, message } = req.body;
+        const { user } = req.body;
+
 
         if (user != undefined &&
-            message != undefined &&
             req.file != undefined) {
+
 
             var final_file = {
                 file: req.file.filename,
@@ -21,13 +23,17 @@ class PostArticleOfIncoporationController {
                         message: `Error: ${err}`,
                     });
                 } else {
-                    ArticlesOfIncorporation.create(
-                        {
-                            user: user,
-                            file: result._id,
-                            message: message,
 
+                    ShareCertificate.findOneAndUpdate(
+                        { 'user': user },
+                        {
+                            $set:
+                            {
+                                user: user,
+                                file: result._id,
+                            }
                         },
+                        { upsert: true },
                         (err, response) => {
                             if (err) {
                                 res.status(400).json({
@@ -35,7 +41,7 @@ class PostArticleOfIncoporationController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `Article of Incorporation Saved.`,
+                                    message: `Share certificate updated.`,
                                 });
                             }
                         }
@@ -47,9 +53,7 @@ class PostArticleOfIncoporationController {
                 message: `Invalid Request`,
             });
         }
-
     }
 }
 
-
-module.exports = PostArticleOfIncoporationController;
+module.exports = PostShareCertificateController;

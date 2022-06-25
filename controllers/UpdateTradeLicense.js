@@ -51,6 +51,7 @@ class UpdateTradeLicenseController {
                                 dateOfIssue: dateOfIssue,
                                 expiryDate: expiryDate,
                                 request: request,
+                                file: result._id
                             }
                         },
                         { upsert: true },
