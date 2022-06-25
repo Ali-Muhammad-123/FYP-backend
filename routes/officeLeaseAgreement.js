@@ -32,7 +32,6 @@ module.exports = (upload) => {
     }
   );
 
-
   officeLeaseAgreementRouter.put(
     "/officeleaseagreements",
     auth,
@@ -42,5 +41,5 @@ module.exports = (upload) => {
     }
   );
 
-  return DeleteOfficeLeaseAgreementController;
+  return officeLeaseAgreementRouter;
 };
