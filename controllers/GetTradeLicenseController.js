@@ -14,6 +14,10 @@ class GetTradeLicenseController {
                 path: 'user',
                 select:
                     'firstName lastName',
+            }).populate({
+                path: 'file',
+                select:
+                    'file',
             });
 
             if (tradeLicense && tradeLicense.length > 0) {
@@ -32,7 +36,12 @@ class GetTradeLicenseController {
                 path: 'user',
                 select:
                     'firstName lastName',
-            });
+            }).populate({
+                path: 'file',
+                select:
+                    'file',
+
+            })
 
             if (tradeLicense && tradeLicense.length > 0) {
                 res.status(200).send({

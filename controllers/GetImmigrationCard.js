@@ -17,6 +17,10 @@ class GetIncorporationCertificateController {
                 path: 'user',
                 select:
                     'firstName lastName',
+            }).populate({
+                path: 'file',
+                select:
+                    'file',
             });
 
             if (immigrationCard && immigrationCard.length > 0) {
@@ -39,6 +43,10 @@ class GetIncorporationCertificateController {
                 path: 'user',
                 select:
                     'firstName lastName',
+            }).populate({
+                path: 'file',
+                select:
+                    'file',
             });
 
             if (immigrationCard && immigrationCard.length > 0) {
