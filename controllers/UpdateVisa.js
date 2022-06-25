@@ -6,10 +6,11 @@ class PostVisaController {
     static async Execute(req, res) {
 
 
-        const { user, visaApplicant, visaUID, visaType, jobTitle, dateOfIssue,
+        const { user, companyName, visaApplicant, visaUID, visaType, jobTitle, dateOfIssue,
             expiryDate } = req.body;
 
         if (user != undefined &&
+            companyName != undefined &&
             visaApplicant != undefined &&
             visaUID != undefined &&
             visaType != undefined &&
@@ -30,17 +31,24 @@ class PostVisaController {
                         message: `Error: ${err}`,
                     });
                 } else {
-                    Visa.create(
+
+                    Visa.findOneAndUpdate(
+                        { 'user': user },
                         {
-                            user: user,
-                            visaApplicant: visaApplicant,
-                            visaUID: visaUID,
-                            visaType: visaType,
-                            jobTitle: jobTitle,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
-                            file: [result._id]
+                            $set:
+                            {
+                                user: user,
+                                companyName: companyName,
+                                visaApplicant: visaApplicant,
+                                visaUID: visaUID,
+                                visaType: visaType,
+                                jobTitle: jobTitle,
+                                dateOfIssue: dateOfIssue,
+                                expiryDate: expiryDate,
+                                file: result._id,
+                            }
                         },
+                        { upsert: true },
                         (err, response) => {
                             if (err) {
                                 res.status(400).json({
@@ -48,7 +56,7 @@ class PostVisaController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `Visa Saved.`,
+                                    message: `Visa updated.`,
                                 });
                             }
                         }

@@ -13,7 +13,7 @@ class GetVisaController {
             }).populate({
                 path: 'user',
                 select:
-                    'firstName lastName',
+                    'firstName lastName companyName',
             });
 
             if (visa && visa.length > 0) {
@@ -31,7 +31,7 @@ class GetVisaController {
             const visa = await Visa.find().populate({
                 path: 'user',
                 select:
-                    'firstName lastName',
+                    'firstName lastName companyName',
             });
 
             if (visa && visa.length > 0) {
