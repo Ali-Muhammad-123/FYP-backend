@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const visaSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
   },
 
   companyName: {
@@ -34,11 +34,12 @@ const visaSchema = mongoose.Schema({
     type: Date,
     required: true,
   },
-  visa: [{
-    type: Buffer,
-    require: true,
-  }]
-
+  visa: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: "File",
+    },
+  ],
 });
 
 module.exports = mongoose.model("visa", visaSchema);
