@@ -3,6 +3,7 @@ const auth = require("../middleware/adminAuth");
 const PostArticleOfIncorporation = require("../controllers/PostArticleOfIncorporation");
 const GetArticleOfIncorporation = require("../controllers/GetArticleOfnIncorporation");
 const PutArticleOfIncorporation = require("../controllers/UpdateArticleOfIncorporation");
+const DeleteArticleOfIncorporation = require("../controllers/DeleteArticleOfIncorporation");
 
 module.exports = (upload) => {
 
@@ -32,6 +33,12 @@ module.exports = (upload) => {
   Router.get("/articlesofincorporation", auth, async (req, res) => {
 
     GetArticleOfIncorporation.Execute(req, res);
+
+  });
+
+  Router.delete("/articlesofincorporation", auth, async (req, res) => {
+
+    DeleteArticleOfIncorporation.Execute(req, res);
 
   });
 

@@ -7,7 +7,7 @@ class PostShareCertificateController {
     static async Execute(req, res) {
 
         const { user } = req.body;
-
+        const { _id } = req.query;
 
         if (user != undefined &&
             req.file != undefined) {
@@ -25,7 +25,7 @@ class PostShareCertificateController {
                 } else {
 
                     ShareCertificate.findOneAndUpdate(
-                        { 'user': user },
+                        { '_id': _id },
                         {
                             $set:
                             {

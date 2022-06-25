@@ -5,12 +5,13 @@ class PostExpressAccountingController {
     static async Execute(req, res) {
 
         const { user, requestType } = req.body;
+        const { _id } = req.query;
 
         if (user != undefined &&
             requestType != undefined) {
 
             ExpressAccountingRequest.findOneAndUpdate(
-                { 'user': user },
+                { '_id': _id },
                 {
                     $set:
                     {

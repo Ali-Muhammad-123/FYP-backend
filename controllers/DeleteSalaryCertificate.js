@@ -1,5 +1,6 @@
-const TradeLicense = require("../models/TradeLicense");
-class DeleteTradeLicenseController {
+const SalaryCertificate = require("../models/SalaryCertificate");
+
+class DeleteSalaryCertificateController {
 
     static async Execute(req, res) {
 
@@ -7,7 +8,7 @@ class DeleteTradeLicenseController {
 
         if (_id != undefined) {
 
-            const result = TradeLicense.findOneAndDelete({ "_id": _id }, function (err, response) {
+            SalaryCertificate.findOneAndDelete({ "_id": _id }, function (err, response) {
                 if (!err) {
                     if (response && response != null) {
                         res.status(200).json({
@@ -43,4 +44,4 @@ class DeleteTradeLicenseController {
 
 
 
-module.exports = DeleteTradeLicenseController;
+module.exports = DeleteSalaryCertificateController;

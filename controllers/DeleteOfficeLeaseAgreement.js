@@ -1,13 +1,14 @@
 const OfficeLeaseAgreement = require("../models/OfficeLeaseAgreement");
+
 class DeleteOfficeLeaseAgreementController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { _id } = req.query;
 
-        if (user != undefined) {
+        if (_id != undefined) {
 
-            OfficeLeaseAgreement.findOneAndDelete({ "user": user }, function (err, response) {
+            OfficeLeaseAgreement.findOneAndDelete({ "_id": _id }, function (err, response) {
                 if (!err) {
                     if (response && response != null) {
                         res.status(200).json({

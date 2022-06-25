@@ -14,6 +14,8 @@ class UpdateTradeLicenseController {
             request,
         } = req.body;
 
+        const { _id } = req.query
+
         if (
             user != undefined &&
             licenseNo != undefined &&
@@ -39,7 +41,7 @@ class UpdateTradeLicenseController {
                     var query = { 'user': req.user };
 
                     tradeLicense.findOneAndUpdate(
-                        { 'user': user },
+                        { '_id': _id },
                         {
                             $set:
                             {

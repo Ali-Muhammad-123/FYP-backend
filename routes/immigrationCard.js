@@ -3,6 +3,7 @@ const auth = require("../middleware/adminAuth");
 const PostImmigrationCard = require("../controllers/PostImmigrationCard");
 const GetImmigrationCard = require("../controllers/GetImmigrationCard");
 const UpdateImmigrationCard = require("../controllers/UpdateImmigrationCard");
+const DeleteImmigrationCard = require("../controllers/DeleteImmigrationCard");
 
 module.exports = (upload) => {
 
@@ -32,6 +33,9 @@ module.exports = (upload) => {
         GetImmigrationCard.Execute(req, res);
     });
 
+    Router.delete("/immigrationcard", auth, async (req, res) => {
+        DeleteImmigrationCard.Execute(req, res);
+    });
 
     return Router;
 

@@ -1,6 +1,7 @@
 const PostShareCertificateController = require("../controllers/PostShareCertificate");
 const GetShareCertificateController = require("../controllers/GetShareCertificate");
 const UpdateShareCertificateController = require("../controllers/UpdateShareCertificate");
+const DeleteShareCertificateController = require("../controllers/DeleteShareCertificate");
 
 
 const shareCertificateRouter = require("express").Router();
@@ -32,6 +33,10 @@ module.exports = (upload) => {
 
     shareCertificateRouter.get("/sharecertificate", auth, async (req, res) => {
         GetShareCertificateController.Execute(req, res);
+    });
+
+    shareCertificateRouter.delete("/sharecertificate", auth, async (req, res) => {
+        DeleteShareCertificateController.Execute(req, res);
     });
 
 

@@ -6,6 +6,7 @@ class UpdateOfficeLeaseAgreementController {
     static async Execute(req, res) {
 
         const { user, dateOfIssue, expiryDate } = req.body;
+        const { _id } = req.query;
 
         if (user != undefined &&
             dateOfIssue != undefined &&
@@ -24,7 +25,7 @@ class UpdateOfficeLeaseAgreementController {
                 } else {
 
                     OfficeLeaseAgreement.findOneAndUpdate(
-                        { 'user': user },
+                        { '_id': _id },
                         {
                             $set:
                             {

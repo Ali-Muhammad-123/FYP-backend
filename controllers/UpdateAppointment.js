@@ -7,6 +7,7 @@ class PostArticleOfIncoporationController {
     static async Execute(req, res) {
 
         const { user, description } = req.body;
+        const { _id } = req.query;
 
         if (user != undefined &&
             description != undefined &&
@@ -25,7 +26,7 @@ class PostArticleOfIncoporationController {
                 } else {
 
                     Appointment.findOneAndUpdate(
-                        { 'user': user },
+                        { '_id': _id },
                         {
                             $set:
                             {

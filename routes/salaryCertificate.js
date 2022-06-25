@@ -1,6 +1,7 @@
 const PostSalarycertificateController = require("../controllers/PostSalarycertificate");
 const GetSalaryCertificateController = require("../controllers/GetSalaryCertificate");
 const UpdateSalaryCertificate = require("../controllers/UpdateSalaryCertificate");
+const DeleteSalaryCertificate = require("../controllers/DeleteSalaryCertificate");
 
 
 const Router = require("express").Router();
@@ -29,9 +30,13 @@ module.exports = (upload) => {
         });
 
     Router.get("/salarycertificate", auth, async (req, res) => {
-        GetSalaryCertificateController.Execute(req, res);
+        DeleteSalaryCertificate.Execute(req, res);
     });
 
+
+    Router.delete("/salarycertificate", auth, async (req, res) => {
+        GetSalaryCertificateController.Execute(req, res);
+    });
 
 
     return Router;
