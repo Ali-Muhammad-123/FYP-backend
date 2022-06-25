@@ -1,6 +1,6 @@
-const ArticlesOfIncorporation = require("../models/ArticleOfIncoporation");
+const Appointment = require("../models/appointment");
 
-class GetArticleOfIncoporationController {
+class GetAppointmentController {
 
     static async Execute(req, res) {
 
@@ -10,7 +10,7 @@ class GetArticleOfIncoporationController {
 
 
 
-            var articlesOfIncorporation = await ArticlesOfIncorporation.find({
+            var appointment = await Appointment.find({
 
                 user: user
             }).populate({
@@ -19,11 +19,11 @@ class GetArticleOfIncoporationController {
                     'firstName lastName',
             });
 
-            if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {
+            if (appointment && appointment.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    articlesOfIncorporation: articlesOfIncorporation
+                    appointment: appointment
                 });
 
             } else {
@@ -35,17 +35,17 @@ class GetArticleOfIncoporationController {
 
         } else {
 
-            var articlesOfIncorporation = await ArticlesOfIncorporation.find().populate({
+            var appointment = await Appointment.find().populate({
                 path: 'user',
                 select:
                     'firstName lastName',
             });
 
-            if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {
+            if (appointment && appointment.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    articlesOfIncorporation: articlesOfIncorporation
+                    appointment: appointment
                 });
 
             } else {
@@ -58,4 +58,4 @@ class GetArticleOfIncoporationController {
     }
 }
 
-module.exports = GetArticleOfIncoporationController
+module.exports = GetAppointmentController

@@ -1,17 +1,15 @@
-const Appointment = require("../models/appointment");
+const ArticlesOfIncorporation = require("../models/ArticleOfIncoporation");
 const File = require("../models/file");
 
-
-class PostArticleOfIncoporationController {
+class UpdateArticleOfIncoporationController {
 
     static async Execute(req, res) {
 
-        const { user, description } = req.body;
+        const { user, message } = req.body;
 
         if (user != undefined &&
-            description != undefined &&
+            message != undefined &&
             req.file != undefined) {
-
 
             var final_file = {
                 file: req.file.filename,
@@ -23,13 +21,18 @@ class PostArticleOfIncoporationController {
                         message: `Error: ${err}`,
                     });
                 } else {
-                    Appointment.create(
-                        {
-                            user: user,
-                            file: result._id,
-                            description: description,
 
+                    ArticlesOfIncorporation.findOneAndUpdate(
+                        { 'user': user },
+                        {
+                            $set:
+                            {
+                                user: user,
+                                file: result._id,
+                                message: message,
+                            }
                         },
+                        { upsert: true },
                         (err, response) => {
                             if (err) {
                                 res.status(400).json({
@@ -37,11 +40,13 @@ class PostArticleOfIncoporationController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `appointment booked.`,
+                                    message: `Article of Incorporation Updated.`,
                                 });
                             }
                         }
-                    );
+                    )
+
+
                 }
             });
         } else {
@@ -54,4 +59,4 @@ class PostArticleOfIncoporationController {
 }
 
 
-module.exports = PostArticleOfIncoporationController;
+module.exports = UpdateArticleOfIncoporationController;

@@ -1,4 +1,5 @@
 const PostEmirates = require("../controllers/PostEmirates");
+const GetEmirates = require("../controllers/GetEmirates");
 const Router = require("express").Router();
 const auth = require("../middleware/adminAuth");
 
@@ -6,6 +7,10 @@ Router.post("/emirates", auth, async (req, res) => {
 
     PostEmirates.Execute(req, res);
 
+});
+
+Router.get("/emirates", auth, async (req, res) => {
+    GetEmirates.Execute(req, res);
 });
 
 

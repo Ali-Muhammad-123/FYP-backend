@@ -1,15 +1,13 @@
-const Appointment = require("../models/appointment");
+const IncorporationCertificate = require("../models/IncorporationCertificate");
 const File = require("../models/file");
 
-
-class PostArticleOfIncoporationController {
+class UpdateIncorporationCertificateController {
 
     static async Execute(req, res) {
 
-        const { user, description } = req.body;
+        const { user } = req.body;
 
         if (user != undefined &&
-            description != undefined &&
             req.file != undefined) {
 
 
@@ -23,13 +21,17 @@ class PostArticleOfIncoporationController {
                         message: `Error: ${err}`,
                     });
                 } else {
-                    Appointment.create(
-                        {
-                            user: user,
-                            file: result._id,
-                            description: description,
 
+                    IncorporationCertificate.findOneAndUpdate(
+                        { 'user': user },
+                        {
+                            $set:
+                            {
+                                user: user,
+                                file: result._id,
+                            }
                         },
+                        { upsert: true },
                         (err, response) => {
                             if (err) {
                                 res.status(400).json({
@@ -37,13 +39,16 @@ class PostArticleOfIncoporationController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `appointment booked.`,
+                                    message: `Incorporation Certificate Updated.`,
                                 });
                             }
                         }
-                    );
+                    )
                 }
             });
+
+
+
         } else {
             res.status(400).json({
                 message: `Invalid Request`,
@@ -53,5 +58,4 @@ class PostArticleOfIncoporationController {
     }
 }
 
-
-module.exports = PostArticleOfIncoporationController;
+module.exports = UpdateIncorporationCertificateController

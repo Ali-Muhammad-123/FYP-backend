@@ -39,16 +39,20 @@ class UpdateTradeLicenseController {
                     var query = { 'user': req.user };
 
                     tradeLicense.findOneAndUpdate(
-                        query,
+                        { 'user': user },
                         {
-                            licenseNo: licenseNo,
-                            code: code,
-                            companyName: companyName,
-                            judiciary: judiciary,
-                            establishmentDate: establishmentDate,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
-                            request: request,
+                            $set:
+                            {
+                                licenseNo: licenseNo,
+                                code: code,
+                                companyName: companyName,
+                                judiciary: judiciary,
+                                establishmentDate: establishmentDate,
+                                dateOfIssue: dateOfIssue,
+                                expiryDate: expiryDate,
+                                request: request,
+                                file: result._id
+                            }
                         },
                         { upsert: true },
                         (err, response) => {

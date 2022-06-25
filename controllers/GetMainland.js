@@ -1,6 +1,6 @@
-const Calculator = require("../models/calculator");
+const Mainland = require("../models/mainland");
 
-class GetCalculatorController {
+class GetMainlandController {
 
     static async Execute(req, res) {
 
@@ -10,15 +10,15 @@ class GetCalculatorController {
 
 
 
-            var calculator = await Calculator.find({
+            var mainland = await Mainland.find({
                 _id: _id
             });
 
-            if (calculator && calculator.length > 0) {
+            if (mainland && mainland.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    calculator: calculator
+                    mainland: mainland
                 });
 
             } else {
@@ -30,13 +30,13 @@ class GetCalculatorController {
 
         } else {
 
-            var calculator = await Calculator.find();
+            var mainland = await Mainland.find();
 
-            if (calculator && calculator.length > 0) {
+            if (mainland && mainland.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    calculator: calculator
+                    mainland: mainland
                 });
 
             } else {
@@ -49,4 +49,4 @@ class GetCalculatorController {
     }
 }
 
-module.exports = GetCalculatorController
+module.exports = GetMainlandController

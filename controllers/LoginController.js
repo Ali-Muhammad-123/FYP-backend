@@ -45,7 +45,7 @@ class LoginController {
 
 
             } else {
-                res.status(400).send({
+                res.status(403).send({
                     message: "No user found",
                 });
             }

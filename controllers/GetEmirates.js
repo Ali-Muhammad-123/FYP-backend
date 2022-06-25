@@ -1,6 +1,6 @@
-const Calculator = require("../models/calculator");
+const Emirates = require("../models/emirates");
 
-class GetCalculatorController {
+class GetEmiratesController {
 
     static async Execute(req, res) {
 
@@ -10,15 +10,15 @@ class GetCalculatorController {
 
 
 
-            var calculator = await Calculator.find({
+            var emirates = await Emirates.find({
                 _id: _id
             });
 
-            if (calculator && calculator.length > 0) {
+            if (emirates && emirates.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    calculator: calculator
+                    emirates: emirates
                 });
 
             } else {
@@ -30,13 +30,13 @@ class GetCalculatorController {
 
         } else {
 
-            var calculator = await Calculator.find();
+            var emirates = await Emirates.find();
 
-            if (calculator && calculator.length > 0) {
+            if (emirates && emirates.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    calculator: calculator
+                    emirates: emirates
                 });
 
             } else {
@@ -49,4 +49,4 @@ class GetCalculatorController {
     }
 }
 
-module.exports = GetCalculatorController
+module.exports = GetEmiratesController

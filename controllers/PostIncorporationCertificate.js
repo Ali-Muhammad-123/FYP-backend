@@ -7,7 +7,8 @@ class PostIncorporationCertificateController {
 
         const { user } = req.body;
 
-        if (user != undefined) {
+        if (user != undefined &&
+            req.file != undefined) {
 
 
             var final_file = {
@@ -32,7 +33,7 @@ class PostIncorporationCertificateController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `Incorporation License Saved.`,
+                                    message: `Incorporation Certificate Saved.`,
                                 });
                             }
                         }

@@ -1,15 +1,15 @@
-const Appointment = require("../models/appointment");
+const ShareCertificate = require("../models/ShareCertificate");
 const File = require("../models/file");
 
 
-class PostArticleOfIncoporationController {
+class PostShareCertificateController {
 
     static async Execute(req, res) {
 
-        const { user, description } = req.body;
+        const { user } = req.body;
+
 
         if (user != undefined &&
-            description != undefined &&
             req.file != undefined) {
 
 
@@ -23,13 +23,17 @@ class PostArticleOfIncoporationController {
                         message: `Error: ${err}`,
                     });
                 } else {
-                    Appointment.create(
-                        {
-                            user: user,
-                            file: result._id,
-                            description: description,
 
+                    ShareCertificate.findOneAndUpdate(
+                        { 'user': user },
+                        {
+                            $set:
+                            {
+                                user: user,
+                                file: result._id,
+                            }
                         },
+                        { upsert: true },
                         (err, response) => {
                             if (err) {
                                 res.status(400).json({
@@ -37,7 +41,7 @@ class PostArticleOfIncoporationController {
                                 });
                             } else {
                                 res.status(200).json({
-                                    message: `appointment booked.`,
+                                    message: `Share certificate updated.`,
                                 });
                             }
                         }
@@ -49,9 +53,7 @@ class PostArticleOfIncoporationController {
                 message: `Invalid Request`,
             });
         }
-
     }
 }
 
-
-module.exports = PostArticleOfIncoporationController;
+module.exports = PostShareCertificateController;

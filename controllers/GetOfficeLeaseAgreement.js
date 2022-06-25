@@ -24,7 +24,7 @@ class GetOfficeLeaseAgreementController {
                 });
 
             } else {
-                res.status(404).json({
+                res.status(403).json({
                     message: "No Record found",
                 });
             }
@@ -46,7 +46,7 @@ class GetOfficeLeaseAgreementController {
                 });
 
             } else {
-                res.status(404).json({
+                res.status(403).json({
                     message: "No Record found",
                 });
             }

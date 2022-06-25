@@ -9,7 +9,8 @@ class PostImmigrationCardController {
 
         if (user != undefined &&
             dateOfIssue != undefined &&
-            expiryDate != undefined
+            expiryDate != undefined &&
+            req.file != undefined
         ) {
 
 

@@ -1,47 +1,46 @@
 const ArticlesOfIncorporation = require("../models/ArticleOfIncoporation");
-const File = require("../models/file");
 
-class PostArticleOfIncoporationController {
+class GetArticleOfIncoporationController {
   static async Execute(req, res) {
-    const { user, article, message } = req.body;
+    const { user } = req.body;
 
-    if (user != undefined && message != undefined) {
-      var final_file = {
-        file: req.file.filename,
-        contentType: req.file.mimetype,
-      };
-      File.create(final_file, function (err, result) {
-        if (err) {
-          res.status(400).json({
-            message: `Error: ${err}`,
-          });
-        } else {
-          ArticlesOfIncorporation.create(
-            {
-              user: user,
-              file: result._id,
-              message: message,
-            },
-            (err, response) => {
-              if (err) {
-                res.status(400).json({
-                  message: `Error: ${err}`,
-                });
-              } else {
-                res.status(200).json({
-                  message: `Article of Incorporation Saved.`,
-                });
-              }
-            }
-          );
-        }
+    if (user != undefined) {
+      var articlesOfIncorporation = await ArticlesOfIncorporation.find({
+        user: user,
+      }).populate({
+        path: "user",
+        select: "firstName lastName",
       });
+
+      if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {
+        res.status(200).json({
+          message: "Sucess",
+          articlesOfIncorporation: articlesOfIncorporation,
+        });
+      } else {
+        res.status(403).json({
+          message: "No Record found",
+        });
+      }
     } else {
-      res.status(400).json({
-        message: `Invalid Request`,
-      });
+      var articlesOfIncorporation =
+        await ArticlesOfIncorporation.find().populate({
+          path: "user",
+          select: "firstName lastName",
+        });
+
+      if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {
+        res.status(200).json({
+          message: "Sucess",
+          articlesOfIncorporation: articlesOfIncorporation,
+        });
+      } else {
+        res.status(403).json({
+          message: "No Record found",
+        });
+      }
     }
   }
 }
 
-module.exports = PostArticleOfIncoporationController;
+module.exports = GetArticleOfIncoporationController;

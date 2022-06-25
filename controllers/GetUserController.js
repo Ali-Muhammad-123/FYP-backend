@@ -23,7 +23,7 @@ class GetUserController {
                             lastName: result.lastName
                         });
                     } else {
-                        res.status(400).send({
+                        res.status(403).send({
                             message: "No records found!"
                         });
                     }
@@ -34,14 +34,14 @@ class GetUserController {
             });
 
         } else {
-            const user = await User.find().select("_id email firstName lastName");
+            const user = await User.find().select("_id email firstName lastName companyName");
 
             if (user && user.length > 0) {
                 res.status(200).send({
                     user: user
                 });
             } else {
-                res.status(400).send({
+                res.status(403).send({
                     message: "No records found!"
                 });
             }
