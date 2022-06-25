@@ -3,6 +3,7 @@ const auth = require("../middleware/adminAuth");
 const PostIncorporationCertificate = require("../controllers/PostIncorporationCertificate");
 const GetIncorporationCertificate = require("../controllers/GetIncorporationCertificate");
 const UpdateIncorporationCertificate = require("../controllers/UpdateIncorporationCertificate");
+const DeleteIncorporationCertificate = require("../controllers/DeleteIncorporationCertificate");
 
 module.exports = (upload) => {
 
@@ -31,6 +32,11 @@ module.exports = (upload) => {
 
     Router.get("/incorporationCertificate", auth, async (req, res) => {
         GetIncorporationCertificate.Execute(req, res);
+    });
+
+
+    Router.delete("/incorporationCertificate", auth, async (req, res) => {
+        DeleteIncorporationCertificate.Execute(req, res);
     });
 
     return Router;

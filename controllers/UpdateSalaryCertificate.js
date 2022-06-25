@@ -6,7 +6,7 @@ class UpdateSalaryCertificateController {
     static async Execute(req, res) {
 
         const { user, visa } = req.body;
-
+        const { _id } = req.query;
 
         if (user != undefined &&
             visa != undefined &&
@@ -25,7 +25,7 @@ class UpdateSalaryCertificateController {
                 } else {
 
                     SalaryCertificate.findOneAndUpdate(
-                        { 'user': user },
+                        { '_id': _id },
                         {
                             $set:
                             {

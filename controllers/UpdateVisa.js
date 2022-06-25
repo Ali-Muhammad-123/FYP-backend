@@ -9,6 +9,8 @@ class PostVisaController {
         const { user, companyName, visaApplicant, visaUID, visaType, jobTitle, dateOfIssue,
             expiryDate } = req.body;
 
+        const { _id } = req.query;
+
         if (user != undefined &&
             companyName != undefined &&
             visaApplicant != undefined &&
@@ -33,7 +35,7 @@ class PostVisaController {
                 } else {
 
                     Visa.findOneAndUpdate(
-                        { 'user': user },
+                        { '_id': _id },
                         {
                             $set:
                             {

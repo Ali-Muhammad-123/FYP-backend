@@ -6,6 +6,7 @@ class UpdateIncorporationCertificateController {
     static async Execute(req, res) {
 
         const { user } = req.body;
+        const { _id } = req.query;
 
         if (user != undefined &&
             req.file != undefined) {
@@ -23,7 +24,7 @@ class UpdateIncorporationCertificateController {
                 } else {
 
                     IncorporationCertificate.findOneAndUpdate(
-                        { 'user': user },
+                        { '_id': _id },
                         {
                             $set:
                             {

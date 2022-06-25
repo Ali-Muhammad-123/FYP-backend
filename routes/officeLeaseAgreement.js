@@ -42,5 +42,5 @@ module.exports = (upload) => {
     }
   );
 
-  return DeleteOfficeLeaseAgreementController;
+  return officeLeaseAgreementRouter;
 };

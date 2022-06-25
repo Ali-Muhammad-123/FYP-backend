@@ -6,6 +6,7 @@ class UpdateArticleOfIncoporationController {
     static async Execute(req, res) {
 
         const { user, message } = req.body;
+        const { _id } = req.query;
 
         if (user != undefined &&
             message != undefined &&
@@ -23,7 +24,7 @@ class UpdateArticleOfIncoporationController {
                 } else {
 
                     ArticlesOfIncorporation.findOneAndUpdate(
-                        { 'user': user },
+                        { '_id': _id },
                         {
                             $set:
                             {
