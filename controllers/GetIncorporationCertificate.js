@@ -20,10 +20,6 @@ class GetIncorporationCertificateController {
         }).populate({
           path: "user",
           select: "firstName lastName",
-        }).populate({
-          path: 'file',
-          select:
-            'file',
         });
 
         if (incorporationCertificate && incorporationCertificate.length > 0) {
@@ -41,11 +37,6 @@ class GetIncorporationCertificateController {
           await IncorporationCertificate.find().populate({
             path: "user",
             select: "firstName lastName",
-          }).populate({
-            path: 'file',
-            select:
-              'file',
-
           });
 
         if (incorporationCertificate && incorporationCertificate.length > 0) {
