@@ -1,4 +1,5 @@
 const TradeLicense = require("../models/TradeLicense");
+const DeleteFile = require("./DeleteFile");
 class DeleteTradeLicenseController {
 
     static async Execute(req, res) {
@@ -6,6 +7,7 @@ class DeleteTradeLicenseController {
         const { _id } = req.query;
 
         if (_id != undefined) {
+
 
             const result = TradeLicense.findOneAndDelete({ "_id": _id }, function (err, response) {
                 if (!err) {

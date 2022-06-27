@@ -18,6 +18,7 @@ const OfficeLeaseAgreementSchema = mongoose.Schema({
     ref: "File",
     required: true,
   },
-});
+},
+  { timestamps: true });
 
 module.exports = mongoose.model("officeLeaseAgreements", OfficeLeaseAgreementSchema);

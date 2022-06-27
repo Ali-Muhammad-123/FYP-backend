@@ -19,7 +19,8 @@ class GetTradeLicenseController {
             if (tradeLicense && tradeLicense.length > 0) {
                 res.status(200).send({
                     message: "Successfull",
-                    tradeLicense: tradeLicense
+                    tradeLicense: tradeLicense,
+                    createdAt: tradeLicense.createdAt,
                 });
             } else {
                 res.status(403).send({
@@ -37,7 +38,8 @@ class GetTradeLicenseController {
             if (tradeLicense && tradeLicense.length > 0) {
                 res.status(200).send({
                     message: "Successfull",
-                    tradeLicense: tradeLicense
+                    tradeLicense: tradeLicense,
+                    createdAt: tradeLicense.createdAt,
                 });
             } else {
                 res.status(403).send({

@@ -25,52 +25,89 @@ class UpdateTradeLicenseController {
             establishmentDate != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
-            request != undefined &&
-            req.file != undefined
+            request != undefined
         ) {
-            var final_file = {
-                file: req.file.filename,
-                contentType: req.file.mimetype,
-            };
-            File.create(final_file, function (err, result) {
-                if (err) {
-                    res.status(400).json({
-                        message: `Error: ${err}`,
-                    });
-                } else {
-                    var query = { 'user': req.user };
+            if (req.file != undefined) {
 
-                    tradeLicense.findOneAndUpdate(
-                        { '_id': _id },
-                        {
-                            $set:
+
+                var final_file = {
+                    file: req.file.filename,
+                    contentType: req.file.mimetype,
+                };
+
+                File.create(final_file, function (err, result) {
+                    if (err) {
+                        res.status(400).json({
+                            message: `Error: ${err}`,
+                        });
+                    } else {
+                        var query = { 'user': req.user };
+
+                        tradeLicense.findOneAndUpdate(
+                            { '_id': _id },
                             {
-                                licenseNo: licenseNo,
-                                code: code,
-                                companyName: companyName,
-                                judiciary: judiciary,
-                                establishmentDate: establishmentDate,
-                                dateOfIssue: dateOfIssue,
-                                expiryDate: expiryDate,
-                                request: request,
-                                file: result._id
+                                $set:
+                                {
+                                    licenseNo: licenseNo,
+                                    code: code,
+                                    companyName: companyName,
+                                    judiciary: judiciary,
+                                    establishmentDate: establishmentDate,
+                                    dateOfIssue: dateOfIssue,
+                                    expiryDate: expiryDate,
+                                    request: request,
+                                    file: result._id
+                                }
+                            },
+                            { upsert: true },
+                            (err, response) => {
+                                if (err) {
+                                    res.status(400).json({
+                                        message: `Error: ${err}`,
+                                    });
+                                } else {
+                                    res.status(200).json({
+                                        message: `Trade License updated with file.`,
+                                    });
+                                }
                             }
-                        },
-                        { upsert: true },
-                        (err, response) => {
-                            if (err) {
-                                res.status(400).json({
-                                    message: `Error: ${err}`,
-                                });
-                            } else {
-                                res.status(200).json({
-                                    message: `Trade License updated.`,
-                                });
-                            }
+                        );
+                    }
+                });
+            } else {
+
+                tradeLicense.findOneAndUpdate(
+                    { '_id': _id },
+                    {
+                        $set:
+                        {
+                            licenseNo: licenseNo,
+                            code: code,
+                            companyName: companyName,
+                            judiciary: judiciary,
+                            establishmentDate: establishmentDate,
+                            dateOfIssue: dateOfIssue,
+                            expiryDate: expiryDate,
+                            request: request
                         }
-                    );
-                }
-            });
+                    },
+                    { upsert: true },
+                    (err, response) => {
+                        if (err) {
+                            res.status(400).json({
+                                message: `Error: ${err}`,
+                            });
+                        } else {
+                            res.status(200).json({
+                                message: `Trade License updated without file.`,
+                            });
+                        }
+                    }
+                );
+
+            }
+
+
         } else {
             res.status(400).json({
                 message: `Invalid Request`,

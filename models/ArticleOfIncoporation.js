@@ -16,6 +16,7 @@ const Schema = mongoose.Schema({
     required: true,
   }
 
-});
+},
+  { timestamps: true });
 
 module.exports = mongoose.model("ArticlesOfIncorporation", Schema);
