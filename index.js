@@ -24,18 +24,16 @@ const incorporationCertificateRouter = require("./routes/incorporationCertificat
 const immigrationCardRouter = require("./routes/immigrationCard");
 const expressAccountingRequest = require("./routes/expressAccountingRequest");
 const visaRouter = require("./routes/visa");
-const client = require("./routes/Client");
+const client = require("./routes/client");
 const salaryCertificate = require("./routes/salaryCertificate");
 const feedbackReply = require("./routes/feedbackReply");
 const calculator = require("./routes/calculator");
-const feedback = require("./routes/feedback")
-const mainland = require("./routes/mainland")
-const emirates = require("./routes/emirates")
-const appointment = require("./routes/appointment")
+const feedback = require("./routes/feedback");
+const mainland = require("./routes/mainland");
+const emirates = require("./routes/emirates");
+const appointment = require("./routes/appointment");
 const filesRouter = require("./routes/Files");
 const upload = require("./middleware/upload");
-
-
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
