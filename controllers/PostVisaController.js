@@ -21,37 +21,32 @@ class PostVisaController {
       jobTitle != undefined &&
       dateOfIssue != undefined &&
       expiryDate != undefined &&
-      req.file != undefined
+      req.files != undefined
     ) {
       var allFiles = [];
+      //   console.log(req.files);
 
-      req.files.forEach((file) => {
+      for (const file of req.files) {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
         };
-        File.create(final_file, function (err, result) {
-          if (err) {
-            res.status(400).json({
-              message: `Error: ${err}`,
-            });
-          } else {
-            allFiles.push(result._id);
-          }
-        });
-      });
+        const fileNew = await File.create(final_file);
 
+        allFiles.push(fileNew._id);
+      }
+
+      console.log(allFiles);
       Visa.create(
         {
           user: user,
-          companyName: companyName,
           visaApplicant: visaApplicant,
           visaUID: visaUID,
           visaType: visaType,
           jobTitle: jobTitle,
           dateOfIssue: dateOfIssue,
           expiryDate: expiryDate,
-          file: allFiles,
+          visa: allFiles,
         },
         (err, response) => {
           if (err) {

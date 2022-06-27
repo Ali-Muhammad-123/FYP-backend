@@ -32,7 +32,6 @@ module.exports = (upload) => {
     }
   );
 
-
   officeLeaseAgreementRouter.put(
     "/officeleaseagreements",
     auth,

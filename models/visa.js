@@ -33,7 +33,7 @@ const visaSchema = mongoose.Schema({
   visa: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      required: "File",
+      ref: "File",
     },
   ],
 });

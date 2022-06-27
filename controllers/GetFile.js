@@ -6,7 +6,7 @@ class GetFile {
   static async Execute(req, res) {
     const { id } = req.params;
     const file = await File.find({ _id: id });
-    console.log(file);
+    console.log(id);
 
     var fileObt = fs.readFileSync(
       path.resolve(__dirname, `../uploads/${file[0].file}`)
