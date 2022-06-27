@@ -5,7 +5,7 @@ const DeleteMainlandController = require("../controllers/DeleteMainland");
 
 const mainlandRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
-const commonauth = require("../middleware/commonAuth");
+const commonauth = require("../middleware/commonauth");
 
 mainlandRouter.post("/mainland", auth, async (req, res) => {
 

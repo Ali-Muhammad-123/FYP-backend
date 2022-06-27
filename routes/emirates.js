@@ -3,7 +3,7 @@ const GetEmirates = require("../controllers/GetEmirates");
 const UpdateEmirates = require("../controllers/UpdateEmirates");
 const Router = require("express").Router();
 const auth = require("../middleware/adminAuth");
-const commonauth = require("../middleware/commonAuth");
+const commonauth = require("../middleware/commonauth");
 
 
 
