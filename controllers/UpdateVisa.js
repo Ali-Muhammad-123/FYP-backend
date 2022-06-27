@@ -23,6 +23,7 @@ class PostVisaController {
         ) {
 
             if (req.file != undefined) {
+
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
@@ -58,7 +59,7 @@ class PostVisaController {
                                     });
                                 } else {
                                     res.status(200).json({
-                                        message: `Visa updated.`,
+                                        message: `Visa updated with file.`,
                                     });
                                 }
                             }
@@ -90,7 +91,7 @@ class PostVisaController {
                             });
                         } else {
                             res.status(200).json({
-                                message: `Visa updated without.`,
+                                message: `Visa updated without file.`,
                             });
                         }
                     }

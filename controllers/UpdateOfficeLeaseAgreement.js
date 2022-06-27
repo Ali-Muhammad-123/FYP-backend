@@ -11,45 +11,73 @@ class UpdateOfficeLeaseAgreementController {
         if (user != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
-            req.file != undefined) {
+            _id != undefined) {
 
-            var final_file = {
-                file: req.file.filename,
-                contentType: req.file.mimetype,
-            };
-            File.create(final_file, function (err, result) {
-                if (err) {
-                    res.status(400).json({
-                        message: `Error: ${err}`,
-                    });
-                } else {
+            if (req.file != undefined) {
+                var final_file = {
+                    file: req.file.filename,
+                    contentType: req.file.mimetype,
+                };
+                File.create(final_file, function (err, result) {
+                    if (err) {
+                        res.status(400).json({
+                            message: `Error: ${err}`,
+                        });
+                    } else {
 
-                    OfficeLeaseAgreement.findOneAndUpdate(
-                        { '_id': _id },
-                        {
-                            $set:
+                        OfficeLeaseAgreement.findOneAndUpdate(
+                            { '_id': _id },
                             {
-                                user: user,
-                                dateOfIssue: dateOfIssue,
-                                expiryDate: expiryDate,
-                                file: result._id,
+                                $set:
+                                {
+                                    user: user,
+                                    dateOfIssue: dateOfIssue,
+                                    expiryDate: expiryDate,
+                                    file: result._id,
+                                }
+                            },
+                            { upsert: true },
+                            (err, response) => {
+                                if (err) {
+                                    res.status(400).json({
+                                        message: `Error: ${err}`,
+                                    });
+                                } else {
+                                    res.status(200).json({
+                                        message: `Office Lease Agreement updated with file.`,
+                                    });
+                                }
                             }
-                        },
-                        { upsert: true },
-                        (err, response) => {
-                            if (err) {
-                                res.status(400).json({
-                                    message: `Error: ${err}`,
-                                });
-                            } else {
-                                res.status(200).json({
-                                    message: `Office Lease Agreement updated.`,
-                                });
-                            }
+                        )
+                    }
+                });
+            } else {
+                OfficeLeaseAgreement.findOneAndUpdate(
+                    { '_id': _id },
+                    {
+                        $set:
+                        {
+                            user: user,
+                            dateOfIssue: dateOfIssue,
+                            expiryDate: expiryDate,
                         }
-                    )
-                }
-            });
+                    },
+                    { upsert: true },
+                    (err, response) => {
+                        if (err) {
+                            res.status(400).json({
+                                message: `Error: ${err}`,
+                            });
+                        } else {
+                            res.status(200).json({
+                                message: `Office Lease Agreement updated without file.`,
+                            });
+                        }
+                    }
+                )
+            }
+
+
         } else {
             res.status(400).json({
                 message: `Invalid Request`,

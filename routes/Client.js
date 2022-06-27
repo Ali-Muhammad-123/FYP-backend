@@ -1,4 +1,4 @@
-const GetUserController = require("../controllers/GetuserController");
+const GetUserController = require("../controllers/GetUserController");
 const userRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
 

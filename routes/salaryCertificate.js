@@ -30,12 +30,13 @@ module.exports = (upload) => {
         });
 
     Router.get("/salarycertificate", auth, async (req, res) => {
-        DeleteSalaryCertificate.Execute(req, res);
+        GetSalaryCertificateController.Execute(req, res);
+
     });
 
 
     Router.delete("/salarycertificate", auth, async (req, res) => {
-        GetSalaryCertificateController.Execute(req, res);
+        DeleteSalaryCertificate.Execute(req, res);
     });
 
 

@@ -9,44 +9,73 @@ class UpdateIncorporationCertificateController {
         const { _id } = req.query;
 
         if (user != undefined &&
-            req.file != undefined) {
+            _id != undefined) {
 
+            if (req.file != undefined) {
 
-            var final_file = {
-                file: req.file.filename,
-                contentType: req.file.mimetype,
-            };
-            File.create(final_file, function (err, result) {
-                if (err) {
-                    res.status(400).json({
-                        message: `Error: ${err}`,
-                    });
-                } else {
+                var final_file = {
+                    file: req.file.filename,
+                    contentType: req.file.mimetype,
+                };
+                File.create(final_file, function (err, result) {
+                    if (err) {
+                        res.status(400).json({
+                            message: `Error: ${err}`,
+                        });
+                    } else {
 
-                    IncorporationCertificate.findOneAndUpdate(
-                        { '_id': _id },
-                        {
-                            $set:
+                        IncorporationCertificate.findOneAndUpdate(
+                            { '_id': _id },
                             {
-                                user: user,
-                                file: result._id,
+                                $set:
+                                {
+                                    user: user,
+                                    file: result._id,
+                                }
+                            },
+                            { upsert: true },
+                            (err, response) => {
+                                if (err) {
+                                    res.status(400).json({
+                                        message: `Error: ${err}`,
+                                    });
+                                } else {
+                                    res.status(200).json({
+                                        message: `Incorporation Certificate Updated with file.`,
+                                    });
+                                }
                             }
-                        },
-                        { upsert: true },
-                        (err, response) => {
-                            if (err) {
-                                res.status(400).json({
-                                    message: `Error: ${err}`,
-                                });
-                            } else {
-                                res.status(200).json({
-                                    message: `Incorporation Certificate Updated.`,
-                                });
-                            }
+                        )
+                    }
+                });
+
+            } else {
+
+                IncorporationCertificate.findOneAndUpdate(
+                    { '_id': _id },
+                    {
+                        $set:
+                        {
+                            user: user
                         }
-                    )
-                }
-            });
+                    },
+                    { upsert: true },
+                    (err, response) => {
+                        if (err) {
+                            res.status(400).json({
+                                message: `Error: ${err}`,
+                            });
+                        } else {
+                            res.status(200).json({
+                                message: `Incorporation Certificate Updated without file.`,
+                            });
+                        }
+                    }
+                )
+
+            }
+
+
 
 
 
