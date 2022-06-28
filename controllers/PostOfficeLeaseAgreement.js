@@ -5,9 +5,9 @@ class PostOfficeLeaseAgreementController {
 
     static async Execute(req, res) {
 
-        const { user, dateOfIssue, expiryDate } = req.body;
+        const { company, dateOfIssue, expiryDate } = req.body;
 
-        if (user != undefined &&
+        if (company != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
             req.file != undefined) {
@@ -24,7 +24,7 @@ class PostOfficeLeaseAgreementController {
                 } else {
                     OfficeLeaseAgreement.create(
                         {
-                            user: user,
+                            company: company,
                             dateOfIssue: dateOfIssue,
                             expiryDate: expiryDate,
                             file: result._id,

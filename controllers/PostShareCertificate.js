@@ -6,10 +6,10 @@ class PostShareCertificateController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { company } = req.body;
 
 
-        if (user != undefined &&
+        if (company != undefined &&
             req.file != undefined) {
 
 
@@ -25,7 +25,7 @@ class PostShareCertificateController {
                 } else {
                     ShareCertificate.create(
                         {
-                            user: user,
+                            company: company,
                             file: result._id,
                         },
                         (err, response) => {

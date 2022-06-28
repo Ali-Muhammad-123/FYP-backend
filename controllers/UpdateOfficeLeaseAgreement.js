@@ -5,10 +5,10 @@ class UpdateOfficeLeaseAgreementController {
 
     static async Execute(req, res) {
 
-        const { user, dateOfIssue, expiryDate } = req.body;
+        const { company, dateOfIssue, expiryDate } = req.body;
         const { _id } = req.query;
 
-        if (user != undefined &&
+        if (company != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
             _id != undefined) {
@@ -30,7 +30,7 @@ class UpdateOfficeLeaseAgreementController {
                             {
                                 $set:
                                 {
-                                    user: user,
+                                    company: company,
                                     dateOfIssue: dateOfIssue,
                                     expiryDate: expiryDate,
                                     file: result._id,
@@ -57,7 +57,7 @@ class UpdateOfficeLeaseAgreementController {
                     {
                         $set:
                         {
-                            user: user,
+                            company: company,
                             dateOfIssue: dateOfIssue,
                             expiryDate: expiryDate,
                         }
