@@ -5,51 +5,80 @@ class UpdateArticleOfIncoporationController {
 
     static async Execute(req, res) {
 
-        const { user, message } = req.body;
+        const { company, message } = req.body;
         const { _id } = req.query;
 
-        if (user != undefined &&
+        if (company != undefined &&
             message != undefined &&
-            req.file != undefined) {
+            _id != undefined
+        ) {
 
-            var final_file = {
-                file: req.file.filename,
-                contentType: req.file.mimetype,
-            };
-            File.create(final_file, function (err, result) {
-                if (err) {
-                    res.status(400).json({
-                        message: `Error: ${err}`,
-                    });
-                } else {
+            if (req.file != undefined) {
 
-                    ArticlesOfIncorporation.findOneAndUpdate(
-                        { '_id': _id },
-                        {
-                            $set:
+                var final_file = {
+                    file: req.file.filename,
+                    contentType: req.file.mimetype,
+                };
+                File.create(final_file, function (err, result) {
+                    if (err) {
+                        res.status(400).json({
+                            message: `Error: ${err}`,
+                        });
+                    } else {
+
+                        ArticlesOfIncorporation.findOneAndUpdate(
+                            { '_id': _id },
                             {
-                                user: user,
-                                file: result._id,
-                                message: message,
+                                $set:
+                                {
+                                    company: company,
+                                    file: result._id,
+                                    message: message,
+                                }
+                            },
+                            { upsert: true },
+                            (err, response) => {
+                                if (err) {
+                                    res.status(400).json({
+                                        message: `Error: ${err}`,
+                                    });
+                                } else {
+                                    res.status(200).json({
+                                        message: `Article of Incorporation Updated with file.`,
+                                    });
+                                }
                             }
-                        },
-                        { upsert: true },
-                        (err, response) => {
-                            if (err) {
-                                res.status(400).json({
-                                    message: `Error: ${err}`,
-                                });
-                            } else {
-                                res.status(200).json({
-                                    message: `Article of Incorporation Updated.`,
-                                });
-                            }
+                        )
+
+
+                    }
+                });
+            } else {
+                ArticlesOfIncorporation.findOneAndUpdate(
+                    { '_id': _id },
+                    {
+                        $set:
+                        {
+                            company: company,
+                            message: message,
                         }
-                    )
+                    },
+                    { upsert: true },
+                    (err, response) => {
+                        if (err) {
+                            res.status(400).json({
+                                message: `Error: ${err}`,
+                            });
+                        } else {
+                            res.status(200).json({
+                                message: `Article of Incorporation Updated without file.`,
+                            });
+                        }
+                    }
+                )
+            }
 
 
-                }
-            });
         } else {
             res.status(400).json({
                 message: `Invalid Request`,

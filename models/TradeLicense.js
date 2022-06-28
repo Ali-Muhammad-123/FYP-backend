@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const TradeLicenseSchema = mongoose.Schema({
-  user: {
+  company: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "company"
   },
   licenseNo: {
     type: Number,
@@ -11,18 +11,6 @@ const TradeLicenseSchema = mongoose.Schema({
   },
   code: {
     type: String,
-    required: true,
-  },
-  companyName: {
-    type: String,
-    required: true,
-  },
-  judiciary: {
-    type: String,
-    required: true,
-  },
-  establishmentDate: {
-    type: Date,
     required: true,
   },
   dateOfIssue: {

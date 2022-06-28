@@ -9,7 +9,10 @@ module.exports = (upload) => {
   visaRouter.post(
     "/visa",
     auth,
-    upload.array("visa", 10),
+    //upload.single("passport"),
+    upload.single("entryPermit"),
+    //upload.single("residencyVisa"),
+    //upload.single("emiratesId"),
     async (req, res, next) => {
       postVisaController.Execute(req, res, next);
     }
@@ -18,7 +21,10 @@ module.exports = (upload) => {
   visaRouter.put(
     "/visa",
     auth,
-    upload.array("visa", 10),
+    upload.array("passport"),
+    upload.array("entryPermit"),
+    upload.array("residencyVisa"),
+    upload.array("emiratesId"),
     async (req, res, next) => {
       UpdateVisaController.Execute(req, res, next);
     }

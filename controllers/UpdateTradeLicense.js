@@ -3,12 +3,9 @@ const File = require("../models/file");
 class UpdateTradeLicenseController {
     static async Execute(req, res, next) {
         const {
-            user,
+            company,
             licenseNo,
             code,
-            companyName,
-            judiciary,
-            establishmentDate,
             dateOfIssue,
             expiryDate,
             request,
@@ -17,15 +14,13 @@ class UpdateTradeLicenseController {
         const { _id } = req.query
 
         if (
-            user != undefined &&
+            company != undefined &&
             licenseNo != undefined &&
             code != undefined &&
-            companyName != undefined &&
-            judiciary != undefined &&
-            establishmentDate != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
-            request != undefined
+            request != undefined &&
+            _id != undefined
         ) {
             if (req.file != undefined) {
 
@@ -41,18 +36,14 @@ class UpdateTradeLicenseController {
                             message: `Error: ${err}`,
                         });
                     } else {
-                        var query = { 'user': req.user };
-
                         tradeLicense.findOneAndUpdate(
                             { '_id': _id },
                             {
                                 $set:
                                 {
+                                    company: company,
                                     licenseNo: licenseNo,
                                     code: code,
-                                    companyName: companyName,
-                                    judiciary: judiciary,
-                                    establishmentDate: establishmentDate,
                                     dateOfIssue: dateOfIssue,
                                     expiryDate: expiryDate,
                                     request: request,
@@ -81,11 +72,9 @@ class UpdateTradeLicenseController {
                     {
                         $set:
                         {
+                            company: company,
                             licenseNo: licenseNo,
                             code: code,
-                            companyName: companyName,
-                            judiciary: judiciary,
-                            establishmentDate: establishmentDate,
                             dateOfIssue: dateOfIssue,
                             expiryDate: expiryDate,
                             request: request

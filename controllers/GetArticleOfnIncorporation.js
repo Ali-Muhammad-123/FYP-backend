@@ -4,55 +4,35 @@ class GetArticleOfIncoporationController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { _id } = req.body;
 
-        if (user != undefined) {
-
-
+        if (_id != undefined) {
 
             var articlesOfIncorporation = await ArticlesOfIncorporation.find({
-
-                user: user
+                _id: _id
             }).populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company',
             });
-
-            if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {
-
-                res.status(200).json({
-                    message: "Sucess",
-                    articlesOfIncorporation: articlesOfIncorporation
-                });
-
-            } else {
-                res.status(403).json({
-                    message: "No Record found",
-                });
-            }
-
 
         } else {
 
             var articlesOfIncorporation = await ArticlesOfIncorporation.find().populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company',
             });
 
-            if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {
+        }
 
-                res.status(200).json({
-                    message: "Sucess",
-                    articlesOfIncorporation: articlesOfIncorporation
-                });
+        if (articlesOfIncorporation && articlesOfIncorporation.length > 0) {
 
-            } else {
-                res.status(403).json({
-                    message: "No Record found",
-                });
-            }
+            res.status(200).json({
+                message: "Sucess",
+                articlesOfIncorporation: articlesOfIncorporation
+            });
+
+        } else {
+            res.status(403).json({
+                message: "No Record found",
+            });
         }
 
     }

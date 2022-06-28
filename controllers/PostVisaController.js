@@ -3,24 +3,36 @@ const File = require("../models/file");
 
 class PostVisaController {
   static async Execute(req, res) {
+    console.log(req)
     const {
-      user,
-      visaApplicant,
+      company,
+      firstName,
+      lastName,
+      passportNo,
+      passportIssue,
+      passportExpiry,
+      passportCountry,
+      passport,
+      entryPermitIssued,
+      entryPermit,
       visaUID,
-      visaType,
-      jobTitle,
-      dateOfIssue,
-      expiryDate,
+      residencyVisaIssued,
+      residencyVisa,
+      emiratesIdIssued,
+      emiratesId
     } = req.body;
 
     if (
-      user != undefined &&
-      visaApplicant != undefined &&
-      visaUID != undefined &&
-      visaType != undefined &&
-      jobTitle != undefined &&
-      dateOfIssue != undefined &&
-      expiryDate != undefined &&
+      company != undefined &&
+      firstName != undefined &&
+      lastName != undefined &&
+      passportNo != undefined &&
+      passportIssue != undefined &&
+      passportExpiry != undefined &&
+      passportCountry != undefined &&
+      entryPermitIssued != undefined &&
+      residencyVisaIssued != undefined &&
+      emiratesIdIssued != undefined &&
       req.files != undefined
     ) {
       var allFiles = [];
@@ -39,14 +51,17 @@ class PostVisaController {
       console.log(allFiles);
       Visa.create(
         {
-          user: user,
-          visaApplicant: visaApplicant,
-          visaUID: visaUID,
-          visaType: visaType,
-          jobTitle: jobTitle,
-          dateOfIssue: dateOfIssue,
-          expiryDate: expiryDate,
-          visa: allFiles,
+          company: company,
+          firstName: firstName,
+          lastName: lastName,
+          passportNo: passportNo,
+          passportIssue: passportIssue,
+          passportExpiry: passportExpiry,
+          passportCountry: passportCountry,
+          entryPermitIssued: entryPermitIssued,
+          residencyVisaIssued: residencyVisaIssued,
+          emiratesIdIssued: emiratesIdIssued,
+          passport: allFiles,
         },
         (err, response) => {
           if (err) {

@@ -1,28 +1,23 @@
 const jwt = require("jsonwebtoken");
 const tradeLicense = require("../models/TradeLicense");
+const Company = require("../models/company");
 const File = require("../models/file");
 const fs = require("fs");
 class PostTradeLicenseController {
   static async Execute(req, res, next) {
     const {
-      user,
+      company,
       licenseNo,
       code,
-      companyName,
-      judiciary,
-      establishmentDate,
       dateOfIssue,
       expiryDate,
       request,
     } = req.body;
 
     if (
-      user != undefined &&
+      company != undefined &&
       licenseNo != undefined &&
       code != undefined &&
-      companyName != undefined &&
-      judiciary != undefined &&
-      establishmentDate != undefined &&
       dateOfIssue != undefined &&
       expiryDate != undefined &&
       request != undefined &&
@@ -40,12 +35,9 @@ class PostTradeLicenseController {
         } else {
           tradeLicense.create(
             {
-              user: user,
+              company: company,
               licenseNo: licenseNo,
               code: code,
-              companyName: companyName,
-              judiciary: judiciary,
-              establishmentDate: establishmentDate,
               dateOfIssue: dateOfIssue,
               expiryDate: expiryDate,
               request: request,
@@ -58,11 +50,13 @@ class PostTradeLicenseController {
                 });
               } else {
                 res.status(200).json({
-                  message: `Trade License Saved.`,
+                  message: `trade license created successfully`,
                 });
+
               }
             }
           );
+
         }
       });
     } else {

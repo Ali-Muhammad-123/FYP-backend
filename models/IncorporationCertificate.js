@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const IncorporationCertificateSchema = mongoose.Schema({
-  user: {
+  company: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+    ref: "company"
   },
   file: {
     type: mongoose.Schema.Types.ObjectId,

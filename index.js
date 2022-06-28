@@ -32,6 +32,8 @@ const feedback = require("./routes/feedback");
 const mainland = require("./routes/mainland");
 const emirates = require("./routes/emirates");
 const appointment = require("./routes/appointment");
+const employee = require("./routes/employee");
+const company = require("./routes/company");
 const filesRouter = require("./routes/Files");
 const upload = require("./middleware/upload");
 
@@ -56,6 +58,8 @@ app.use(feedback);
 app.use(calculator);
 app.use(mainland);
 app.use(emirates);
+app.use(employee)
+app.use(company)
 app.use(appointment(upload));
 app.use(filesRouter);
 
