@@ -4,7 +4,7 @@ class GetSalaryCertificateController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { user } = req.params;
 
         if (user != undefined) {
 

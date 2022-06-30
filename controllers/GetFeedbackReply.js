@@ -4,7 +4,7 @@ class GetFeedbackReplyController {
 
     static async Execute(req, res) {
 
-        const { feedback } = req.body;
+        const { feedback } = req.params;
 
         if (feedback != undefined) {
 

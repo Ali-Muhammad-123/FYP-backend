@@ -2,7 +2,7 @@ const IncorporationCertificate = require("../models/IncorporationCertificate");
 
 class GetIncorporationCertificateController {
   static async Execute(req, res) {
-    const { _id } = req.body;
+    const { _id } = req.params;
 
     if (_id != undefined) {
       var incorporationCertificate = await IncorporationCertificate.find({

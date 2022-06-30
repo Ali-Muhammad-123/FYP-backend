@@ -4,7 +4,7 @@ class GetCompanyController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.body;
+        const { _id } = req.params;
 
         if (_id != undefined) {
 

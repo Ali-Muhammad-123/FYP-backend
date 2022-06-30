@@ -2,11 +2,11 @@ const Feedback = require("../models/feedback");
 
 class GetFeedbackController {
   static async Execute(req, res) {
-    const { user } = req.body;
+    const { id } = req.params;
 
-    if (user != undefined) {
+    if (id != undefined) {
       var feedback = await Feedback.find({
-        user: user,
+        _id: id,
       }).populate({
         path: "user",
         select: "firstName lastName",

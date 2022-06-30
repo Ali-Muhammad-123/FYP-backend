@@ -3,7 +3,7 @@ class GetTradeLicenseController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.query;
+        const { _id } = req.params;
 
         if (_id != undefined) {
 
