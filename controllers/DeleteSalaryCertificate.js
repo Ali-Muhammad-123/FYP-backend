@@ -1,4 +1,5 @@
 const SalaryCertificate = require("../models/SalaryCertificate");
+const deleteFile = require("./DeleteFile")
 
 class DeleteSalaryCertificateController {
 
@@ -7,6 +8,11 @@ class DeleteSalaryCertificateController {
         const { _id } = req.query;
 
         if (_id != undefined) {
+
+            var oldSalaryCertificate = await SalaryCertificate.findOne({ _id: _id });
+            if (oldSalaryCertificate) {
+                deleteFile.Execute(oldSalaryCertificate.file)
+            }
 
             SalaryCertificate.findOneAndDelete({ "_id": _id }, function (err, response) {
                 if (!err) {

@@ -1,5 +1,6 @@
 const ArticlesOfIncorporation = require("../models/ArticleOfIncoporation");
 const File = require("../models/file");
+const deleteFile = require("./DeleteFile")
 
 class UpdateArticleOfIncoporationController {
 
@@ -14,6 +15,12 @@ class UpdateArticleOfIncoporationController {
         ) {
 
             if (req.file != undefined) {
+
+                var oldArticlesOfIncorporation = await ArticlesOfIncorporation.findOne({ _id: _id });
+                if (oldArticlesOfIncorporation) {
+                    deleteFile.Execute(oldArticlesOfIncorporation.file)
+                }
+
 
                 var final_file = {
                     file: req.file.filename,

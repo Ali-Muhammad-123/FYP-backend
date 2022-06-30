@@ -7,10 +7,8 @@ Router.post("/feedbackreply", auth, async (req, res) => {
   PostFeedbackReply.Execute(req, res);
 });
 
-
 Router.get("/feedbackreply", auth, async (req, res) => {
   GetFeedbackReply.Execute(req, res);
 });
-
 
 module.exports = Router;

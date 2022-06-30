@@ -1,5 +1,6 @@
 const ImmigrationCard = require("../models/ImmigrationCard");
 const File = require("../models/file");
+const deleteFile = require("./DeleteFile")
 
 class PostImmigrationCardController {
 
@@ -15,6 +16,12 @@ class PostImmigrationCardController {
         ) {
 
             if (req.file != undefined) {
+
+                var oldImmigrationCard = await ImmigrationCard.findOne({ _id: _id });
+                if (oldImmigrationCard) {
+                    console.log(oldImmigrationCard)
+                    deleteFile.Execute(oldImmigrationCard.file)
+                }
 
                 var final_file = {
                     file: req.file.filename,

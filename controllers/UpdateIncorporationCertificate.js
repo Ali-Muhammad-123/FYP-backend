@@ -1,17 +1,23 @@
 const IncorporationCertificate = require("../models/IncorporationCertificate");
 const File = require("../models/file");
+const deleteFile = require("./DeleteFile")
 
 class UpdateIncorporationCertificateController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { company } = req.body;
         const { _id } = req.query;
 
-        if (user != undefined &&
+        if (company != undefined &&
             _id != undefined) {
 
             if (req.file != undefined) {
+
+                var oldIncorporationCertificate = await IncorporationCertificate.findOne({ _id: _id });
+                if (oldIncorporationCertificate) {
+                    deleteFile.Execute(oldIncorporationCertificate.file)
+                }
 
                 var final_file = {
                     file: req.file.filename,
@@ -29,7 +35,7 @@ class UpdateIncorporationCertificateController {
                             {
                                 $set:
                                 {
-                                    user: user,
+                                    company: company,
                                     file: result._id,
                                 }
                             },
@@ -56,7 +62,7 @@ class UpdateIncorporationCertificateController {
                     {
                         $set:
                         {
-                            user: user
+                            company: company
                         }
                     },
                     { upsert: true },

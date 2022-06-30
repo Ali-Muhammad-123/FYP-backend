@@ -3,7 +3,7 @@ const File = require("../models/file");
 
 class PostVisaController {
   static async Execute(req, res) {
-    console.log(req)
+    //console.log(req)
     const {
       company,
       firstName,
@@ -22,6 +22,8 @@ class PostVisaController {
       emiratesId
     } = req.body;
 
+    console.log(req.body)
+
     if (
       company != undefined &&
       firstName != undefined &&
@@ -35,20 +37,62 @@ class PostVisaController {
       emiratesIdIssued != undefined &&
       req.files != undefined
     ) {
-      var allFiles = [];
-      //   console.log(req.files);
 
-      for (const file of req.files) {
+
+
+      var PassportAllFiles = [];
+
+      for (const file of req.files.passport) {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
         };
         const fileNew = await File.create(final_file);
 
-        allFiles.push(fileNew._id);
+        PassportAllFiles.push(fileNew._id);
       }
 
-      console.log(allFiles);
+
+      var entryPermitAllFiles = [];
+
+      for (const file of req.files.entryPermit) {
+        var final_file = {
+          file: file.filename,
+          contentType: file.mimetype,
+        };
+        const fileNew = await File.create(final_file);
+
+        entryPermitAllFiles.push(fileNew._id);
+      }
+
+
+      var residencyVisaAllFiles = [];
+
+      for (const file of req.files.residencyVisa) {
+        var final_file = {
+          file: file.filename,
+          contentType: file.mimetype,
+        };
+        const fileNew = await File.create(final_file);
+
+        residencyVisaAllFiles.push(fileNew._id);
+      }
+
+
+      var emiratesIdAllFiles = [];
+
+      for (const file of req.files.emiratesId) {
+        var final_file = {
+          file: file.filename,
+          contentType: file.mimetype,
+        };
+        const fileNew = await File.create(final_file);
+
+        emiratesIdAllFiles.push(fileNew._id);
+      }
+
+
+
       Visa.create(
         {
           company: company,
@@ -61,7 +105,10 @@ class PostVisaController {
           entryPermitIssued: entryPermitIssued,
           residencyVisaIssued: residencyVisaIssued,
           emiratesIdIssued: emiratesIdIssued,
-          passport: allFiles,
+          passport: PassportAllFiles,
+          entryPermit: entryPermitAllFiles,
+          residencyVisa: residencyVisaAllFiles,
+          emiratesId: emiratesIdAllFiles
         },
         (err, response) => {
           if (err) {

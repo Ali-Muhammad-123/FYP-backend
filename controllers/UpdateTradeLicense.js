@@ -1,5 +1,10 @@
 const tradeLicense = require("../models/TradeLicense");
 const File = require("../models/file");
+const fs = require("fs");
+const path = require("path");
+const deleteFile = require("./DeleteFile")
+
+
 class UpdateTradeLicenseController {
     static async Execute(req, res, next) {
         const {
@@ -23,6 +28,27 @@ class UpdateTradeLicenseController {
             _id != undefined
         ) {
             if (req.file != undefined) {
+
+                const oldTradeLicense = await tradeLicense.findOne({ _id: _id });
+                if (oldTradeLicense) {
+                    deleteFile.Execute(oldTradeLicense.file)
+                }
+
+                // var oldTradeLicense = await tradeLicense.findOne({ _id: _id });
+                // if (oldTradeLicense) {
+                //     const oldfile = await File.find({ _id: oldTradeLicense.file });
+                //     for (const file of oldfile) {
+                //         fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                //             if (err) {
+                //                 console.error(err)
+                //                 return
+                //             } else {
+                //                 console.log(`deletd ${_id}`);
+
+                //             }
+                //         });
+                //     }
+                // }
 
 
                 var final_file = {

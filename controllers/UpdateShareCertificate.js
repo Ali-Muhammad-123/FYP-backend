@@ -1,18 +1,24 @@
 const ShareCertificate = require("../models/ShareCertificate");
 const File = require("../models/file");
-
+const deleteFile = require("./DeleteFile");
 
 class PostShareCertificateController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { company } = req.body;
         const { _id } = req.query;
 
-        if (user != undefined &&
+        if (company != undefined &&
             _id != undefined) {
 
             if (req.file != undefined) {
+
+                var oldShareCertificate = await ShareCertificate.findOne({ _id: _id });
+                if (oldShareCertificate) {
+                    deleteFile.Execute(oldShareCertificate.file)
+                }
+
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
@@ -29,7 +35,7 @@ class PostShareCertificateController {
                             {
                                 $set:
                                 {
-                                    user: user,
+                                    company: company,
                                     file: result._id,
                                 }
                             },
@@ -54,7 +60,7 @@ class PostShareCertificateController {
                     {
                         $set:
                         {
-                            user: user
+                            company: company
                         }
                     },
                     { upsert: true },

@@ -1,4 +1,5 @@
 const ShareCertificate = require("../models/ShareCertificate");
+const deleteFile = require("./DeleteFile");
 
 class DeleteShareCertificateController {
 
@@ -7,6 +8,11 @@ class DeleteShareCertificateController {
         const { _id } = req.query;
 
         if (_id != undefined) {
+
+            var oldShareCertificate = await ShareCertificate.findOne({ _id: _id });
+            if (oldShareCertificate) {
+                deleteFile.Execute(oldShareCertificate.file)
+            }
 
             ShareCertificate.findOneAndDelete({ "_id": _id }, function (err, response) {
                 if (!err) {

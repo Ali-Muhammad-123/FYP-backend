@@ -68,6 +68,28 @@ const visaSchema = mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "File",
+      required: false
+    },
+  ],
+  entryPermit: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "File",
+      required: false
+    },
+  ],
+  residencyVisa: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "File",
+      required: false
+    },
+  ],
+  emiratesId: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "File",
+      required: false
     },
   ],
 });

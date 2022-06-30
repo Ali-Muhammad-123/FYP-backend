@@ -5,9 +5,9 @@ class PostIncorporationCertificateController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { company } = req.body;
 
-        if (user != undefined &&
+        if (company != undefined &&
             req.file != undefined) {
 
 
@@ -23,7 +23,7 @@ class PostIncorporationCertificateController {
                 } else {
                     IncorporationCertificate.create(
                         {
-                            user: user,
+                            company: company,
                             file: result._id,
                         },
                         (err, response) => {

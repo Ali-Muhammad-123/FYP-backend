@@ -11,9 +11,7 @@ class GetShareCertificateController {
             const shareCertificate = await ShareCertificate.find({
                 user: user
             }).populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company',
             });
 
             if (shareCertificate && shareCertificate.length > 0) {
@@ -29,9 +27,7 @@ class GetShareCertificateController {
 
         } else {
             const shareCertificate = await ShareCertificate.find().populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company',
             });
 
             if (shareCertificate && shareCertificate.length > 0) {
