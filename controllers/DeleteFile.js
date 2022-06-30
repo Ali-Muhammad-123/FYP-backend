@@ -3,12 +3,12 @@ const fs = require("fs");
 const path = require("path");
 
 class deleteFile {
-    static async Execute(id) {
+    static async Execute(id, fpath) {
         const file = await File.findOne({ _id: id });
 
         if (file) {
             if (file.file) {
-                fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                fs.unlink(path.resolve(path.resolve(__dirname, `..${fpath}/${file.file}`)), (err) => {
                     if (err) {
                         console.error(err)
                         return
