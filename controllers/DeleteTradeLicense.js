@@ -17,22 +17,6 @@ class DeleteTradeLicenseController {
                 deleteFile.Execute(oldTradeLicense.file)
             }
 
-            // var oldTradeLicense = await TradeLicense.findOne({ _id: _id });
-            // if (oldTradeLicense) {
-            //     const oldfile = await File.find({ _id: oldTradeLicense.file });
-            //     for (const file of oldfile) {
-            //         fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
-            //             if (err) {
-            //                 console.error(err)
-            //                 return
-            //             } else {
-            //                 console.log(`deletd ${_id}`);
-
-            //             }
-            //         });
-            //     }
-            // }
-
             const result = TradeLicense.findOneAndDelete({ "_id": _id }, function (err, response) {
                 if (!err) {
                     if (response && response != null) {

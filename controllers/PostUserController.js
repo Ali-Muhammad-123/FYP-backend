@@ -1,5 +1,9 @@
 const User = require("../models/user");
 const Credential = require("../models/credential");
+const otpGenerator = require('otp-generator')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 class PostUserController {
 
@@ -26,26 +30,53 @@ class PostUserController {
                 dateOfBirth: dateOfBirth,
                 passportDetails: passportDetails,
                 role: role,
-            })
-
-            await user.save((err, response) => {
-                if (err) {
-                    return res.status(400).send(err, response);
-                }
-                else {
-                    // const credential = new Credential({
-                    //     user : response._id,
-                    //     email : response.email,
-                    //     password
-                    // });
+            });
 
 
+            const existingUser = await User.find({
+                email: email
+            });
 
-                    return res.status(200).json({
-                        message: `User added successfully`
-                    });
-                }
-            })
+            if (existingUser.length > 0) {
+                res.status(400).json({
+                    message: `Email Address is already registered`,
+                });
+            }
+            else {
+
+                await user.save((err, response) => {
+                    if (err) {
+                        return res.status(400).send(err, response);
+                    }
+                    else {
+
+                        var password = otpGenerator.generate(8, { upperCaseAlphabets: false, digits: true, specialChars: false })
+                        console.log(password)
+
+                        bcrypt.hash(password, saltRounds).then(async function (hash) {
+                            // Store hash in your password DB.
+                            const credential = new Credential({
+                                user: response._id,
+                                email: response.email,
+                                password: hash,
+                                role: "client"
+                            });
+
+                            await credential.save((err) => {
+                                if (err) {
+                                    return res.status(400).send(err);
+                                }
+                                else {
+                                    res.status(200).json({
+                                        message: `user added sucessfully`,
+                                    });
+                                }
+                            })
+
+                        });
+                    }
+                })
+            }
 
         } else {
             res.status(400).json({
