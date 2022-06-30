@@ -36,8 +36,9 @@ const companySchema = mongoose.Schema({
         required: true,
     },
     activities: {
-        type: String,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "activity",
+        required: true
     },
 },
     { timestamps: true });
