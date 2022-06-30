@@ -21,7 +21,7 @@ Router.put("/company", async (req, res) => {
 
 });
 
-Router.get("/company", async (req, res) => {
+Router.get("/company:_id", async (req, res) => {
     GetCompany.Execute(req, res);
 });
 
