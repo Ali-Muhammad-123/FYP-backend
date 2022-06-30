@@ -1,5 +1,5 @@
 const User = require("../models/user");
-
+const Credential = require("../models/credential");
 
 class PostUserController {
 
@@ -28,11 +28,19 @@ class PostUserController {
                 role: role,
             })
 
-            await user.save((err) => {
+            await user.save((err, response) => {
                 if (err) {
-                    return res.status(400).send(err);
+                    return res.status(400).send(err, response);
                 }
                 else {
+                    // const credential = new Credential({
+                    //     user : response._id,
+                    //     email : response.email,
+                    //     password
+                    // });
+
+
+
                     return res.status(200).json({
                         message: `User added successfully`
                     });

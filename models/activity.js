@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MainlandSchema = mongoose.Schema({
+const ActivitySchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -12,4 +12,4 @@ const MainlandSchema = mongoose.Schema({
 },
   { timestamps: true });
 
-module.exports = mongoose.model("mainland", MainlandSchema);
+module.exports = mongoose.model("activity", ActivitySchema);

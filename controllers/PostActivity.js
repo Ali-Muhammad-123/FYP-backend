@@ -1,7 +1,7 @@
-const Mainland = require("../models/mainland");
+const Activity = require("../models/activity");
 
 
-class PostMainlandController {
+class PostActivityController {
 
     static async Execute(req, res) {
 
@@ -10,18 +10,18 @@ class PostMainlandController {
         if (name != undefined &&
             emirates_id != undefined) {
 
-            const mainlandObj = new Mainland({
+            const activityObj = new Activity({
                 name: name,
                 emirates_id: emirates_id,
             })
 
-            await mainlandObj.save((err) => {
+            await activityObj.save((err) => {
                 if (err) {
                     return res.status(400).send(err);
                 }
                 else {
                     return res.status(200).json({
-                        message: `mainland added successfully`
+                        message: `activity added successfully`
                     });
                 }
             })
@@ -37,4 +37,4 @@ class PostMainlandController {
     }
 }
 
-module.exports = PostMainlandController;
+module.exports = PostActivityController;

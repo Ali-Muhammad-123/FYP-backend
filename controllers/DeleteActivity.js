@@ -1,6 +1,6 @@
-const Mainland = require("../models/mainland");
+const Activity = require("../models/activity");
 
-class DeleteMainlandController {
+class DeleteActivityController {
 
     static async Execute(req, res) {
 
@@ -8,7 +8,7 @@ class DeleteMainlandController {
 
         if (_id != undefined) {
 
-            Mainland.findOneAndDelete({ "_id": _id }, function (err, response) {
+            Activity.findOneAndDelete({ "_id": _id }, function (err, response) {
                 if (!err) {
                     if (response && response != null) {
                         res.status(200).json({
@@ -44,4 +44,4 @@ class DeleteMainlandController {
 
 
 
-module.exports = DeleteMainlandController;
+module.exports = DeleteActivityController;

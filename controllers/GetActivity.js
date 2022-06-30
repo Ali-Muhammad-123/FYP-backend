@@ -1,6 +1,6 @@
-const Mainland = require("../models/mainland");
+const Activity = require("../models/activity");
 
-class GetMainlandController {
+class GetActivityController {
 
     static async Execute(req, res) {
 
@@ -10,15 +10,15 @@ class GetMainlandController {
 
 
 
-            var mainland = await Mainland.find({
-                _id: _id
+            var activity = await Activity.find({
+                emirates_id: _id
             });
 
-            if (mainland && mainland.length > 0) {
+            if (activity && activity.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    mainland: mainland
+                    activity: activity
                 });
 
             } else {
@@ -30,13 +30,13 @@ class GetMainlandController {
 
         } else {
 
-            var mainland = await Mainland.find();
+            var activity = await Activity.find();
 
-            if (mainland && mainland.length > 0) {
+            if (activity && activity.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    mainland: mainland
+                    activity: activity
                 });
 
             } else {
@@ -49,4 +49,4 @@ class GetMainlandController {
     }
 }
 
-module.exports = GetMainlandController
+module.exports = GetActivityController

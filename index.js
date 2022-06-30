@@ -29,7 +29,7 @@ const salaryCertificate = require("./routes/salaryCertificate");
 const feedbackReply = require("./routes/feedbackReply");
 const calculator = require("./routes/calculator");
 const feedback = require("./routes/feedback");
-const mainland = require("./routes/mainland");
+const activity = require("./routes/activity");
 const emirates = require("./routes/emirates");
 const appointment = require("./routes/appointment");
 const employee = require("./routes/employee");
@@ -57,7 +57,7 @@ app.use(salaryCertificate(upload));
 app.use(feedbackReply);
 app.use(feedback);
 app.use(calculator);
-app.use(mainland);
+app.use(activity);
 app.use(emirates);
 app.use(employee)
 app.use(company)

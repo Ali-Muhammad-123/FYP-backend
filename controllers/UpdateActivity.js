@@ -1,7 +1,7 @@
-const Mainland = require("../models/mainland");
+const Activity = require("../models/activity");
 
 
-class PostMainlandController {
+class PostActivityController {
 
     static async Execute(req, res) {
 
@@ -13,7 +13,7 @@ class PostMainlandController {
             _id != undefined) {
 
 
-            Mainland.findOneAndUpdate(
+            Activity.findOneAndUpdate(
                 { '_id': _id },
                 {
                     $set:
@@ -46,4 +46,4 @@ class PostMainlandController {
     }
 }
 
-module.exports = PostMainlandController;
+module.exports = PostActivityController;
