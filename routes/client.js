@@ -5,7 +5,7 @@ const UpdateUserController = require("../controllers/UpdateUser");
 const DeleteUserController = require("../controllers/DeleteUser");
 const auth = require("../middleware/adminAuth");
 
-userRouter.get("/user", async (req, res) => {
+userRouter.get("/user/:_id", async (req, res) => {
   GetUserController.Execute(req, res);
 });
 
@@ -20,6 +20,5 @@ userRouter.put("/user", async (req, res) => {
 userRouter.delete("/user", async (req, res) => {
   DeleteUserController.Execute(req, res);
 });
-
 
 module.exports = userRouter;
