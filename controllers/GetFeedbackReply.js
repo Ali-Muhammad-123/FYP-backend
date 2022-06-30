@@ -4,7 +4,7 @@ class GetFeedbackReplyController {
 
     static async Execute(req, res) {
 
-        const { feedback } = req.params;
+        const { feedback } = req.query;
 
         if (feedback != undefined) {
 

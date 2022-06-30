@@ -4,7 +4,7 @@ class GetArticleOfIncoporationController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.params;
+        const { _id } = req.query;
 
         if (_id != undefined) {
 

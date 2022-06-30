@@ -1,7 +1,7 @@
 const Visa = require("../models/visa");
 class GetVisaController {
   static async Execute(req, res) {
-    const { user } = req.body;
+    const { user } = req.query;
 
     if (user != undefined) {
       const visa = await Visa.find({

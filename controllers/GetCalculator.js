@@ -4,14 +4,14 @@ class GetCalculatorController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.params;
+        const { id } = req.query;
 
-        if (_id != undefined) {
+        if (id != undefined) {
 
 
 
             var calculator = await Calculator.find({
-                _id: _id
+                _id: id
             });
 
             if (calculator && calculator.length > 0) {
