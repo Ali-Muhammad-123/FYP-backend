@@ -33,12 +33,12 @@ class UpdateIncorporationCertificateController {
                     } else {
 
                         IncorporationCertificate.findOneAndUpdate(
-                            { '_id': _id },
+                            { '_id': id },
                             {
                                 $set:
                                 {
                                     company: company.trim(),
-                                    file: result._id.trim(),
+                                    file: result._id,
                                 }
                             },
                             { upsert: true },

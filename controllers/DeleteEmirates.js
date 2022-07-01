@@ -6,7 +6,7 @@ class DeleteEmiratesController {
 
         const { id } = req.query;
 
-        if (id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             Emirates.findOneAndDelete({ "_id": id }, function (err, response) {
                 if (!err) {

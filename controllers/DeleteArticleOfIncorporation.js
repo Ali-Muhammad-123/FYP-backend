@@ -7,7 +7,7 @@ class DeleteArticleOfIncoporationController {
 
         const { id } = req.query;
 
-        if (id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             var oldArticleOfIncoporation = await ArticleOfIncoporation.findOne({ _id: id });
             if (oldArticleOfIncoporation && oldArticleOfIncoporation.file) {

@@ -5,7 +5,7 @@ class DeleteUserController {
 
         const { id } = req.query;
 
-        if (id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             User.findOneAndDelete({ "_id": id }, function (err, response) {
                 if (!err) {

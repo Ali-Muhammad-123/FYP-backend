@@ -7,7 +7,7 @@ class DeleteIncorporationCertificateController {
 
         const { id } = req.query;
 
-        if (id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             var oldIncorporationCertificate = await IncorporationCertificate.findOne({ _id: id });
             if (oldIncorporationCertificate && oldIncorporationCertificate.file) {

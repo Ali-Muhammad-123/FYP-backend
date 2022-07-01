@@ -6,7 +6,7 @@ class DeleteCalculatorController {
 
         const { id } = req.query;
 
-        if (id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             Calculator.findOneAndDelete({ "_id": id }, function (err, response) {
                 if (!err) {

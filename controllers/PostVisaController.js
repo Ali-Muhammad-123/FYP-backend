@@ -109,10 +109,10 @@ class PostVisaController {
           entryPermitIssued: entryPermitIssued.trim(),
           residencyVisaIssued: residencyVisaIssued.trim(),
           emiratesIdIssued: emiratesIdIssued.trim(),
-          passport: PassportAllFiles.trim(),
-          entryPermit: entryPermitAllFiles.trim(),
-          residencyVisa: residencyVisaAllFiles.trim(),
-          emiratesId: emiratesIdAllFiles.trim()
+          passport: PassportAllFiles,
+          entryPermit: entryPermitAllFiles,
+          residencyVisa: residencyVisaAllFiles,
+          emiratesId: emiratesIdAllFiles,
         },
         (err, response) => {
           if (err) {

@@ -25,7 +25,7 @@ class PostIncorporationCertificateController {
                     IncorporationCertificate.create(
                         {
                             company: company.trim(),
-                            file: result._id.trim(),
+                            file: result._id,
                         },
                         (err, response) => {
                             if (err) {

@@ -43,7 +43,7 @@ class UpdateImmigrationCardController {
                                     user: user.trim(),
                                     dateOfIssue: dateOfIssue.trim(),
                                     expiryDate: expiryDate.trim(),
-                                    file: result._id.trim(),
+                                    file: result._id,
                                 }
                             },
                             { upsert: true },

@@ -7,7 +7,7 @@ class DeleteSalaryCertificateController {
 
         const { id } = req.query;
 
-        if (id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             var oldSalaryCertificate = await SalaryCertificate.findOne({ _id: id });
             if (oldSalaryCertificate && oldSalaryCertificate.file) {

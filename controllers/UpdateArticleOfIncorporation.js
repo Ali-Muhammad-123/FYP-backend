@@ -36,12 +36,12 @@ class UpdateArticleOfIncoporationController {
                     } else {
 
                         ArticlesOfIncorporation.findOneAndUpdate(
-                            { '_id': _id },
+                            { '_id': id },
                             {
                                 $set:
                                 {
                                     company: company.trim(),
-                                    file: result._id.trim(),
+                                    file: result._id,
                                     message: message.trim(),
                                 }
                             },

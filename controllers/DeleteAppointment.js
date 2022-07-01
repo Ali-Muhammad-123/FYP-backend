@@ -7,7 +7,7 @@ class DeleteAppointmentController {
 
         const { id } = req.query;
 
-        if (id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             var oldAppointment = await Appointment.findOne({ _id: id });
             if (oldAppointment && oldAppointment.file) {

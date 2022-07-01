@@ -9,7 +9,7 @@ class DeleteTradeLicenseController {
     static async Execute(req, res) {
         const { id } = req.query;
 
-        if (id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             var oldTradeLicense = await TradeLicense.findOne({ _id: id });
             if (oldTradeLicense && oldTradeLicense.file) {

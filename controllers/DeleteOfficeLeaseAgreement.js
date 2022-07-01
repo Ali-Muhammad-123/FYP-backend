@@ -7,7 +7,7 @@ class DeleteOfficeLeaseAgreementController {
 
         const { id } = req.query;
 
-        if (id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             var oldOfficeLeaseAgreement = await OfficeLeaseAgreement.findOne({ _id: id });
             if (oldOfficeLeaseAgreement && oldOfficeLeaseAgreement.file) {
