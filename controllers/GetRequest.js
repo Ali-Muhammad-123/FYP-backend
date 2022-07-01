@@ -1,6 +1,6 @@
-const ExpressAccountingRequest = require("../models/expressAccountingRequest");
+const Request = require("../models/request");
 
-class GetExpressAccountingRequestController {
+class GetRequestController {
 
     static async Execute(req, res) {
 
@@ -10,7 +10,7 @@ class GetExpressAccountingRequestController {
 
 
 
-            var expressAccountingRequest = await ExpressAccountingRequest.find({
+            var request = await Request.find({
 
                 user: user
             }).populate({
@@ -19,11 +19,11 @@ class GetExpressAccountingRequestController {
                     'firstName lastName',
             });
 
-            if (expressAccountingRequest && expressAccountingRequest.length > 0) {
+            if (request && request.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    expressAccountingRequest: expressAccountingRequest
+                    request: request
                 });
 
             } else {
@@ -35,17 +35,17 @@ class GetExpressAccountingRequestController {
 
         } else {
 
-            var expressAccountingRequest = await ExpressAccountingRequest.find().populate({
+            var request = await request.find().populate({
                 path: 'user',
                 select:
                     'firstName lastName',
             });
 
-            if (expressAccountingRequest && expressAccountingRequest.length > 0) {
+            if (request && request.length > 0) {
 
                 res.status(200).json({
                     message: "Sucess",
-                    expressAccountingRequest: expressAccountingRequest
+                    request: request
                 });
 
             } else {
@@ -58,4 +58,4 @@ class GetExpressAccountingRequestController {
     }
 }
 
-module.exports = GetExpressAccountingRequestController
+module.exports = GetRequestController
