@@ -35,7 +35,7 @@ class GetRequestController {
 
         } else {
 
-            var request = await request.find().populate({
+            var request = await Request.find().populate({
                 path: 'user',
                 select:
                     'firstName lastName',

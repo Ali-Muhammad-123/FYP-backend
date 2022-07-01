@@ -4,7 +4,7 @@ const PostRequest = require("../controllers/PostRequest");
 const GetRequest = require("../controllers/GetRequest");
 const UpdateRequest = require("../controllers/UpdateRequest");
 
-Router.post('/expressaccounting', auth, async (req, res) => {
+Router.post('/request', auth, async (req, res) => {
 
     PostRequest.Execute(req, res);
 
@@ -12,12 +12,12 @@ Router.post('/expressaccounting', auth, async (req, res) => {
 });
 
 
-Router.get("/expressaccounting", auth, async (req, res) => {
+Router.get("/request", auth, async (req, res) => {
     GetRequest.Execute(req, res);
 });
 
 
-Router.put("/expressaccounting", auth, async (req, res) => {
+Router.put("/request", auth, async (req, res) => {
     UpdateRequest.Execute(req, res);
 });
 
