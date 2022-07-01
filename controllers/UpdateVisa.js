@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { off } = require("process");
 
-class PostVisaController {
+class UpdateVisaController {
 
     static async Execute(req, res) {
 
@@ -224,4 +224,4 @@ class PostVisaController {
 }
 
 
-module.exports = PostVisaController;
+module.exports = UpdateVisaController;

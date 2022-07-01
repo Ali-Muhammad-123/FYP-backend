@@ -1,6 +1,6 @@
 const ImmigrationCard = require("../models/ImmigrationCard");
 
-class GetIncorporationCertificateController {
+class GetImmigrationCardController {
 
     static async Execute(req, res) {
 
@@ -58,4 +58,4 @@ class GetIncorporationCertificateController {
     }
 }
 
-module.exports = GetIncorporationCertificateController
+module.exports = GetImmigrationCardController
