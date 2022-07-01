@@ -1,6 +1,6 @@
-const ExpressAccountingRequest = require("../models/expressAccountingRequest");
+const Request = require("../models/request");
 
-class PostExpressAccountingController {
+class PostRequestController {
 
     static async Execute(req, res) {
 
@@ -9,18 +9,18 @@ class PostExpressAccountingController {
         if (user != undefined &&
             requestType != undefined) {
 
-            const expressAccountingRequestObj = new ExpressAccountingRequest({
+            const request = new Request({
                 user: user.trim(),
                 requestType: requestType.trim(),
             })
 
-            await expressAccountingRequestObj.save((err) => {
+            await request.save((err) => {
                 if (err) {
                     return res.status(400).send(err);
                 }
                 else {
                     res.status(200).json({
-                        message: `Express Accounting Request saved`,
+                        message: `Request saved`,
                     });
                 }
             })
@@ -36,4 +36,4 @@ class PostExpressAccountingController {
 
 
 
-module.exports = PostExpressAccountingController;
+module.exports = PostRequestController;
