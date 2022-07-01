@@ -41,7 +41,7 @@ class UpdateSalaryCertificateController {
                                 {
                                     user: user.trim(),
                                     visa: visa.trim(),
-                                    file: result._id.trim(),
+                                    file: result._id,
                                 }
                             },
                             { upsert: true },

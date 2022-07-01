@@ -28,7 +28,7 @@ class PostSalaryCertificateController {
                         {
                             user: user.trim(),
                             visa: visa.trim(),
-                            file: result._id.trim(),
+                            file: result._id,
                         },
                         (err, response) => {
                             if (err) {

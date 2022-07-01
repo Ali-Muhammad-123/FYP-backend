@@ -29,8 +29,8 @@ class UpdateUserController {
                         countryCode: countryCode.trim(),
                         mobile: mobile.trim(),
                         nationality: nationality.trim(),
-                        dateOfBirth: dateOfBirth.trim(),
-                        passportDetails: passportDetails.trim(),
+                        dateOfBirth: dateOfBirth,
+                        passportDetails: passportDetails,
                         role: role.trim(),
                     }
                 },

@@ -40,7 +40,7 @@ class UpdateAppointmentController {
                                 $set:
                                 {
                                     user: user.trim(),
-                                    file: result._id.trim(),
+                                    file: result._id,
                                     description: description.trim(),
                                 }
                             },

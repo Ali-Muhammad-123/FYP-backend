@@ -2,7 +2,7 @@ const Appointment = require("../models/appointment");
 const File = require("../models/file");
 
 
-class PostArticleOfIncoporationController {
+class PostAppointmentController {
 
     static async Execute(req, res) {
 
@@ -55,4 +55,4 @@ class PostArticleOfIncoporationController {
 }
 
 
-module.exports = PostArticleOfIncoporationController;
+module.exports = PostAppointmentController;
