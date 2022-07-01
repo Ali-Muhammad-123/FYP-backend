@@ -7,7 +7,7 @@ class UpdateCalculatorController {
         const { calculatorActivity, emirates, name, noOfShareholders, visaAllocation, freeZoneType,
             freeZone, price, description } = req.body;
 
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (calculatorActivity != undefined &&
             emirates != undefined &&
@@ -18,12 +18,13 @@ class UpdateCalculatorController {
             freeZone != undefined &&
             price != undefined &&
             description != undefined &&
-            _id != undefined) {
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)) {
 
 
 
             Calculator.findOneAndUpdate(
-                { '_id': _id },
+                { '_id': id },
                 {
                     $set:
                     {

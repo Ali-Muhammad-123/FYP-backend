@@ -10,8 +10,8 @@ class DeleteImmigrationCardController {
         if (_id != undefined) {
 
             var oldImmigrationCard = await ImmigrationCard.findOne({ _id: _id });
-            if (oldImmigrationCard) {
-                deleteFile.Execute(oldImmigrationCard.file)
+            if (oldImmigrationCard && oldImmigrationCard.file) {
+                deleteFile.Execute(oldImmigrationCard.file, req.route.path)
             }
 
             ImmigrationCard.findOneAndDelete({ "_id": _id }, function (err, response) {

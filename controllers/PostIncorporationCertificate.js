@@ -14,6 +14,7 @@ class PostIncorporationCertificateController {
             var final_file = {
                 file: req.file.filename,
                 contentType: req.file.mimetype,
+                docOF: req.route.path,
             };
             File.create(final_file, function (err, result) {
                 if (err) {

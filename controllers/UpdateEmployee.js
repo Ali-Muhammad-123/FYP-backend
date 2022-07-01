@@ -5,17 +5,18 @@ class UpdateEmployeeController {
     static async Execute(req, res) {
 
         const { firstName, lastName, email, mobile, company } = req.body;
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (firstName != undefined &&
             lastName != undefined &&
             email != undefined &&
             mobile != undefined &&
             company != undefined &&
-            _id != undefined) {
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)) {
 
             Employee.findOneAndUpdate(
-                { '_id': _id },
+                { '_id': id },
                 {
                     $set:
                     {

@@ -1,14 +1,15 @@
 const Visa = require("../models/visa");
 class GetVisaController {
   static async Execute(req, res) {
-    const { user } = req.query;
+    const { company } = req.query;
 
-    if (user != undefined) {
+    if (company != undefined && company.match(/^[0-9a-fA-F]{24}$/)) {
       const visa = await Visa.find({
-        user: user,
-      }).populate({
-        path: "company",
-      });
+        company: company,
+      })
+        .populate({
+          path: "company",
+        });
 
       if (visa && visa.length > 0) {
         res.status(200).send({

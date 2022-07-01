@@ -10,8 +10,8 @@ class DeleteArticleOfIncoporationController {
         if (_id != undefined) {
 
             var oldArticleOfIncoporation = await ArticleOfIncoporation.findOne({ _id: _id });
-            if (oldArticleOfIncoporation) {
-                deleteFile.Execute(oldArticleOfIncoporation.file)
+            if (oldArticleOfIncoporation && oldArticleOfIncoporation.file) {
+                deleteFile.Execute(oldArticleOfIncoporation.file, req.route.path)
             }
 
             ArticleOfIncoporation.findOneAndDelete({ "_id": _id }, function (err, response) {

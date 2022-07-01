@@ -10,8 +10,8 @@ class DeleteSalaryCertificateController {
         if (_id != undefined) {
 
             var oldSalaryCertificate = await SalaryCertificate.findOne({ _id: _id });
-            if (oldSalaryCertificate) {
-                deleteFile.Execute(oldSalaryCertificate.file)
+            if (oldSalaryCertificate && oldSalaryCertificate.file) {
+                deleteFile.Execute(oldSalaryCertificate.file, req.route.path)
             }
 
             SalaryCertificate.findOneAndDelete({ "_id": _id }, function (err, response) {

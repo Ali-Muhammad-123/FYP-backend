@@ -17,7 +17,7 @@ class DeleteVisaController {
 
                 const oldPassport = await File.find({ _id: oldVisa.passport });
                 for (const file of oldPassport) {
-                    fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                    fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                         if (err) {
                             console.error(err)
                             return
@@ -31,7 +31,7 @@ class DeleteVisaController {
 
                 const oldEntryPermit = await File.find({ _id: oldVisa.entryPermit });
                 for (const file of oldEntryPermit) {
-                    fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                    fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                         if (err) {
                             console.error(err)
                             return
@@ -44,7 +44,7 @@ class DeleteVisaController {
 
                 const oldresidencyVisa = await File.find({ _id: oldVisa.residencyVisa });
                 for (const file of oldresidencyVisa) {
-                    fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                    fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                         if (err) {
                             console.error(err)
                             return
@@ -58,7 +58,7 @@ class DeleteVisaController {
 
                 const oldemiratesId = await File.find({ _id: oldVisa.emiratesId });
                 for (const file of oldemiratesId) {
-                    fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                    fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                         if (err) {
                             console.error(err)
                             return

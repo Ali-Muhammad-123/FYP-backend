@@ -12,6 +12,7 @@ const verifyToken = (req, res, next) => {
     }
     try {
         const decoded = jwt.verify(token, config.ACCESS_TOKEN_JWT);
+        console.log(decoded)
         if (decoded.role == "admin") {
             req.user = decoded;
         } else {

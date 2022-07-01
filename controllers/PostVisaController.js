@@ -46,6 +46,7 @@ class PostVisaController {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
+          docOF: req.route.path,
         };
         const fileNew = await File.create(final_file);
 
@@ -59,6 +60,7 @@ class PostVisaController {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
+          docOF: req.route.path,
         };
         const fileNew = await File.create(final_file);
 
@@ -72,6 +74,7 @@ class PostVisaController {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
+          docOF: req.route.path,
         };
         const fileNew = await File.create(final_file);
 
@@ -85,6 +88,7 @@ class PostVisaController {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
+          docOF: req.route.path,
         };
         const fileNew = await File.create(final_file);
 

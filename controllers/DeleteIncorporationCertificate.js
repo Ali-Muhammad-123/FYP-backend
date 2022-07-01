@@ -10,8 +10,8 @@ class DeleteIncorporationCertificateController {
         if (_id != undefined) {
 
             var oldIncorporationCertificate = await IncorporationCertificate.findOne({ _id: _id });
-            if (oldIncorporationCertificate) {
-                deleteFile.Execute(oldIncorporationCertificate.file)
+            if (oldIncorporationCertificate && oldIncorporationCertificate.file) {
+                deleteFile.Execute(oldIncorporationCertificate.file, req.route.path)
             }
 
             IncorporationCertificate.findOneAndDelete({ "_id": _id }, function (err, response) {

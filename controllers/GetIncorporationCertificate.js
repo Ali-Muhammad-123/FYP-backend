@@ -4,7 +4,7 @@ class GetIncorporationCertificateController {
   static async Execute(req, res) {
     const { id } = req.query;
 
-    if (id != undefined) {
+    if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
       var incorporationCertificate = await IncorporationCertificate.find({
         _id: id,
       }).populate({

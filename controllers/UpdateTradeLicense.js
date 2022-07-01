@@ -16,7 +16,7 @@ class UpdateTradeLicenseController {
             request,
         } = req.body;
 
-        const { _id } = req.query
+        const { id } = req.query
 
         if (
             company != undefined &&
@@ -25,13 +25,14 @@ class UpdateTradeLicenseController {
             dateOfIssue != undefined &&
             expiryDate != undefined &&
             request != undefined &&
-            _id != undefined
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)
         ) {
             if (req.file != undefined) {
 
-                const oldTradeLicense = await tradeLicense.findOne({ _id: _id });
-                if (oldTradeLicense) {
-                    deleteFile.Execute(oldTradeLicense.file)
+                const oldTradeLicense = await tradeLicense.findOne({ _id: id });
+                if (oldTradeLicense && oldTradeLicense.file) {
+                    deleteFile.Execute(oldTradeLicense.file, req.route.path)
                 }
 
                 // var oldTradeLicense = await tradeLicense.findOne({ _id: _id });
@@ -54,6 +55,7 @@ class UpdateTradeLicenseController {
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
+                    docOF: req.route.path,
                 };
 
                 File.create(final_file, function (err, result) {
@@ -63,7 +65,7 @@ class UpdateTradeLicenseController {
                         });
                     } else {
                         tradeLicense.findOneAndUpdate(
-                            { '_id': _id },
+                            { '_id': id },
                             {
                                 $set:
                                 {
@@ -94,7 +96,7 @@ class UpdateTradeLicenseController {
             } else {
 
                 tradeLicense.findOneAndUpdate(
-                    { '_id': _id },
+                    { '_id': id },
                     {
                         $set:
                         {

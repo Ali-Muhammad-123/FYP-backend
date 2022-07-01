@@ -6,15 +6,16 @@ class PostActivityController {
     static async Execute(req, res) {
 
         const { name, emirates_id } = req.body;
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (name != undefined &&
             emirates_id != undefined &&
-            _id != undefined) {
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)) {
 
 
             Activity.findOneAndUpdate(
-                { '_id': _id },
+                { '_id': id },
                 {
                     $set:
                     {

@@ -4,12 +4,12 @@ class GetArticleOfIncoporationController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.query;
+        const { id } = req.query;
 
-        if (_id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
             var articlesOfIncorporation = await ArticlesOfIncorporation.find({
-                _id: _id
+                _id: id
             }).populate({
                 path: 'company',
             });

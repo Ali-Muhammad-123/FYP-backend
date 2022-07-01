@@ -5,7 +5,7 @@ class UpdateUserController {
         const { firstName, lastName, email, countryCode, mobile, nationality,
             dateOfBirth, passportDetails, role } = req.body;
 
-        const { _id } = req.query
+        const { id } = req.query
 
         if (firstName != undefined &&
             lastName != undefined &&
@@ -13,10 +13,13 @@ class UpdateUserController {
             countryCode != undefined &&
             mobile != undefined &&
             nationality != undefined &&
-            role != undefined) {
+            role != undefined &&
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)
+        ) {
 
             User.findOneAndUpdate(
-                { '_id': _id },
+                { '_id': id },
                 {
                     $set:
                     {

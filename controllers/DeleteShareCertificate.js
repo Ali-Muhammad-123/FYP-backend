@@ -10,8 +10,8 @@ class DeleteShareCertificateController {
         if (_id != undefined) {
 
             var oldShareCertificate = await ShareCertificate.findOne({ _id: _id });
-            if (oldShareCertificate) {
-                deleteFile.Execute(oldShareCertificate.file)
+            if (oldShareCertificate && oldShareCertificate.file) {
+                deleteFile.Execute(oldShareCertificate.file, req.route.path)
             }
 
             ShareCertificate.findOneAndDelete({ "_id": _id }, function (err, response) {

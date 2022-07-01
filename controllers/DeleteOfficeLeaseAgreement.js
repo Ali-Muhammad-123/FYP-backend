@@ -10,8 +10,8 @@ class DeleteOfficeLeaseAgreementController {
         if (_id != undefined) {
 
             var oldOfficeLeaseAgreement = await OfficeLeaseAgreement.findOne({ _id: _id });
-            if (oldOfficeLeaseAgreement) {
-                deleteFile.Execute(oldOfficeLeaseAgreement.file)
+            if (oldOfficeLeaseAgreement && oldOfficeLeaseAgreement.file) {
+                deleteFile.Execute(oldOfficeLeaseAgreement.file, req.route.path)
             }
 
             OfficeLeaseAgreement.findOneAndDelete({ "_id": _id }, function (err, response) {
