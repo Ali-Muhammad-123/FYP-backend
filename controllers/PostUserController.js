@@ -56,7 +56,7 @@ class PostUserController {
                         bcrypt.hash(password, saltRounds).then(async function (hash) {
                             // Store hash in your password DB.
                             const credential = new Credential({
-                                user: response._id.trim(),
+                                user: response._id,
                                 email: response.email.trim(),
                                 password: hash,
                                 role: "client"
