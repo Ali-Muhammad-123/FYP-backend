@@ -39,7 +39,7 @@ class PostShareCertificateController {
                                 $set:
                                 {
                                     company: company.trim(),
-                                    file: result._id.trim(),
+                                    file: result._id,
                                 }
                             },
                             { upsert: true },

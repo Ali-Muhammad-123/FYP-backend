@@ -7,11 +7,11 @@ class DeleteVisaController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.query;
+        const { id } = req.query;
 
-        if (_id != undefined) {
+        if (id != undefined) {
 
-            const oldVisa = await Visa.findOne({ _id: _id });
+            const oldVisa = await Visa.findOne({ _id: id });
             console.log(oldVisa)
             if (oldVisa) {
 
@@ -22,7 +22,7 @@ class DeleteVisaController {
                             console.error(err)
                             return
                         } else {
-                            console.log(`deletd ${_id}`);
+                            console.log(`deletd ${id}`);
 
                         }
                     });
@@ -36,7 +36,7 @@ class DeleteVisaController {
                             console.error(err)
                             return
                         } else {
-                            console.log(`deletd ${_id}`);
+                            console.log(`deletd ${id}`);
 
                         }
                     });
@@ -49,7 +49,7 @@ class DeleteVisaController {
                             console.error(err)
                             return
                         } else {
-                            console.log(`deletd ${_id}`);
+                            console.log(`deletd ${id}`);
 
                         }
                     });
@@ -63,7 +63,7 @@ class DeleteVisaController {
                             console.error(err)
                             return
                         } else {
-                            console.log(`deletd ${_id}`);
+                            console.log(`deletd ${id}`);
 
                         }
                     });
@@ -71,7 +71,7 @@ class DeleteVisaController {
 
             }
 
-            Visa.findOneAndDelete({ "_id": _id }, async function (err, response) {
+            Visa.findOneAndDelete({ "_id": id }, async function (err, response) {
                 if (!err) {
                     if (response && response != null) {
 

@@ -4,11 +4,11 @@ class DeleteCalculatorController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.query;
+        const { id } = req.query;
 
-        if (_id != undefined) {
+        if (id != undefined) {
 
-            Calculator.findOneAndDelete({ "_id": _id }, function (err, response) {
+            Calculator.findOneAndDelete({ "_id": id }, function (err, response) {
                 if (!err) {
                     if (response && response != null) {
                         res.status(200).json({

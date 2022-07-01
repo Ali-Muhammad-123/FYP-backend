@@ -58,7 +58,7 @@ class UpdateTradeLicenseController {
                                     dateOfIssue: dateOfIssue.trim(),
                                     expiryDate: expiryDate.trim(),
                                     request: request.trim(),
-                                    file: result._id.trim(),
+                                    file: result._id.trim,
                                 }
                             },
                             { upsert: true },
