@@ -16,7 +16,7 @@ class UpdateEmiratesController {
                 {
                     $set:
                     {
-                        name: name,
+                        name: name.trim(),
                     }
                 },
                 { upsert: true },

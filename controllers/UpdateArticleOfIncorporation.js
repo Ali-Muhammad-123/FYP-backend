@@ -40,9 +40,9 @@ class UpdateArticleOfIncoporationController {
                             {
                                 $set:
                                 {
-                                    company: company,
-                                    file: result._id,
-                                    message: message,
+                                    company: company.trim(),
+                                    file: result._id.trim(),
+                                    message: message.trim(),
                                 }
                             },
                             { upsert: true },
@@ -68,8 +68,8 @@ class UpdateArticleOfIncoporationController {
                     {
                         $set:
                         {
-                            company: company,
-                            message: message,
+                            company: company.trim(),
+                            message: message.trim(),
                         }
                     },
                     { upsert: true },

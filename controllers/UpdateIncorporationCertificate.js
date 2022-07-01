@@ -37,8 +37,8 @@ class UpdateIncorporationCertificateController {
                             {
                                 $set:
                                 {
-                                    company: company,
-                                    file: result._id,
+                                    company: company.trim(),
+                                    file: result._id.trim(),
                                 }
                             },
                             { upsert: true },
@@ -64,7 +64,7 @@ class UpdateIncorporationCertificateController {
                     {
                         $set:
                         {
-                            company: company
+                            company: company.trim(),
                         }
                     },
                     { upsert: true },

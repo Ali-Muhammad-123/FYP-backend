@@ -27,15 +27,15 @@ class UpdateCompanyController {
                 {
                     $set:
                     {
-                        owner: owner,
-                        name: name,
-                        licenseNo: licenseNo,
-                        licenseCode: licenseCode,
-                        judiciary: judiciary,
-                        establishmentDate: establishmentDate,
-                        issueDate: issueDate,
-                        expiryDate: expiryDate,
-                        activities: activities,
+                        owner: owner.trim(),
+                        name: name.trim(),
+                        licenseNo: licenseNo.trim(),
+                        licenseCode: licenseCode.trim(),
+                        judiciary: judiciary.trim(),
+                        establishmentDate: establishmentDate.trim(),
+                        issueDate: issueDate.trim(),
+                        expiryDate: expiryDate.trim(),
+                        activities: activities.trim(),
                     }
                 },
                 { upsert: true },

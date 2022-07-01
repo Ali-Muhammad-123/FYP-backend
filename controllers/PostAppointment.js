@@ -26,9 +26,9 @@ class PostArticleOfIncoporationController {
                 } else {
                     Appointment.create(
                         {
-                            user: user,
+                            user: user.trim(),
                             file: result._id,
-                            description: description,
+                            description: description.trim(),
 
                         },
                         (err, response) => {

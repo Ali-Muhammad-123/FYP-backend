@@ -9,7 +9,7 @@ class PostEmiratesController {
         if (name != undefined) {
 
             const emiratesObj = new Emirates({
-                name: name,
+                name: name.trim(),
 
             })
 

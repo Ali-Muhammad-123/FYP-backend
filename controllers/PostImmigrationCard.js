@@ -28,10 +28,10 @@ class PostImmigrationCardController {
                 } else {
                     ImmigrationCard.create(
                         {
-                            user: user,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
-                            file: result._id,
+                            user: user.trim(),
+                            dateOfIssue: dateOfIssue.trim(),
+                            expiryDate: expiryDate.trim(),
+                            file: result._id.trim(),
                         },
                         (err, response) => {
                             if (err) {

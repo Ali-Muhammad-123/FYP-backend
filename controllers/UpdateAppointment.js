@@ -39,9 +39,9 @@ class UpdateAppointmentController {
                             {
                                 $set:
                                 {
-                                    user: user,
-                                    file: result._id,
-                                    description: description,
+                                    user: user.trim(),
+                                    file: result._id.trim(),
+                                    description: description.trim(),
                                 }
                             },
                             { upsert: true },

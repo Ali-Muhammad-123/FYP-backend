@@ -36,12 +36,12 @@ class PostTradeLicenseController {
         } else {
           tradeLicense.create(
             {
-              company: company,
-              licenseNo: licenseNo,
-              code: code,
-              dateOfIssue: dateOfIssue,
-              expiryDate: expiryDate,
-              request: request,
+              company: company.trim(),
+              licenseNo: licenseNo.trim(),
+              code: code.trim(),
+              dateOfIssue: dateOfIssue.trim(),
+              expiryDate: expiryDate.trim(),
+              request: request.trim(),
               file: result._id,
             },
             (err, response) => {

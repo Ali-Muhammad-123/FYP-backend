@@ -40,10 +40,10 @@ class UpdateImmigrationCardController {
                             {
                                 $set:
                                 {
-                                    user: user,
-                                    dateOfIssue: dateOfIssue,
-                                    expiryDate: expiryDate,
-                                    file: result._id,
+                                    user: user.trim(),
+                                    dateOfIssue: dateOfIssue.trim(),
+                                    expiryDate: expiryDate.trim(),
+                                    file: result._id.trim(),
                                 }
                             },
                             { upsert: true },
@@ -69,9 +69,9 @@ class UpdateImmigrationCardController {
                     {
                         $set:
                         {
-                            user: user,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
+                            user: user.trim(),
+                            dateOfIssue: dateOfIssue.trim(),
+                            expiryDate: expiryDate.trim(),
                         }
                     },
                     { upsert: true },

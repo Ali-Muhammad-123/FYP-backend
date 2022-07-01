@@ -35,23 +35,6 @@ class UpdateTradeLicenseController {
                     deleteFile.Execute(oldTradeLicense.file, req.route.path)
                 }
 
-                // var oldTradeLicense = await tradeLicense.findOne({ _id: _id });
-                // if (oldTradeLicense) {
-                //     const oldfile = await File.find({ _id: oldTradeLicense.file });
-                //     for (const file of oldfile) {
-                //         fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
-                //             if (err) {
-                //                 console.error(err)
-                //                 return
-                //             } else {
-                //                 console.log(`deletd ${_id}`);
-
-                //             }
-                //         });
-                //     }
-                // }
-
-
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
@@ -69,13 +52,13 @@ class UpdateTradeLicenseController {
                             {
                                 $set:
                                 {
-                                    company: company,
-                                    licenseNo: licenseNo,
-                                    code: code,
-                                    dateOfIssue: dateOfIssue,
-                                    expiryDate: expiryDate,
-                                    request: request,
-                                    file: result._id
+                                    company: company.trim(),
+                                    licenseNo: licenseNo.trim(),
+                                    code: code.trim(),
+                                    dateOfIssue: dateOfIssue.trim(),
+                                    expiryDate: expiryDate.trim(),
+                                    request: request.trim(),
+                                    file: result._id.trim(),
                                 }
                             },
                             { upsert: true },
@@ -100,12 +83,12 @@ class UpdateTradeLicenseController {
                     {
                         $set:
                         {
-                            company: company,
-                            licenseNo: licenseNo,
-                            code: code,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
-                            request: request
+                            company: company.trim(),
+                            licenseNo: licenseNo.trim(),
+                            code: code.trim(),
+                            dateOfIssue: dateOfIssue.trim(),
+                            expiryDate: expiryDate.trim(),
+                            request: request.trim(),
                         }
                     },
                     { upsert: true },

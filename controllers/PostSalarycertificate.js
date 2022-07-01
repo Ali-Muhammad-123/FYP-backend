@@ -26,9 +26,9 @@ class PostSalaryCertificateController {
                 } else {
                     SalaryCertificate.create(
                         {
-                            user: user,
-                            visa: visa,
-                            file: result._id,
+                            user: user.trim(),
+                            visa: visa.trim(),
+                            file: result._id.trim(),
                         },
                         (err, response) => {
                             if (err) {

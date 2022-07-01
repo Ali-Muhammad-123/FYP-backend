@@ -19,8 +19,8 @@ class PostActivityController {
                 {
                     $set:
                     {
-                        name: name,
-                        emirates_id: emirates_id,
+                        name: name.trim(),
+                        emirates_id: emirates_id.trim(),
                     }
                 },
                 { upsert: true },

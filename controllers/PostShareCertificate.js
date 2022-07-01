@@ -26,8 +26,8 @@ class PostShareCertificateController {
                 } else {
                     ShareCertificate.create(
                         {
-                            company: company,
-                            file: result._id,
+                            company: company.trim(),
+                            file: result._id.trim(),
                         },
                         (err, response) => {
                             if (err) {

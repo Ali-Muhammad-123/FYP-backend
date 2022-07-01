@@ -99,20 +99,20 @@ class PostVisaController {
 
       Visa.create(
         {
-          company: company,
-          firstName: firstName,
-          lastName: lastName,
-          passportNo: passportNo,
-          passportIssue: passportIssue,
-          passportExpiry: passportExpiry,
-          passportCountry: passportCountry,
-          entryPermitIssued: entryPermitIssued,
-          residencyVisaIssued: residencyVisaIssued,
-          emiratesIdIssued: emiratesIdIssued,
-          passport: PassportAllFiles,
-          entryPermit: entryPermitAllFiles,
-          residencyVisa: residencyVisaAllFiles,
-          emiratesId: emiratesIdAllFiles
+          company: company.trim(),
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          passportNo: passportNo.trim(),
+          passportIssue: passportIssue.trim(),
+          passportExpiry: passportExpiry.trim(),
+          passportCountry: passportCountry.trim(),
+          entryPermitIssued: entryPermitIssued.trim(),
+          residencyVisaIssued: residencyVisaIssued.trim(),
+          emiratesIdIssued: emiratesIdIssued.trim(),
+          passport: PassportAllFiles.trim(),
+          entryPermit: entryPermitAllFiles.trim(),
+          residencyVisa: residencyVisaAllFiles.trim(),
+          emiratesId: emiratesIdAllFiles.trim()
         },
         (err, response) => {
           if (err) {

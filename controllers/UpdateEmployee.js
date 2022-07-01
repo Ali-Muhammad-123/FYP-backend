@@ -20,11 +20,11 @@ class UpdateEmployeeController {
                 {
                     $set:
                     {
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        mobile: mobile,
-                        company: company,
+                        firstName: firstName.trim(),
+                        lastName: lastName.trim(),
+                        email: email.trim(),
+                        mobile: mobile.trim(),
+                        company: company.trim(),
                     }
                 },
                 { upsert: true },

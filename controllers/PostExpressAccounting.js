@@ -10,8 +10,8 @@ class PostExpressAccountingController {
             requestType != undefined) {
 
             const expressAccountingRequestObj = new ExpressAccountingRequest({
-                user: user,
-                requestType: requestType
+                user: user.trim(),
+                requestType: requestType.trim(),
             })
 
             await expressAccountingRequestObj.save((err) => {

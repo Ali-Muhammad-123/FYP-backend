@@ -11,7 +11,7 @@ class PostActivityController {
             emirates_id != undefined) {
 
             const activityObj = new Activity({
-                name: name,
+                name: name.trim(),
                 emirates_id: emirates_id,
             })
 

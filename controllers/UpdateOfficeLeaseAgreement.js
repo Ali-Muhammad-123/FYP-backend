@@ -38,10 +38,10 @@ class UpdateOfficeLeaseAgreementController {
               { _id: _id },
               {
                 $set: {
-                  company: company,
-                  dateOfIssue: dateOfIssue,
-                  expiryDate: expiryDate,
-                  file: result._id,
+                  company: company.trim(),
+                  dateOfIssue: dateOfIssue.trim(),
+                  expiryDate: expiryDate.trim(),
+                  file: result._id.trim(),
                 },
               },
               { upsert: true },
@@ -64,9 +64,9 @@ class UpdateOfficeLeaseAgreementController {
           { _id: id },
           {
             $set: {
-              company: company,
-              dateOfIssue: dateOfIssue,
-              expiryDate: expiryDate,
+              company: company.trim(),
+              dateOfIssue: dateOfIssue.trim(),
+              expiryDate: expiryDate.trim(),
             },
           },
           { upsert: true },

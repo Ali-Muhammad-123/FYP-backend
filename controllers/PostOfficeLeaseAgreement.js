@@ -25,10 +25,10 @@ class PostOfficeLeaseAgreementController {
                 } else {
                     OfficeLeaseAgreement.create(
                         {
-                            company: company,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
-                            file: result._id,
+                            company: company.trim(),
+                            dateOfIssue: dateOfIssue.trim(),
+                            expiryDate: expiryDate.trim(),
+                            file: result._id.trim(),
                         },
                         (err, response) => {
                             if (err) {

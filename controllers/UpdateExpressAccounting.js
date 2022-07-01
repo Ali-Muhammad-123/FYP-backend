@@ -15,8 +15,8 @@ class PostExpressAccountingController {
                 {
                     $set:
                     {
-                        user: user,
-                        requestType: requestType
+                        user: user.trim(),
+                        requestType: requestType.trim()
                     }
                 },
                 { upsert: true },

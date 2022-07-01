@@ -23,15 +23,15 @@ class UpdateUserController {
                 {
                     $set:
                     {
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        countryCode: countryCode,
-                        mobile: mobile,
-                        nationality: nationality,
-                        dateOfBirth: dateOfBirth,
-                        passportDetails: passportDetails,
-                        role: role
+                        firstName: firstName.trim(),
+                        lastName: lastName.trim(),
+                        email: email.trim(),
+                        countryCode: countryCode.trim(),
+                        mobile: mobile.trim(),
+                        nationality: nationality.trim(),
+                        dateOfBirth: dateOfBirth.trim(),
+                        passportDetails: passportDetails.trim(),
+                        role: role.trim(),
                     }
                 },
                 { upsert: true },

@@ -39,9 +39,9 @@ class UpdateSalaryCertificateController {
                             {
                                 $set:
                                 {
-                                    user: user,
-                                    visa: visa,
-                                    file: result._id,
+                                    user: user.trim(),
+                                    visa: visa.trim(),
+                                    file: result._id.trim(),
                                 }
                             },
                             { upsert: true },
@@ -65,8 +65,8 @@ class UpdateSalaryCertificateController {
                     {
                         $set:
                         {
-                            user: user,
-                            visa: visa,
+                            user: user.trim(),
+                            visa: visa.trim(),
                         }
                     },
                     { upsert: true },
