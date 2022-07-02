@@ -92,6 +92,12 @@ const visaSchema = mongoose.Schema({
       required: false
     },
   ],
+  employee: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "employee",
+    require: false
+  },
+
 });
 
 module.exports = mongoose.model("visa", visaSchema);
