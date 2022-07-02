@@ -6,15 +6,15 @@ class GetEmployeeController {
 
         const { id, company } = req.query;
 
-        if (id != undefined || company != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
+        if ((id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) || (company != undefined && company.match(/^[0-9a-fA-F]{24}$/))) {
 
             var employee;
 
 
-            if (company) {
+            if (!company) {
                 employee = await Employee.find({
 
-                    id: id
+                    _id: id
                 }).populate({
                     path: 'company'
                 })
