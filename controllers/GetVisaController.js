@@ -9,6 +9,10 @@ class GetVisaController {
       })
         .populate({
           path: "company",
+        }).populate({
+          path: "employee",
+        }).populate({
+          path: "familyMember",
         });
 
       if (visa && visa.length > 0) {
@@ -24,6 +28,10 @@ class GetVisaController {
     } else {
       const visa = await Visa.find().populate({
         path: "company",
+      }).populate({
+        path: "employee",
+      }).populate({
+        path: "familyMember",
       });
 
       if (visa && visa.length > 0) {

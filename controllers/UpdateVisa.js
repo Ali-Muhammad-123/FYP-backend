@@ -20,6 +20,8 @@ class UpdateVisaController {
             visaUID,
             residencyVisaIssued,
             emiratesIdIssued,
+            employee,
+            familyMember,
         } = req.body;
 
         const { id } = req.query;
@@ -191,6 +193,8 @@ class UpdateVisaController {
                         entryPermit: entryPermitAllFiles,
                         residencyVisa: residencyVisaAllFiles,
                         emiratesId: emiratesIdAllFiles,
+                        employee: employee,
+                        familyMember: familyMember
                     }
                 },
                 { upsert: true },

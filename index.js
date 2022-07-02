@@ -35,6 +35,7 @@ const appointment = require("./routes/appointment");
 const employee = require("./routes/employee");
 const company = require("./routes/company");
 const allUser = require("./routes/allUsers");
+const familyMember = require("./routes/familyMember");
 const filesRouter = require("./routes/Files");
 const upload = require("./middleware/upload");
 
@@ -62,6 +63,7 @@ app.use(emirates);
 app.use(employee)
 app.use(company)
 app.use(allUser);
+app.use(familyMember);
 app.use(appointment(upload));
 app.use(filesRouter);
 
