@@ -1,9 +1,11 @@
 const Visa = require("../models/visa");
 class GetVisaController {
   static async Execute(req, res) {
-    const { company, employee } = req.query;
+    const { company, employee, familyMember } = req.query;
 
-    if ((employee != undefined && employee.match(/^[0-9a-fA-F]{24}$/)) || (company != undefined && company.match(/^[0-9a-fA-F]{24}$/))) {
+    if ((employee != undefined && employee.match(/^[0-9a-fA-F]{24}$/)) ||
+      (familyMember != undefined && familyMember.match(/^[0-9a-fA-F]{24}$/)) ||
+      (company != undefined && company.match(/^[0-9a-fA-F]{24}$/))) {
 
       var visa;
       if (employee) {
@@ -19,7 +21,19 @@ class GetVisaController {
             path: "familyMember",
           });
 
-      } else {
+      } else if (familyMember) {
+        visa = await Visa.find({
+          familyMember: familyMember,
+        })
+          .populate({
+            path: "company",
+          }).populate({
+            path: "employee",
+          }).populate({
+            path: "familyMember",
+          });
+      }
+      else {
 
         visa = await Visa.find({
           company: company,
