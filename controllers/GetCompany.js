@@ -29,7 +29,11 @@ class GetCompanyController {
 		} else {
 			var company = await Company.find().populate({
 				path: "activities",
+			}).populate({
+				path: "owner",
+				select: "firstName lastName",
 			});
+
 
 			if (company && company.length > 0) {
 				res.status(200).json({
