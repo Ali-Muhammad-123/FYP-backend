@@ -97,7 +97,11 @@ const visaSchema = mongoose.Schema({
     ref: "employee",
     require: false
   },
-
+  familyMember: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "familyMember",
+    require: false
+  },
 });
 
 module.exports = mongoose.model("visa", visaSchema);

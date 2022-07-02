@@ -1,5 +1,5 @@
 const PostFamilyMemberController = require("../controllers/PostFamilyMember");
-const GetEmployeeController = require("../controllers/GetEmployee");
+const GetFamilyMemberController = require("../controllers/GetFamilyMember");
 
 const familyMemberRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
@@ -11,7 +11,7 @@ familyMemberRouter.post("/familymember", async (req, res) => {
 });
 
 familyMemberRouter.get("/familymember", async (req, res) => {
-    GetEmployeeController.Execute(req, res);
+    GetFamilyMemberController.Execute(req, res);
 });
 
 module.exports = familyMemberRouter;

@@ -19,7 +19,9 @@ class PostVisaController {
       residencyVisaIssued,
       residencyVisa,
       emiratesIdIssued,
-      emiratesId
+      emiratesId,
+      employee,
+      familyMember
     } = req.body;
 
     console.log(req.body)
@@ -113,6 +115,8 @@ class PostVisaController {
           entryPermit: entryPermitAllFiles,
           residencyVisa: residencyVisaAllFiles,
           emiratesId: emiratesIdAllFiles,
+          employee: employee,
+          familyMember: familyMember,
         },
         (err, response) => {
           if (err) {

@@ -4,12 +4,12 @@ class GetFamilyMemberController {
 
     static async Execute(req, res) {
 
-        const { id } = req.query;
+        const { employee } = req.query;
 
-        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
+        if (employee != undefined && employee.match(/^[0-9a-fA-F]{24}$/)) {
 
             var familyMember = await FamilyMember.find({
-                _id: id
+                employee: employee
             }).populate({
                 path: 'employee'
             });
