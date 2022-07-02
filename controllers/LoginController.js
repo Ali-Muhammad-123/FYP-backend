@@ -1,4 +1,4 @@
-const user = require("../models/user");
+const Credential = require("../models/credential");
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 
@@ -13,15 +13,16 @@ class LoginController {
         if (email != undefined && password != undefined) {
 
 
-            const existingUser = await user.findOne({
+            const existingUser = await Credential.findOne({
                 email: email,
             });
 
 
-
+            console.log(existingUser)
 
 
             if (existingUser) {
+
 
                 await bcrypt.compare(password, existingUser.password).then(function (result) {
 

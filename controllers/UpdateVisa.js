@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { off } = require("process");
 
-class PostVisaController {
+class UpdateVisaController {
 
     static async Execute(req, res) {
 
@@ -22,7 +22,7 @@ class PostVisaController {
             emiratesIdIssued,
         } = req.body;
 
-        const { _id } = req.query;
+        const { id } = req.query;
 
 
 
@@ -40,21 +40,22 @@ class PostVisaController {
             entryPermitIssued != undefined &&
             residencyVisaIssued != undefined &&
             emiratesIdIssued != undefined &&
-            _id != undefined
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)
         ) {
 
-            var oldVisa = await Visa.findOne({ _id: _id });
+            var oldVisa = await Visa.findOne({ _id: id });
 
             if (req.files.passport) {
                 if (oldVisa) {
                     const oldfile = await File.find({ _id: oldVisa.passport });
                     for (const file of oldfile) {
-                        fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                        fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                             if (err) {
                                 console.error(err)
                                 return
                             } else {
-                                console.log(`deletd ${_id}`);
+                                console.log(`deletd ${id}`);
 
                             }
                         });
@@ -67,6 +68,7 @@ class PostVisaController {
                     var final_file = {
                         file: file.filename,
                         contentType: file.mimetype,
+                        docOF: req.route.path,
                     };
                     const fileNew = await File.create(final_file);
 
@@ -80,12 +82,12 @@ class PostVisaController {
                 if (oldVisa) {
                     const oldfile = await File.find({ _id: oldVisa.entryPermit });
                     for (const file of oldfile) {
-                        fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                        fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                             if (err) {
                                 console.error(err)
                                 return
                             } else {
-                                console.log(`deletd ${_id}`);
+                                console.log(`deletd ${id}`);
 
                             }
                         });
@@ -98,6 +100,7 @@ class PostVisaController {
                     var final_file = {
                         file: file.filename,
                         contentType: file.mimetype,
+                        docOF: req.route.path,
                     };
                     const fileNew = await File.create(final_file);
 
@@ -110,12 +113,12 @@ class PostVisaController {
                 if (oldVisa) {
                     const oldfile = await File.find({ _id: oldVisa.residencyVisa });
                     for (const file of oldfile) {
-                        fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                        fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                             if (err) {
                                 console.error(err)
                                 return
                             } else {
-                                console.log(`deletd ${_id}`);
+                                console.log(`deletd ${id}`);
 
                             }
                         });
@@ -128,6 +131,7 @@ class PostVisaController {
                     var final_file = {
                         file: file.filename,
                         contentType: file.mimetype,
+                        docOF: req.route.path,
                     };
                     const fileNew = await File.create(final_file);
 
@@ -141,12 +145,12 @@ class PostVisaController {
                 if (oldVisa) {
                     const oldfile = await File.find({ _id: oldVisa.emiratesId });
                     for (const file of oldfile) {
-                        fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                        fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                             if (err) {
                                 console.error(err)
                                 return
                             } else {
-                                console.log(`deletd ${_id}`);
+                                console.log(`deletd ${id}`);
 
                             }
                         });
@@ -159,6 +163,7 @@ class PostVisaController {
                     var final_file = {
                         file: file.filename,
                         contentType: file.mimetype,
+                        docOF: req.route.path,
                     };
                     const fileNew = await File.create(final_file);
 
@@ -168,24 +173,24 @@ class PostVisaController {
             }
 
             Visa.findOneAndUpdate(
-                { '_id': _id },
+                { '_id': id },
                 {
                     $set:
                     {
-                        company: company,
-                        firstName: firstName,
-                        lastName: lastName,
-                        passportNo: passportNo,
-                        passportIssue: passportIssue,
-                        passportExpiry: passportExpiry,
-                        passportCountry: passportCountry,
-                        entryPermitIssued: entryPermitIssued,
-                        residencyVisaIssued: residencyVisaIssued,
-                        emiratesIdIssued: emiratesIdIssued,
+                        company: company.trim(),
+                        firstName: firstName.trim(),
+                        lastName: lastName.trim(),
+                        passportNo: passportNo.trim(),
+                        passportIssue: passportIssue.trim(),
+                        passportExpiry: passportExpiry.trim(),
+                        passportCountry: passportCountry.trim(),
+                        entryPermitIssued: entryPermitIssued.trim(),
+                        residencyVisaIssued: residencyVisaIssued.trim(),
+                        emiratesIdIssued: emiratesIdIssued.trim(),
                         passport: PassportAllFiles,
                         entryPermit: entryPermitAllFiles,
                         residencyVisa: residencyVisaAllFiles,
-                        emiratesId: emiratesIdAllFiles
+                        emiratesId: emiratesIdAllFiles,
                     }
                 },
                 { upsert: true },
@@ -219,4 +224,4 @@ class PostVisaController {
 }
 
 
-module.exports = PostVisaController;
+module.exports = UpdateVisaController;

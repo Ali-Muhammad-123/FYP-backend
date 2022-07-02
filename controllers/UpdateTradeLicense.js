@@ -16,7 +16,7 @@ class UpdateTradeLicenseController {
             request,
         } = req.body;
 
-        const { _id } = req.query
+        const { id } = req.query
 
         if (
             company != undefined &&
@@ -25,35 +25,20 @@ class UpdateTradeLicenseController {
             dateOfIssue != undefined &&
             expiryDate != undefined &&
             request != undefined &&
-            _id != undefined
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)
         ) {
             if (req.file != undefined) {
 
-                const oldTradeLicense = await tradeLicense.findOne({ _id: _id });
-                if (oldTradeLicense) {
-                    deleteFile.Execute(oldTradeLicense.file)
+                const oldTradeLicense = await tradeLicense.findOne({ _id: id });
+                if (oldTradeLicense && oldTradeLicense.file) {
+                    deleteFile.Execute(oldTradeLicense.file, req.route.path)
                 }
-
-                // var oldTradeLicense = await tradeLicense.findOne({ _id: _id });
-                // if (oldTradeLicense) {
-                //     const oldfile = await File.find({ _id: oldTradeLicense.file });
-                //     for (const file of oldfile) {
-                //         fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
-                //             if (err) {
-                //                 console.error(err)
-                //                 return
-                //             } else {
-                //                 console.log(`deletd ${_id}`);
-
-                //             }
-                //         });
-                //     }
-                // }
-
 
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
+                    docOF: req.route.path,
                 };
 
                 File.create(final_file, function (err, result) {
@@ -63,17 +48,17 @@ class UpdateTradeLicenseController {
                         });
                     } else {
                         tradeLicense.findOneAndUpdate(
-                            { '_id': _id },
+                            { '_id': id },
                             {
                                 $set:
                                 {
-                                    company: company,
-                                    licenseNo: licenseNo,
-                                    code: code,
-                                    dateOfIssue: dateOfIssue,
-                                    expiryDate: expiryDate,
-                                    request: request,
-                                    file: result._id
+                                    company: company.trim(),
+                                    licenseNo: licenseNo.trim(),
+                                    code: code.trim(),
+                                    dateOfIssue: dateOfIssue.trim(),
+                                    expiryDate: expiryDate.trim(),
+                                    request: request.trim(),
+                                    file: result._id.trim,
                                 }
                             },
                             { upsert: true },
@@ -94,16 +79,16 @@ class UpdateTradeLicenseController {
             } else {
 
                 tradeLicense.findOneAndUpdate(
-                    { '_id': _id },
+                    { '_id': id },
                     {
                         $set:
                         {
-                            company: company,
-                            licenseNo: licenseNo,
-                            code: code,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
-                            request: request
+                            company: company.trim(),
+                            licenseNo: licenseNo.trim(),
+                            code: code.trim(),
+                            dateOfIssue: dateOfIssue.trim(),
+                            expiryDate: expiryDate.trim(),
+                            request: request.trim(),
                         }
                     },
                     { upsert: true },

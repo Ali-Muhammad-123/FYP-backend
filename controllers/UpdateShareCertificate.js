@@ -7,21 +7,24 @@ class PostShareCertificateController {
     static async Execute(req, res) {
 
         const { company } = req.body;
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (company != undefined &&
-            _id != undefined) {
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)
+        ) {
 
             if (req.file != undefined) {
 
-                var oldShareCertificate = await ShareCertificate.findOne({ _id: _id });
-                if (oldShareCertificate) {
-                    deleteFile.Execute(oldShareCertificate.file)
+                var oldShareCertificate = await ShareCertificate.findOne({ _id: id });
+                if (oldShareCertificate && oldShareCertificate.file) {
+                    deleteFile.Execute(oldShareCertificate.file, req.route.path)
                 }
 
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
+                    docOF: req.route.path,
                 };
                 File.create(final_file, function (err, result) {
                     if (err) {
@@ -31,11 +34,11 @@ class PostShareCertificateController {
                     } else {
 
                         ShareCertificate.findOneAndUpdate(
-                            { '_id': _id },
+                            { '_id': id },
                             {
                                 $set:
                                 {
-                                    company: company,
+                                    company: company.trim(),
                                     file: result._id,
                                 }
                             },
@@ -56,11 +59,11 @@ class PostShareCertificateController {
                 });
             } else {
                 ShareCertificate.findOneAndUpdate(
-                    { '_id': _id },
+                    { '_id': id },
                     {
                         $set:
                         {
-                            company: company
+                            company: company.trim(),
                         }
                     },
                     { upsert: true },

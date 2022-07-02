@@ -5,16 +5,16 @@ class DeleteIncorporationCertificateController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.query;
+        const { id } = req.query;
 
-        if (_id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
-            var oldIncorporationCertificate = await IncorporationCertificate.findOne({ _id: _id });
-            if (oldIncorporationCertificate) {
-                deleteFile.Execute(oldIncorporationCertificate.file)
+            var oldIncorporationCertificate = await IncorporationCertificate.findOne({ _id: id });
+            if (oldIncorporationCertificate && oldIncorporationCertificate.file) {
+                deleteFile.Execute(oldIncorporationCertificate.file, req.route.path)
             }
 
-            IncorporationCertificate.findOneAndDelete({ "_id": _id }, function (err, response) {
+            IncorporationCertificate.findOneAndDelete({ "_id": id }, function (err, response) {
                 if (!err) {
                     if (response && response != null) {
                         res.status(200).json({

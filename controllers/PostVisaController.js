@@ -46,6 +46,7 @@ class PostVisaController {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
+          docOF: req.route.path,
         };
         const fileNew = await File.create(final_file);
 
@@ -59,6 +60,7 @@ class PostVisaController {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
+          docOF: req.route.path,
         };
         const fileNew = await File.create(final_file);
 
@@ -72,6 +74,7 @@ class PostVisaController {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
+          docOF: req.route.path,
         };
         const fileNew = await File.create(final_file);
 
@@ -85,6 +88,7 @@ class PostVisaController {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
+          docOF: req.route.path,
         };
         const fileNew = await File.create(final_file);
 
@@ -95,20 +99,20 @@ class PostVisaController {
 
       Visa.create(
         {
-          company: company,
-          firstName: firstName,
-          lastName: lastName,
-          passportNo: passportNo,
-          passportIssue: passportIssue,
-          passportExpiry: passportExpiry,
-          passportCountry: passportCountry,
-          entryPermitIssued: entryPermitIssued,
-          residencyVisaIssued: residencyVisaIssued,
-          emiratesIdIssued: emiratesIdIssued,
+          company: company.trim(),
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          passportNo: passportNo.trim(),
+          passportIssue: passportIssue.trim(),
+          passportExpiry: passportExpiry.trim(),
+          passportCountry: passportCountry.trim(),
+          entryPermitIssued: entryPermitIssued.trim(),
+          residencyVisaIssued: residencyVisaIssued.trim(),
+          emiratesIdIssued: emiratesIdIssued.trim(),
           passport: PassportAllFiles,
           entryPermit: entryPermitAllFiles,
           residencyVisa: residencyVisaAllFiles,
-          emiratesId: emiratesIdAllFiles
+          emiratesId: emiratesIdAllFiles,
         },
         (err, response) => {
           if (err) {

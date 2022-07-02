@@ -5,26 +5,28 @@ const deleteFile = require("./DeleteFile")
 class UpdateOfficeLeaseAgreementController {
   static async Execute(req, res) {
     const { company, dateOfIssue, expiryDate } = req.body;
-    const { _id } = req.query;
+    const { id } = req.query;
 
     if (
       company != undefined &&
       dateOfIssue != undefined &&
       expiryDate != undefined &&
-      _id != undefined
+      id != undefined &&
+      id.match(/^[0-9a-fA-F]{24}$/)
     ) {
 
 
       if (req.file != undefined) {
 
-        var oldOfficeLeaseAgreement = await OfficeLeaseAgreement.findOne({ _id: _id });
-        if (oldOfficeLeaseAgreement) {
-          deleteFile.Execute(oldOfficeLeaseAgreement.file)
+        var oldOfficeLeaseAgreement = await OfficeLeaseAgreement.findOne({ _id: id });
+        if (oldOfficeLeaseAgreement && oldOfficeLeaseAgreement.file) {
+          deleteFile.Execute(oldOfficeLeaseAgreement.file, req.route.path)
         }
 
         var final_file = {
           file: req.file.filename,
           contentType: req.file.mimetype,
+          docOF: req.route.path,
         };
         File.create(final_file, function (err, result) {
           if (err) {
@@ -33,12 +35,12 @@ class UpdateOfficeLeaseAgreementController {
             });
           } else {
             OfficeLeaseAgreement.findOneAndUpdate(
-              { _id: _id },
+              { _id: id },
               {
                 $set: {
-                  company: company,
-                  dateOfIssue: dateOfIssue,
-                  expiryDate: expiryDate,
+                  company: company.trim(),
+                  dateOfIssue: dateOfIssue.trim(),
+                  expiryDate: expiryDate.trim(),
                   file: result._id,
                 },
               },
@@ -59,12 +61,12 @@ class UpdateOfficeLeaseAgreementController {
         });
       } else {
         OfficeLeaseAgreement.findOneAndUpdate(
-          { _id: _id },
+          { _id: id },
           {
             $set: {
-              company: company,
-              dateOfIssue: dateOfIssue,
-              expiryDate: expiryDate,
+              company: company.trim(),
+              dateOfIssue: dateOfIssue.trim(),
+              expiryDate: expiryDate.trim(),
             },
           },
           { upsert: true },

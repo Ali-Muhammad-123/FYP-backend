@@ -1,56 +1,52 @@
 const Company = require("../models/company");
 
 class GetCompanyController {
+	static async Execute(req, res) {
+		const { id } = req.query;
 
-    static async Execute(req, res) {
+		if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
+			var company = await Company.find({
+				owner: id,
+			})
+				.populate({
+					path: "activities",
+				})
+				.populate({
+					path: "owner",
+					select: "firstName lastName",
+				});
 
-        const { id } = req.query;
-
-        if (id != undefined) {
-
-
-
-            var company = await Company.find({
-                owner: id
-            }).populate({
-                path: 'activities'
-            });
-
-            if (company && company.length > 0) {
-
-                res.status(200).json({
-                    message: "Sucess",
-                    company: company
-                });
-
-            } else {
-                res.status(403).json({
-                    message: "No Record found",
-                });
-            }
+			if (company && company.length > 0) {
+				res.status(200).json({
+					message: "Sucess",
+					company: company,
+				});
+			} else {
+				res.status(403).json({
+					message: "No Record found",
+				});
+			}
+		} else {
+			var company = await Company.find().populate({
+				path: "activities",
+			}).populate({
+				path: "owner",
+				select: "firstName lastName",
+			});
 
 
-        } else {
-
-            var company = await Company.find().populate({
-                path: 'activities'
-            });
-
-            if (company && company.length > 0) {
-
-                res.status(200).json({
-                    message: "Sucess",
-                    company: company
-                });
-
-            } else {
-                res.status(403).json({
-                    message: "No Record found",
-                });
-            }
-        }
-
-    }
+			if (company && company.length > 0) {
+				res.status(200).json({
+					message: "Sucess",
+					company: company,
+				});
+			} else {
+				res.status(403).json({
+					message: "No Record found",
+				});
+			}
+		}
+	}
 }
 
-module.exports = GetCompanyController
+module.exports = GetCompanyController;

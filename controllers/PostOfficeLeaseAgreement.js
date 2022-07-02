@@ -15,6 +15,7 @@ class PostOfficeLeaseAgreementController {
             var final_file = {
                 file: req.file.filename,
                 contentType: req.file.mimetype,
+                docOF: req.route.path,
             };
             File.create(final_file, function (err, result) {
                 if (err) {
@@ -24,9 +25,9 @@ class PostOfficeLeaseAgreementController {
                 } else {
                     OfficeLeaseAgreement.create(
                         {
-                            company: company,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
+                            company: company.trim(),
+                            dateOfIssue: dateOfIssue.trim(),
+                            expiryDate: expiryDate.trim(),
                             file: result._id,
                         },
                         (err, response) => {

@@ -7,7 +7,7 @@ class UpdateCompanyController {
         const { owner, name, licenseNo, licenseCode, judiciary, establishmentDate,
             issueDate, expiryDate, activities } = req.body;
 
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (owner != undefined &&
             name != undefined &&
@@ -16,24 +16,26 @@ class UpdateCompanyController {
             establishmentDate != undefined &&
             issueDate != undefined &&
             expiryDate != undefined &&
-            activities != undefined) {
+            activities != undefined &&
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)) {
 
 
 
             Company.findOneAndUpdate(
-                { '_id': _id },
+                { '_id': id },
                 {
                     $set:
                     {
-                        owner: owner,
-                        name: name,
-                        licenseNo: licenseNo,
-                        licenseCode: licenseCode,
-                        judiciary: judiciary,
-                        establishmentDate: establishmentDate,
-                        issueDate: issueDate,
-                        expiryDate: expiryDate,
-                        activities: activities,
+                        owner: owner.trim(),
+                        name: name.trim(),
+                        licenseNo: licenseNo.trim(),
+                        licenseCode: licenseCode.trim(),
+                        judiciary: judiciary.trim(),
+                        establishmentDate: establishmentDate.trim(),
+                        issueDate: issueDate.trim(),
+                        expiryDate: expiryDate.trim(),
+                        activities: activities.trim(),
                     }
                 },
                 { upsert: true },

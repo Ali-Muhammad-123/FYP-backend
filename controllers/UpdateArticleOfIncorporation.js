@@ -7,24 +7,26 @@ class UpdateArticleOfIncoporationController {
     static async Execute(req, res) {
 
         const { company, message } = req.body;
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (company != undefined &&
             message != undefined &&
-            _id != undefined
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)
         ) {
 
             if (req.file != undefined) {
 
-                var oldArticlesOfIncorporation = await ArticlesOfIncorporation.findOne({ _id: _id });
-                if (oldArticlesOfIncorporation) {
-                    deleteFile.Execute(oldArticlesOfIncorporation.file)
+                var oldArticlesOfIncorporation = await ArticlesOfIncorporation.findOne({ _id: id });
+                if (oldArticlesOfIncorporation && oldArticlesOfIncorporation.file) {
+                    deleteFile.Execute(oldArticlesOfIncorporation.file, req.route.path)
                 }
 
 
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
+                    docOF: req.route.path,
                 };
                 File.create(final_file, function (err, result) {
                     if (err) {
@@ -34,13 +36,13 @@ class UpdateArticleOfIncoporationController {
                     } else {
 
                         ArticlesOfIncorporation.findOneAndUpdate(
-                            { '_id': _id },
+                            { '_id': id },
                             {
                                 $set:
                                 {
-                                    company: company,
+                                    company: company.trim(),
                                     file: result._id,
-                                    message: message,
+                                    message: message.trim(),
                                 }
                             },
                             { upsert: true },
@@ -62,12 +64,12 @@ class UpdateArticleOfIncoporationController {
                 });
             } else {
                 ArticlesOfIncorporation.findOneAndUpdate(
-                    { '_id': _id },
+                    { '_id': id },
                     {
                         $set:
                         {
-                            company: company,
-                            message: message,
+                            company: company.trim(),
+                            message: message.trim(),
                         }
                     },
                     { upsert: true },

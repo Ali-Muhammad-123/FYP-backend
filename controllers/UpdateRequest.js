@@ -1,6 +1,6 @@
-const ExpressAccountingRequest = require("../models/expressAccountingRequest");
+const Request = require("../models/request");
 
-class PostExpressAccountingController {
+class PostRequestController {
 
     static async Execute(req, res) {
 
@@ -10,13 +10,13 @@ class PostExpressAccountingController {
         if (user != undefined &&
             requestType != undefined) {
 
-            ExpressAccountingRequest.findOneAndUpdate(
+            Request.findOneAndUpdate(
                 { '_id': _id },
                 {
                     $set:
                     {
-                        user: user,
-                        requestType: requestType
+                        user: user.trim(),
+                        requestType: requestType.trim()
                     }
                 },
                 { upsert: true },
@@ -27,7 +27,7 @@ class PostExpressAccountingController {
                         });
                     } else {
                         res.status(200).json({
-                            message: `Express Accountng Updated.`,
+                            message: `Request Updated.`,
                         });
                     }
                 }
@@ -43,4 +43,4 @@ class PostExpressAccountingController {
 
 
 
-module.exports = PostExpressAccountingController;
+module.exports = PostRequestController;

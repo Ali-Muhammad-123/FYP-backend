@@ -7,21 +7,23 @@ class UpdateIncorporationCertificateController {
     static async Execute(req, res) {
 
         const { company } = req.body;
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (company != undefined &&
-            _id != undefined) {
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)) {
 
             if (req.file != undefined) {
 
-                var oldIncorporationCertificate = await IncorporationCertificate.findOne({ _id: _id });
-                if (oldIncorporationCertificate) {
-                    deleteFile.Execute(oldIncorporationCertificate.file)
+                var oldIncorporationCertificate = await IncorporationCertificate.findOne({ _id: id });
+                if (oldIncorporationCertificate && oldIncorporationCertificate.file) {
+                    deleteFile.Execute(oldIncorporationCertificate.file, req.route.path)
                 }
 
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
+                    docOF: req.route.path,
                 };
                 File.create(final_file, function (err, result) {
                     if (err) {
@@ -31,11 +33,11 @@ class UpdateIncorporationCertificateController {
                     } else {
 
                         IncorporationCertificate.findOneAndUpdate(
-                            { '_id': _id },
+                            { '_id': id },
                             {
                                 $set:
                                 {
-                                    company: company,
+                                    company: company.trim(),
                                     file: result._id,
                                 }
                             },
@@ -58,11 +60,11 @@ class UpdateIncorporationCertificateController {
             } else {
 
                 IncorporationCertificate.findOneAndUpdate(
-                    { '_id': _id },
+                    { '_id': id },
                     {
                         $set:
                         {
-                            company: company
+                            company: company.trim(),
                         }
                     },
                     { upsert: true },

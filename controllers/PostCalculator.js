@@ -18,15 +18,15 @@ class PostCalculatorController {
             description != undefined) {
 
             const calculatorObj = new Calculator({
-                calculatorActivity: calculatorActivity,
-                emirates: emirates,
-                name: name,
-                noOfShareholders: noOfShareholders,
-                visaAllocation: visaAllocation,
-                freeZoneType: freeZoneType,
-                freeZone: freeZone,
-                price: price,
-                description: description
+                calculatorActivity: calculatorActivity.trim(),
+                emirates: emirates.trim(),
+                name: name.trim(),
+                noOfShareholders: noOfShareholders.trim(),
+                visaAllocation: visaAllocation.trim(),
+                freeZoneType: freeZoneType.trim(),
+                freeZone: freeZone.trim(),
+                price: price.trim(),
+                description: description.trim(),
             })
 
             await calculatorObj.save((err) => {

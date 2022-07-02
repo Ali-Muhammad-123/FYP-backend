@@ -16,6 +16,7 @@ class PostArticleOfIncoporationController {
       var final_file = {
         file: req.file.filename,
         contentType: req.file.mimetype,
+        docOF: req.route.path,
       };
       File.create(final_file, function (err, result) {
         if (err) {
@@ -25,9 +26,9 @@ class PostArticleOfIncoporationController {
         } else {
           ArticleOfIncoporation.create(
             {
-              company: company,
+              company: company.trim(),
               file: result._id,
-              message: message,
+              message: message.trim(),
             },
             (err, response) => {
               if (err) {

@@ -31,15 +31,15 @@ class SignupController {
 
 
                     const User = new user({
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        countryCode: countryCode,
-                        mobile: mobile,
-                        nationality: nationality,
-                        dateOfBirth: dateOfBirth,
-                        passportDetails: passportDetails,
-                        role: role,
+                        firstName: firstName.trim(),
+                        lastName: lastName.trim(),
+                        email: email.trim(),
+                        countryCode: countryCode.trim(),
+                        mobile: mobile.trim(),
+                        nationality: nationality.trim(),
+                        dateOfBirth: dateOfBirth.trim(),
+                        passportDetails: passportDetails.trim(),
+                        role: role.trim(),
                         password: hash,
                     })
 
@@ -61,8 +61,8 @@ class SignupController {
                             }
                             else {
                                 const credential = new Credential({
-                                    user: response._id,
-                                    email: response.email,
+                                    user: response._id.trim(),
+                                    email: response.email.trim(),
                                     password: hash,
                                     role: "client"
                                 });

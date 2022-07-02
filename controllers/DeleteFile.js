@@ -4,8 +4,8 @@ const path = require("path");
 
 class deleteFile {
     static async Execute(id, fpath) {
-        const file = await File.findOne({ _id: id });
-
+        const file = await File.findOneAndDelete({ _id: id });
+        console.log(file)
         if (file) {
             if (file.file) {
                 fs.unlink(path.resolve(path.resolve(__dirname, `..${fpath}/${file.file}`)), (err) => {

@@ -1,55 +1,66 @@
 const Appointment = require("../models/appointment");
 const File = require("../models/file");
+const deleteFile = require("./DeleteFile")
 
 
-class PostArticleOfIncoporationController {
+class UpdateAppointmentController {
 
     static async Execute(req, res) {
 
         const { user, description } = req.body;
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (user != undefined &&
             description != undefined &&
-            req.file != undefined) {
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)) {
 
+            if (req.file != undefined) {
 
-            var final_file = {
-                file: req.file.filename,
-                contentType: req.file.mimetype,
-            };
-            File.create(final_file, function (err, result) {
-                if (err) {
-                    res.status(400).json({
-                        message: `Error: ${err}`,
-                    });
-                } else {
-
-                    Appointment.findOneAndUpdate(
-                        { '_id': _id },
-                        {
-                            $set:
-                            {
-                                user: user,
-                                file: result._id,
-                                description: description,
-                            }
-                        },
-                        { upsert: true },
-                        (err, response) => {
-                            if (err) {
-                                res.status(400).json({
-                                    message: `Error: ${err}`,
-                                });
-                            } else {
-                                res.status(200).json({
-                                    message: `appointment updated.`,
-                                });
-                            }
-                        }
-                    );
+                var oldAppointment = await Appointment.findOne({ _id: id });
+                if (oldAppointment && oldAppointment.file) {
+                    deleteFile.Execute(oldAppointment.file, req.route.path)
                 }
-            });
+
+                var final_file = {
+                    file: req.file.filename,
+                    contentType: req.file.mimetype,
+                    docOF: req.route.path,
+                };
+                File.create(final_file, function (err, result) {
+                    if (err) {
+                        res.status(400).json({
+                            message: `Error: ${err}`,
+                        });
+                    } else {
+
+                        Appointment.findOneAndUpdate(
+                            { '_id': id },
+                            {
+                                $set:
+                                {
+                                    user: user.trim(),
+                                    file: result._id,
+                                    description: description.trim(),
+                                }
+                            },
+                            { upsert: true },
+                            (err, response) => {
+                                if (err) {
+                                    res.status(400).json({
+                                        message: `Error: ${err}`,
+                                    });
+                                } else {
+                                    res.status(200).json({
+                                        message: `appointment updated.`,
+                                    });
+                                }
+                            }
+                        );
+
+                    }
+                });
+            }
         } else {
             res.status(400).json({
                 message: `Invalid Request`,
@@ -60,4 +71,4 @@ class PostArticleOfIncoporationController {
 }
 
 
-module.exports = PostArticleOfIncoporationController;
+module.exports = UpdateAppointmentController;

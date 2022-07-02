@@ -7,7 +7,7 @@ class UpdateCalculatorController {
         const { calculatorActivity, emirates, name, noOfShareholders, visaAllocation, freeZoneType,
             freeZone, price, description } = req.body;
 
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (calculatorActivity != undefined &&
             emirates != undefined &&
@@ -18,24 +18,25 @@ class UpdateCalculatorController {
             freeZone != undefined &&
             price != undefined &&
             description != undefined &&
-            _id != undefined) {
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)) {
 
 
 
             Calculator.findOneAndUpdate(
-                { '_id': _id },
+                { '_id': id },
                 {
                     $set:
                     {
-                        calculatorActivity: calculatorActivity,
-                        emirates: emirates,
-                        name: name,
-                        noOfShareholders: noOfShareholders,
-                        visaAllocation: visaAllocation,
-                        freeZoneType: freeZoneType,
-                        freeZone: freeZone,
-                        price: price,
-                        description: description
+                        calculatorActivity: calculatorActivity.trim(),
+                        emirates: emirates.trim(),
+                        name: name.trim(),
+                        noOfShareholders: noOfShareholders.trim(),
+                        visaAllocation: visaAllocation.trim(),
+                        freeZoneType: freeZoneType.trim(),
+                        freeZone: freeZone.trim(),
+                        price: price.trim(),
+                        description: description.trim(),
                     }
                 },
                 { upsert: true },

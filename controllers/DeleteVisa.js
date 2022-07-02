@@ -7,22 +7,22 @@ class DeleteVisaController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.query;
+        const { id } = req.query;
 
-        if (_id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
-            const oldVisa = await Visa.findOne({ _id: _id });
+            const oldVisa = await Visa.findOne({ _id: id });
             console.log(oldVisa)
             if (oldVisa) {
 
                 const oldPassport = await File.find({ _id: oldVisa.passport });
                 for (const file of oldPassport) {
-                    fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                    fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                         if (err) {
                             console.error(err)
                             return
                         } else {
-                            console.log(`deletd ${_id}`);
+                            console.log(`deletd ${id}`);
 
                         }
                     });
@@ -31,12 +31,12 @@ class DeleteVisaController {
 
                 const oldEntryPermit = await File.find({ _id: oldVisa.entryPermit });
                 for (const file of oldEntryPermit) {
-                    fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                    fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                         if (err) {
                             console.error(err)
                             return
                         } else {
-                            console.log(`deletd ${_id}`);
+                            console.log(`deletd ${id}`);
 
                         }
                     });
@@ -44,12 +44,12 @@ class DeleteVisaController {
 
                 const oldresidencyVisa = await File.find({ _id: oldVisa.residencyVisa });
                 for (const file of oldresidencyVisa) {
-                    fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                    fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                         if (err) {
                             console.error(err)
                             return
                         } else {
-                            console.log(`deletd ${_id}`);
+                            console.log(`deletd ${id}`);
 
                         }
                     });
@@ -58,12 +58,12 @@ class DeleteVisaController {
 
                 const oldemiratesId = await File.find({ _id: oldVisa.emiratesId });
                 for (const file of oldemiratesId) {
-                    fs.unlink(path.resolve(path.resolve(__dirname, `../uploads/${file.file}`)), (err) => {
+                    fs.unlink(path.resolve(path.resolve(__dirname, `..${req.route.path}/${file.file}`)), (err) => {
                         if (err) {
                             console.error(err)
                             return
                         } else {
-                            console.log(`deletd ${_id}`);
+                            console.log(`deletd ${id}`);
 
                         }
                     });
@@ -71,7 +71,7 @@ class DeleteVisaController {
 
             }
 
-            Visa.findOneAndDelete({ "_id": _id }, async function (err, response) {
+            Visa.findOneAndDelete({ "_id": id }, async function (err, response) {
                 if (!err) {
                     if (response && response != null) {
 

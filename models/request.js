@@ -12,4 +12,4 @@ const requestSchema = mongoose.Schema({
 },
   { timestamps: true });
 
-module.exports = mongoose.model("expressAccountingRequest", requestSchema);
+module.exports = mongoose.model("Request", requestSchema);

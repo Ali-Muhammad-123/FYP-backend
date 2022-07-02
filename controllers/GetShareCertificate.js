@@ -5,7 +5,7 @@ class GetShareCertificateController {
 
         const { user } = req.query;
 
-        if (user != undefined) {
+        if (user != undefined && user.match(/^[0-9a-fA-F]{24}$/)) {
 
 
             const shareCertificate = await ShareCertificate.find({

@@ -2,7 +2,7 @@ const Appointment = require("../models/appointment");
 const File = require("../models/file");
 
 
-class PostArticleOfIncoporationController {
+class PostAppointmentController {
 
     static async Execute(req, res) {
 
@@ -16,6 +16,7 @@ class PostArticleOfIncoporationController {
             var final_file = {
                 file: req.file.filename,
                 contentType: req.file.mimetype,
+                docOF: req.route.path,
             };
             File.create(final_file, function (err, result) {
                 if (err) {
@@ -25,9 +26,9 @@ class PostArticleOfIncoporationController {
                 } else {
                     Appointment.create(
                         {
-                            user: user,
+                            user: user.trim(),
                             file: result._id,
-                            description: description,
+                            description: description.trim(),
 
                         },
                         (err, response) => {
@@ -54,4 +55,4 @@ class PostArticleOfIncoporationController {
 }
 
 
-module.exports = PostArticleOfIncoporationController;
+module.exports = PostAppointmentController;

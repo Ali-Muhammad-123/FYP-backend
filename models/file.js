@@ -14,6 +14,10 @@ const FileSchema = new Schema({
     default: Date.now(),
     type: Date,
   },
+  docOF: {
+    required: true,
+    type: String,
+  }
 });
 
 const File = mongoose.model("File", FileSchema);

@@ -14,8 +14,8 @@ class PostfeedbackReplyController {
         ) {
 
             const feedbackreplyObj = new FeedbackReply({
-                feedback: feedback,
-                reply: reply
+                feedback: feedback.trim(),
+                reply: reply.trim(),
             })
 
             await feedbackreplyObj.save((err) => {

@@ -16,6 +16,7 @@ class PostSalaryCertificateController {
             var final_file = {
                 file: req.file.filename,
                 contentType: req.file.mimetype,
+                docOF: req.route.path,
             };
             File.create(final_file, function (err, result) {
                 if (err) {
@@ -25,8 +26,8 @@ class PostSalaryCertificateController {
                 } else {
                     SalaryCertificate.create(
                         {
-                            user: user,
-                            visa: visa,
+                            user: user.trim(),
+                            visa: visa.trim(),
                             file: result._id,
                         },
                         (err, response) => {
