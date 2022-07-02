@@ -4,7 +4,7 @@ class GetExpressAccountingRequestController {
 
     static async Execute(req, res) {
 
-        const { user } = req.params;
+        const { user } = req.query;
 
         if (user != undefined) {
 

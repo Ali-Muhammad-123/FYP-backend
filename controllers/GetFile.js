@@ -4,7 +4,7 @@ const path = require("path");
 
 class GetFile {
   static async Execute(req, res) {
-    const { id } = req.params;
+    const { id } = req.query;
     const file = await File.find({ _id: id });
     console.log(id);
 

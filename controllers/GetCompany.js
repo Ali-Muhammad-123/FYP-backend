@@ -4,14 +4,14 @@ class GetCompanyController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.params;
+        const { id } = req.query;
 
-        if (_id != undefined) {
+        if (id != undefined) {
 
 
 
             var company = await Company.find({
-                owner: _id
+                owner: id
             }).populate({
                 path: 'activities'
             });

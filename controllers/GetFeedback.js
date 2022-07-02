@@ -2,7 +2,7 @@ const Feedback = require("../models/feedback");
 
 class GetFeedbackController {
   static async Execute(req, res) {
-    const { id } = req.params;
+    const { id } = req.query;
 
     if (id != undefined) {
       var feedback = await Feedback.find({
