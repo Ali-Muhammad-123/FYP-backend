@@ -5,10 +5,11 @@ class GetVisaController {
 
     if ((employee != undefined && employee.match(/^[0-9a-fA-F]{24}$/)) || (company != undefined && company.match(/^[0-9a-fA-F]{24}$/))) {
 
+      var visa;
       if (employee) {
 
-        const visa = await Visa.find({
-          company: company,
+        visa = await Visa.find({
+          employee: employee,
         })
           .populate({
             path: "company",
@@ -20,8 +21,8 @@ class GetVisaController {
 
       } else {
 
-        const visa = await Visa.find({
-          employee: employee,
+        visa = await Visa.find({
+          company: company,
         })
           .populate({
             path: "company",
