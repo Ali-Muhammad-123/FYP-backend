@@ -34,7 +34,7 @@ class PostUserController {
                 countryCode: countryCode.trim(),
                 mobile: mobile.trim(),
                 nationality: nationality.trim(),
-                dateOfBirth: dateOfBirth.trim(),
+                dateOfBirth: dateOfBirth,
                 passportDetails: passportDetails.trim(),
                 role: role.trim(),
             });

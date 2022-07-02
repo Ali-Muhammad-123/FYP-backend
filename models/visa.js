@@ -29,18 +29,9 @@ const visaSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  passport: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "File",
-  },
   entryPermitIssued: {
     type: Boolean,
     required: true,
-  },
-  entryPermit: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "File",
-    required: false,
   },
   visaUID: {
     type: String,
@@ -49,11 +40,6 @@ const visaSchema = mongoose.Schema({
   residencyVisaIssued: {
     type: Boolean,
     required: true,
-  },
-  residencyVisa: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "File",
-    required: false,
   },
   emiratesIdIssued: {
     type: String,
@@ -98,8 +84,7 @@ const visaSchema = mongoose.Schema({
     require: false
   },
   familyMember: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "familyMember",
+    type: Boolean,
     require: false
   },
 });

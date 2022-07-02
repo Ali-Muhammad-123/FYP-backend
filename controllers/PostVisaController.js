@@ -110,6 +110,7 @@ class PostVisaController {
           passportCountry: passportCountry.trim(),
           entryPermitIssued: entryPermitIssued.trim(),
           residencyVisaIssued: residencyVisaIssued.trim(),
+          visaUID: visaUID,
           emiratesIdIssued: emiratesIdIssued.trim(),
           passport: PassportAllFiles,
           entryPermit: entryPermitAllFiles,
