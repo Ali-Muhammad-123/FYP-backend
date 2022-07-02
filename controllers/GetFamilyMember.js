@@ -1,0 +1,54 @@
+const FamilyMember = require("../models/familyMember");
+
+class GetFamilyMemberController {
+
+    static async Execute(req, res) {
+
+        const { id } = req.query;
+
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
+
+            var familyMember = await FamilyMember.find({
+                _id: id
+            }).populate({
+                path: 'employee'
+            });
+
+            if (familyMember && familyMember.length > 0) {
+
+                res.status(200).json({
+                    message: "Sucess",
+                    familyMember: familyMember
+                });
+
+            } else {
+                res.status(403).json({
+                    message: "No Record found",
+                });
+            }
+
+
+        } else {
+
+            var familyMember = await FamilyMember.find().populate({
+                path: 'employee'
+            });
+
+            if (familyMember && familyMember.length > 0) {
+
+                res.status(200).json({
+                    message: "Sucess",
+                    familyMember: familyMember,
+                });
+
+            } else {
+                res.status(403).json({
+                    message: "No Record found",
+                });
+            }
+        }
+
+    }
+}
+
+module.exports = GetFamilyMemberController
