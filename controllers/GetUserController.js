@@ -13,7 +13,7 @@ class GetUserController {
             res.status(200).send({
               message: "Successfull",
               id: result._id,
-              user: result
+              user: result,
             });
           } else {
             res.status(403).send({
@@ -23,9 +23,7 @@ class GetUserController {
         }
       });
     } else {
-      const user = await User.find().select(
-        "_id email firstName lastName"
-      );
+      const user = await User.find().select("_id email firstName lastName");
 
       if (user && user.length > 0) {
         res.status(200).send({

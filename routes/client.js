@@ -21,5 +21,4 @@ userRouter.delete("/user", async (req, res) => {
   DeleteUserController.Execute(req, res);
 });
 
-
 module.exports = userRouter;
