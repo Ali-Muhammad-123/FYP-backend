@@ -27,7 +27,7 @@ class UpdateCompanyController {
                 {
                     $set:
                     {
-                        owner: owner.trim(),
+                        owner: owner,
                         name: name.trim(),
                         licenseNo: licenseNo.trim(),
                         licenseCode: licenseCode.trim(),
@@ -35,7 +35,7 @@ class UpdateCompanyController {
                         establishmentDate: establishmentDate.trim(),
                         issueDate: issueDate.trim(),
                         expiryDate: expiryDate.trim(),
-                        activities: activities.trim(),
+                        activities: activities,
                     }
                 },
                 { upsert: true },
