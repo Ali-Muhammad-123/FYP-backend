@@ -1,6 +1,7 @@
 const user = require("../models/user");
-const otpGenerator = require('otp-generator')
+const Credential = require("../models/credential");
 const bcrypt = require('bcrypt');
+const { response } = require("express");
 const saltRounds = 10;
 
 class SignupController {
@@ -8,57 +9,85 @@ class SignupController {
     static async Execute(req, res) {
 
 
-        const { firstName, lastName, email, mobile, role } = req.query;
+        const { firstName, lastName, email, countryCode, mobile,
+            nationality, dateOfBirth, passportDetails, role, password, confirmPassword } = req.body;
 
         if (firstName != undefined &&
             lastName != undefined &&
             email != undefined &&
+            countryCode != undefined &&
             mobile != undefined &&
-            role != undefined
+            nationality != undefined &&
+            role != undefined &&
+            password != undefined &&
+            confirmPassword != undefined
         ) {
 
+            if (password === confirmPassword) {
 
-            var password = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false })
-            console.log(password)
-
-            bcrypt.hash(password, saltRounds).then(async function (hash) {
-                // Store hash in your password DB.
+                bcrypt.hash(password, saltRounds).then(async function (hash) {
+                    // Store hash in your password DB.
 
 
 
-                const User = new user({
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    mobile: mobile,
-                    password: hash,
-                    role: role
-                })
-
-                const existingUser = await user.find({
-                    email: email
-                });
-
-                if (existingUser.length > 0) {
-                    res.status(400).json({
-                        message: `Email Address is already registered`,
-                    });
-                }
-                else {
-                    await User.save((err) => {
-                        if (err) {
-                            return res.status(400).send(err);
-                        }
-                        else {
-                            res.status(200).json({
-                                message: `user Signup sucessfull`,
-                            });
-                        }
+                    const User = new user({
+                        firstName: firstName.trim(),
+                        lastName: lastName.trim(),
+                        email: email.trim(),
+                        countryCode: countryCode.trim(),
+                        mobile: mobile.trim(),
+                        nationality: nationality.trim(),
+                        dateOfBirth: dateOfBirth.trim(),
+                        passportDetails: passportDetails.trim(),
+                        role: role.trim(),
+                        password: hash,
                     })
 
-                }
+                    const existingUser = await user.find({
+                        email: email
+                    });
 
-            });
+                    if (existingUser.length > 0) {
+                        res.status(400).json({
+                            message: `Email Address is already registered`,
+                        });
+                    }
+                    else {
+
+
+                        await User.save(async (err, response) => {
+                            if (err) {
+                                return res.status(400).send(err);
+                            }
+                            else {
+                                const credential = new Credential({
+                                    user: response._id.trim(),
+                                    email: response.email.trim(),
+                                    password: hash,
+                                    role: "client"
+                                });
+
+                                await credential.save(async (err) => {
+                                    if (err) {
+                                        return res.status(400).send(err);
+                                    }
+                                    else {
+                                        res.status(200).json({
+                                            message: `user Signup sucessfull`,
+                                        });
+                                    }
+                                })
+                            }
+                        });
+
+                    }
+
+                });
+            } else {
+                res.status(400).json({
+                    message: `password does not match`,
+                });
+            }
 
         } else {
             res.status(400).json({

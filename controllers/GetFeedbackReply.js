@@ -4,9 +4,9 @@ class GetFeedbackReplyController {
 
     static async Execute(req, res) {
 
-        const { feedback } = req.body;
+        const { feedback } = req.query;
 
-        if (feedback != undefined) {
+        if (feedback != undefined && feedback.match(/^[0-9a-fA-F]{24}$/)) {
 
 
 

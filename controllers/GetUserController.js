@@ -4,18 +4,16 @@ class GetUserController {
   static async Execute(req, res) {
     const { id } = req.query;
 
-    if (id != undefined) {
-      const user = User.findById(id, function (err, result) {
+    if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
+      User.findById(id, function (err, result) {
         if (err) {
           res.status(400).send(err);
         } else {
           if (result) {
             res.status(200).send({
               message: "Successfull",
-              _id: result._id,
-              email: result.email,
-              firstName: result.firstName,
-              lastName: result.lastName,
+              id: result._id,
+              user: result
             });
           } else {
             res.status(403).send({
@@ -26,7 +24,7 @@ class GetUserController {
       });
     } else {
       const user = await User.find().select(
-        "_id email firstName lastName companyName"
+        "_id email firstName lastName"
       );
 
       if (user && user.length > 0) {

@@ -3,50 +3,121 @@ const File = require("../models/file");
 
 class PostVisaController {
   static async Execute(req, res) {
+    //console.log(req)
     const {
-      user,
-      visaApplicant,
+      company,
+      firstName,
+      lastName,
+      passportNo,
+      passportIssue,
+      passportExpiry,
+      passportCountry,
+      passport,
+      entryPermitIssued,
+      entryPermit,
       visaUID,
-      visaType,
-      jobTitle,
-      dateOfIssue,
-      expiryDate,
+      residencyVisaIssued,
+      residencyVisa,
+      emiratesIdIssued,
+      emiratesId,
+      employee,
+      familyMember
     } = req.body;
 
+    console.log(req.body)
+
     if (
-      user != undefined &&
-      visaApplicant != undefined &&
-      visaUID != undefined &&
-      visaType != undefined &&
-      jobTitle != undefined &&
-      dateOfIssue != undefined &&
-      expiryDate != undefined &&
+      company != undefined &&
+      firstName != undefined &&
+      lastName != undefined &&
+      passportNo != undefined &&
+      passportIssue != undefined &&
+      passportExpiry != undefined &&
+      passportCountry != undefined &&
+      entryPermitIssued != undefined &&
+      residencyVisaIssued != undefined &&
+      emiratesIdIssued != undefined &&
       req.files != undefined
     ) {
-      var allFiles = [];
-      //   console.log(req.files);
 
-      for (const file of req.files) {
+
+
+      var PassportAllFiles = [];
+
+      for (const file of req.files.passport) {
         var final_file = {
           file: file.filename,
           contentType: file.mimetype,
+          docOF: req.route.path,
         };
         const fileNew = await File.create(final_file);
 
-        allFiles.push(fileNew._id);
+        PassportAllFiles.push(fileNew._id);
       }
 
-      console.log(allFiles);
+
+      var entryPermitAllFiles = [];
+
+      for (const file of req.files.entryPermit) {
+        var final_file = {
+          file: file.filename,
+          contentType: file.mimetype,
+          docOF: req.route.path,
+        };
+        const fileNew = await File.create(final_file);
+
+        entryPermitAllFiles.push(fileNew._id);
+      }
+
+
+      var residencyVisaAllFiles = [];
+
+      for (const file of req.files.residencyVisa) {
+        var final_file = {
+          file: file.filename,
+          contentType: file.mimetype,
+          docOF: req.route.path,
+        };
+        const fileNew = await File.create(final_file);
+
+        residencyVisaAllFiles.push(fileNew._id);
+      }
+
+
+      var emiratesIdAllFiles = [];
+
+      for (const file of req.files.emiratesId) {
+        var final_file = {
+          file: file.filename,
+          contentType: file.mimetype,
+          docOF: req.route.path,
+        };
+        const fileNew = await File.create(final_file);
+
+        emiratesIdAllFiles.push(fileNew._id);
+      }
+
+
+
       Visa.create(
         {
-          user: user,
-          visaApplicant: visaApplicant,
+          company: company.trim(),
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          passportNo: passportNo.trim(),
+          passportIssue: passportIssue.trim(),
+          passportExpiry: passportExpiry.trim(),
+          passportCountry: passportCountry.trim(),
+          entryPermitIssued: entryPermitIssued.trim(),
+          residencyVisaIssued: residencyVisaIssued.trim(),
           visaUID: visaUID,
-          visaType: visaType,
-          jobTitle: jobTitle,
-          dateOfIssue: dateOfIssue,
-          expiryDate: expiryDate,
-          visa: allFiles,
+          emiratesIdIssued: emiratesIdIssued.trim(),
+          passport: PassportAllFiles,
+          entryPermit: entryPermitAllFiles,
+          residencyVisa: residencyVisaAllFiles,
+          emiratesId: emiratesIdAllFiles,
+          employee: employee,
+          familyMember: familyMember,
         },
         (err, response) => {
           if (err) {

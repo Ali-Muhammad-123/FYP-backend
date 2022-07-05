@@ -3,24 +3,21 @@ class GetTradeLicenseController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { id } = req.query;
 
-        if (user != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
 
             const tradeLicense = await TradeLicense.find({
-                user: user
+                _id: id
             }).populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company',
             });
 
             if (tradeLicense && tradeLicense.length > 0) {
                 res.status(200).send({
                     message: "Successfull",
                     tradeLicense: tradeLicense,
-                    createdAt: tradeLicense.createdAt,
                 });
             } else {
                 res.status(403).send({
@@ -30,9 +27,7 @@ class GetTradeLicenseController {
 
         } else {
             const tradeLicense = await TradeLicense.find().populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company',
             });
 
             if (tradeLicense && tradeLicense.length > 0) {

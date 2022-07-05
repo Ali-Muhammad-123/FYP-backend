@@ -3,17 +3,15 @@ class GetShareCertificateController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { user } = req.query;
 
-        if (user != undefined) {
+        if (user != undefined && user.match(/^[0-9a-fA-F]{24}$/)) {
 
 
             const shareCertificate = await ShareCertificate.find({
                 user: user
             }).populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company',
             });
 
             if (shareCertificate && shareCertificate.length > 0) {
@@ -29,9 +27,7 @@ class GetShareCertificateController {
 
         } else {
             const shareCertificate = await ShareCertificate.find().populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company',
             });
 
             if (shareCertificate && shareCertificate.length > 0) {

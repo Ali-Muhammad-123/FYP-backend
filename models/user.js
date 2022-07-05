@@ -14,17 +14,25 @@ const UserSchema = mongoose.Schema({
     required: true,
     unique: true
   },
+  countryCode: {
+    type: String,
+    required: true,
+  },
   mobile: {
     type: String,
     required: true,
   },
-  password: {
+  nationality: {
     type: String,
     required: true,
   },
-  companyName: {
+  dateOfBirth: {
+    type: Date,
+    required: false,
+  },
+  passportDetails: {
     type: String,
-    required: true,
+    required: false,
   },
   role: {
     type: String,

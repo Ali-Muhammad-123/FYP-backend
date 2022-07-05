@@ -30,13 +30,13 @@ module.exports = (upload) => {
     });
 
 
-  Router.get("/articlesofincorporation", auth, async (req, res) => {
+  Router.get("/articleofincorporation", auth, async (req, res) => {
 
     GetArticleOfIncorporation.Execute(req, res);
 
   });
 
-  Router.delete("/articlesofincorporation", auth, async (req, res) => {
+  Router.delete("/articleofincorporation", auth, async (req, res) => {
 
     DeleteArticleOfIncorporation.Execute(req, res);
 

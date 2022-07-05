@@ -4,11 +4,11 @@ const updatetradeLicenseController = require("../controllers/UpdateTradeLicense"
 const DeleteTradeLicenseController = require("../controllers/DeleteTradeLicense");
 const auth = require("../middleware/adminAuth");
 const tradeLicenseRouter = require("express").Router();
-const { body, validationResult } = require("express-validator");
+const { body, check, validationResult } = require("express-validator");
 
 module.exports = (upload) => {
   tradeLicenseRouter.post(
-    "/uploadtradelicense",
+    "/tradelicense",
     auth,
     upload.single("trade-license"),
     async (req, res, next) => {
@@ -18,7 +18,7 @@ module.exports = (upload) => {
 
 
   tradeLicenseRouter.put(
-    "/updatetradelicense",
+    "/tradelicense",
     auth,
     upload.single("trade-license"),
     async (req, res, next) => {
@@ -27,13 +27,15 @@ module.exports = (upload) => {
   );
 
 
-  tradeLicenseRouter.get("/gettradelicense", auth, async (req, res) => {
-    gettradeLicenseController.Execute(req, res);
-  });
+  tradeLicenseRouter.get("/tradelicense", auth,
+    async (req, res) => {
+      gettradeLicenseController.Execute(req, res);
+    });
 
-  tradeLicenseRouter.delete("/deletetradelicense", auth, async (req, res) => {
-    DeleteTradeLicenseController.Execute(req, res);
-  });
+  tradeLicenseRouter.delete("/tradelicense",
+    auth, async (req, res) => {
+      DeleteTradeLicenseController.Execute(req, res);
+    });
 
   return tradeLicenseRouter;
 };

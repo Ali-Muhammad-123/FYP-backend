@@ -1,15 +1,53 @@
 const Visa = require("../models/visa");
 class GetVisaController {
   static async Execute(req, res) {
-    const { user } = req.body;
+    const { company, employee, familyMember } = req.query;
 
-    if (user != undefined) {
-      const visa = await Visa.find({
-        user: user,
-      }).populate({
-        path: "user",
-        select: "firstName lastName companyName",
-      });
+    if ((employee != undefined && employee.match(/^[0-9a-fA-F]{24}$/)) ||
+      (familyMember != undefined && familyMember.match(/^[0-9a-fA-F]{24}$/)) ||
+      (company != undefined && company.match(/^[0-9a-fA-F]{24}$/))) {
+
+      var visa;
+      if (employee) {
+
+        visa = await Visa.find({
+          employee: employee,
+        })
+          .populate({
+            path: "company",
+          }).populate({
+            path: "employee",
+          }).populate({
+            path: "familyMember",
+          });
+
+      } else if (familyMember) {
+        visa = await Visa.find({
+          familyMember: familyMember,
+        })
+          .populate({
+            path: "company",
+          }).populate({
+            path: "employee",
+          }).populate({
+            path: "familyMember",
+          });
+      }
+      else {
+
+        visa = await Visa.find({
+          company: company,
+        })
+          .populate({
+            path: "company",
+          }).populate({
+            path: "employee",
+          }).populate({
+            path: "familyMember",
+          });
+
+      }
+
 
       if (visa && visa.length > 0) {
         res.status(200).send({
@@ -23,8 +61,11 @@ class GetVisaController {
       }
     } else {
       const visa = await Visa.find().populate({
-        path: "user",
-        select: "firstName lastName companyName",
+        path: "company",
+      }).populate({
+        path: "employee",
+      }).populate({
+        path: "familyMember",
       });
 
       if (visa && visa.length > 0) {

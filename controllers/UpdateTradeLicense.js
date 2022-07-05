@@ -1,38 +1,44 @@
 const tradeLicense = require("../models/TradeLicense");
 const File = require("../models/file");
+const fs = require("fs");
+const path = require("path");
+const deleteFile = require("./DeleteFile")
+
+
 class UpdateTradeLicenseController {
     static async Execute(req, res, next) {
         const {
-            user,
+            company,
             licenseNo,
             code,
-            companyName,
-            judiciary,
-            establishmentDate,
             dateOfIssue,
             expiryDate,
             request,
         } = req.body;
 
-        const { _id } = req.query
+        const { id } = req.query
 
         if (
-            user != undefined &&
+            company != undefined &&
             licenseNo != undefined &&
             code != undefined &&
-            companyName != undefined &&
-            judiciary != undefined &&
-            establishmentDate != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
-            request != undefined
+            request != undefined &&
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)
         ) {
             if (req.file != undefined) {
 
+                const oldTradeLicense = await tradeLicense.findOne({ _id: id });
+                if (oldTradeLicense && oldTradeLicense.file) {
+                    deleteFile.Execute(oldTradeLicense.file, req.route.path)
+                }
 
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
+                    docOF: req.route.path,
                 };
 
                 File.create(final_file, function (err, result) {
@@ -41,22 +47,18 @@ class UpdateTradeLicenseController {
                             message: `Error: ${err}`,
                         });
                     } else {
-                        var query = { 'user': req.user };
-
                         tradeLicense.findOneAndUpdate(
-                            { '_id': _id },
+                            { '_id': id },
                             {
                                 $set:
                                 {
-                                    licenseNo: licenseNo,
-                                    code: code,
-                                    companyName: companyName,
-                                    judiciary: judiciary,
-                                    establishmentDate: establishmentDate,
-                                    dateOfIssue: dateOfIssue,
-                                    expiryDate: expiryDate,
-                                    request: request,
-                                    file: result._id
+                                    company: company.trim(),
+                                    licenseNo: licenseNo.trim(),
+                                    code: code.trim(),
+                                    dateOfIssue: dateOfIssue.trim(),
+                                    expiryDate: expiryDate.trim(),
+                                    request: request.trim(),
+                                    file: result._id.trim,
                                 }
                             },
                             { upsert: true },
@@ -77,18 +79,16 @@ class UpdateTradeLicenseController {
             } else {
 
                 tradeLicense.findOneAndUpdate(
-                    { '_id': _id },
+                    { '_id': id },
                     {
                         $set:
                         {
-                            licenseNo: licenseNo,
-                            code: code,
-                            companyName: companyName,
-                            judiciary: judiciary,
-                            establishmentDate: establishmentDate,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
-                            request: request
+                            company: company.trim(),
+                            licenseNo: licenseNo.trim(),
+                            code: code.trim(),
+                            dateOfIssue: dateOfIssue.trim(),
+                            expiryDate: expiryDate.trim(),
+                            request: request.trim(),
                         }
                     },
                     { upsert: true },

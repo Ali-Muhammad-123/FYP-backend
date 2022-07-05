@@ -22,16 +22,20 @@ const articleOfIncoporationRouter = require("./routes/articleofincorporaton");
 const sharecertificateRouter = require("./routes/shareCertificate");
 const incorporationCertificateRouter = require("./routes/incorporationCertificate");
 const immigrationCardRouter = require("./routes/immigrationCard");
-const expressAccountingRequest = require("./routes/expressAccountingRequest");
+const request = require("./routes/request");
 const visaRouter = require("./routes/visa");
 const client = require("./routes/client");
 const salaryCertificate = require("./routes/salaryCertificate");
 const feedbackReply = require("./routes/feedbackReply");
 const calculator = require("./routes/calculator");
 const feedback = require("./routes/feedback");
-const mainland = require("./routes/mainland");
+const activity = require("./routes/activity");
 const emirates = require("./routes/emirates");
 const appointment = require("./routes/appointment");
+const employee = require("./routes/employee");
+const company = require("./routes/company");
+const allUser = require("./routes/allUsers");
+const familyMember = require("./routes/familyMember");
 const filesRouter = require("./routes/Files");
 const upload = require("./middleware/upload");
 
@@ -47,15 +51,19 @@ app.use(articleOfIncoporationRouter(upload));
 app.use(sharecertificateRouter(upload));
 app.use(incorporationCertificateRouter(upload));
 app.use(immigrationCardRouter(upload));
-app.use(expressAccountingRequest);
+app.use(request);
 app.use(visaRouter(upload));
 app.use(client);
 app.use(salaryCertificate(upload));
 app.use(feedbackReply);
 app.use(feedback);
 app.use(calculator);
-app.use(mainland);
+app.use(activity);
 app.use(emirates);
+app.use(employee)
+app.use(company)
+app.use(allUser);
+app.use(familyMember);
 app.use(appointment(upload));
 app.use(filesRouter);
 

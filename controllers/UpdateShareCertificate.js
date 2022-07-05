@@ -1,21 +1,30 @@
 const ShareCertificate = require("../models/ShareCertificate");
 const File = require("../models/file");
-
+const deleteFile = require("./DeleteFile");
 
 class PostShareCertificateController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
-        const { _id } = req.query;
+        const { company } = req.body;
+        const { id } = req.query;
 
-        if (user != undefined &&
-            _id != undefined) {
+        if (company != undefined &&
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)
+        ) {
 
             if (req.file != undefined) {
+
+                var oldShareCertificate = await ShareCertificate.findOne({ _id: id });
+                if (oldShareCertificate && oldShareCertificate.file) {
+                    deleteFile.Execute(oldShareCertificate.file, req.route.path)
+                }
+
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
+                    docOF: req.route.path,
                 };
                 File.create(final_file, function (err, result) {
                     if (err) {
@@ -25,11 +34,11 @@ class PostShareCertificateController {
                     } else {
 
                         ShareCertificate.findOneAndUpdate(
-                            { '_id': _id },
+                            { '_id': id },
                             {
                                 $set:
                                 {
-                                    user: user,
+                                    company: company.trim(),
                                     file: result._id,
                                 }
                             },
@@ -50,11 +59,11 @@ class PostShareCertificateController {
                 });
             } else {
                 ShareCertificate.findOneAndUpdate(
-                    { '_id': _id },
+                    { '_id': id },
                     {
                         $set:
                         {
-                            user: user
+                            company: company.trim(),
                         }
                     },
                     { upsert: true },

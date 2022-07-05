@@ -4,9 +4,9 @@ class GetSalaryCertificateController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { user } = req.query;
 
-        if (user != undefined) {
+        if (user != undefined && user.match(/^[0-9a-fA-F]{24}$/)) {
 
             var salaryCertificate = await SalaryCertificate.find({
                 user: user

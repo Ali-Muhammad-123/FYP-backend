@@ -4,14 +4,14 @@ class GetEmiratesController {
 
     static async Execute(req, res) {
 
-        const { _id } = req.body;
+        const { id } = req.query;
 
-        if (_id != undefined) {
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
 
 
             var emirates = await Emirates.find({
-                _id: _id
+                _id: id
             });
 
             if (emirates && emirates.length > 0) {

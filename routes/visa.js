@@ -9,7 +9,12 @@ module.exports = (upload) => {
   visaRouter.post(
     "/visa",
     auth,
-    upload.array("visa", 10),
+    upload.fields([
+      { name: "entryPermit", maxCount: 2 },
+      { name: "passport", maxCount: 2 },
+      { name: "residencyVisa", maxCount: 2 },
+      { name: "emiratesId", maxCount: 2 },
+    ]),
     async (req, res, next) => {
       postVisaController.Execute(req, res, next);
     }
@@ -18,7 +23,12 @@ module.exports = (upload) => {
   visaRouter.put(
     "/visa",
     auth,
-    upload.array("visa", 10),
+    upload.fields([
+      { name: "entryPermit", maxCount: 2 },
+      { name: "passport", maxCount: 2 },
+      { name: "residencyVisa", maxCount: 2 },
+      { name: "emiratesId", maxCount: 2 },
+    ]),
     async (req, res, next) => {
       UpdateVisaController.Execute(req, res, next);
     }
@@ -31,7 +41,6 @@ module.exports = (upload) => {
   visaRouter.delete("/visa", auth, async (req, res) => {
     DeleteVisaController.Execute(req, res);
   });
-
 
   return visaRouter;
 };

@@ -1,15 +1,22 @@
 const TradeLicense = require("../models/TradeLicense");
-const DeleteFile = require("./DeleteFile");
+const File = require("../models/file");
+const fs = require("fs");
+const path = require("path");
+const deleteFile = require("./DeleteFile")
+
 class DeleteTradeLicenseController {
 
     static async Execute(req, res) {
+        const { id } = req.query;
 
-        const { _id } = req.query;
+        if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
 
-        if (_id != undefined) {
+            var oldTradeLicense = await TradeLicense.findOne({ _id: id });
+            if (oldTradeLicense && oldTradeLicense.file) {
+                deleteFile.Execute(oldTradeLicense.file, req.route.path)
+            }
 
-
-            const result = TradeLicense.findOneAndDelete({ "_id": _id }, function (err, response) {
+            const result = TradeLicense.findOneAndDelete({ "_id": id }, function (err, response) {
                 if (!err) {
                     if (response && response != null) {
                         res.status(200).json({

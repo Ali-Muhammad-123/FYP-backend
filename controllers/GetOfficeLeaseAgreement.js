@@ -4,16 +4,14 @@ class GetOfficeLeaseAgreementController {
 
     static async Execute(req, res) {
 
-        const { user } = req.body;
+        const { user } = req.query;
 
-        if (user != undefined) {
+        if (user != undefined && user.match(/^[0-9a-fA-F]{24}$/)) {
 
             var agreements = await OfficeLeaseAgreement.find({
                 user: user
             }).populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company'
             });
 
             if (agreements && agreements.length > 0) {
@@ -33,9 +31,7 @@ class GetOfficeLeaseAgreementController {
 
 
             var agreements = await OfficeLeaseAgreement.find().populate({
-                path: 'user',
-                select:
-                    'firstName lastName',
+                path: 'company'
             });
 
             if (agreements && agreements.length > 0) {

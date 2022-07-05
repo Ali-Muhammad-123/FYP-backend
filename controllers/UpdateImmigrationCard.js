@@ -1,24 +1,32 @@
 const ImmigrationCard = require("../models/ImmigrationCard");
 const File = require("../models/file");
+const deleteFile = require("./DeleteFile")
 
-class PostImmigrationCardController {
+class UpdateImmigrationCardController {
 
     static async Execute(req, res) {
 
         const { user, dateOfIssue, expiryDate } = req.body;
-        const { _id } = req.query;
+        const { id } = req.query;
 
         if (user != undefined &&
             dateOfIssue != undefined &&
             expiryDate != undefined &&
-            _id != undefined
+            id != undefined &&
+            id.match(/^[0-9a-fA-F]{24}$/)
         ) {
 
             if (req.file != undefined) {
 
+                var oldImmigrationCard = await ImmigrationCard.findOne({ _id: id });
+                if (oldImmigrationCard && oldImmigrationCard.file) {
+                    deleteFile.Execute(oldImmigrationCard.file, req.route.path)
+                }
+
                 var final_file = {
                     file: req.file.filename,
                     contentType: req.file.mimetype,
+                    docOF: req.route.path,
                 };
                 File.create(final_file, function (err, result) {
                     if (err) {
@@ -28,13 +36,13 @@ class PostImmigrationCardController {
                     } else {
 
                         ImmigrationCard.findOneAndUpdate(
-                            { 'user': user },
+                            { '_id': id },
                             {
                                 $set:
                                 {
-                                    user: user,
-                                    dateOfIssue: dateOfIssue,
-                                    expiryDate: expiryDate,
+                                    user: user.trim(),
+                                    dateOfIssue: dateOfIssue.trim(),
+                                    expiryDate: expiryDate.trim(),
                                     file: result._id,
                                 }
                             },
@@ -57,13 +65,13 @@ class PostImmigrationCardController {
             } else {
 
                 ImmigrationCard.findOneAndUpdate(
-                    { 'user': user },
+                    { '_id': id },
                     {
                         $set:
                         {
-                            user: user,
-                            dateOfIssue: dateOfIssue,
-                            expiryDate: expiryDate,
+                            user: user.trim(),
+                            dateOfIssue: dateOfIssue.trim(),
+                            expiryDate: expiryDate.trim(),
                         }
                     },
                     { upsert: true },
@@ -93,4 +101,4 @@ class PostImmigrationCardController {
 }
 
 
-module.exports = PostImmigrationCardController;
+module.exports = UpdateImmigrationCardController;

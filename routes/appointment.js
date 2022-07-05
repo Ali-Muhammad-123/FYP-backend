@@ -3,6 +3,7 @@ const auth = require("../middleware/commonauth");
 const PostAppointment = require("../controllers/PostAppointment");
 const GetAppointment = require("../controllers/GetAppointment");
 const UpdateAppointment = require("../controllers/UpdateAppointment");
+const DeleteAppointment = require("../controllers/DeleteAppointment");
 
 
 module.exports = (upload) => {
@@ -35,6 +36,12 @@ module.exports = (upload) => {
 
     });
 
+
+    Router.delete("/appointment", auth, async (req, res) => {
+
+        DeleteAppointment.Execute(req, res);
+
+    });
 
     return Router;
 }

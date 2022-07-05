@@ -1,28 +1,23 @@
 const jwt = require("jsonwebtoken");
 const tradeLicense = require("../models/TradeLicense");
+const Company = require("../models/company");
 const File = require("../models/file");
 const fs = require("fs");
 class PostTradeLicenseController {
   static async Execute(req, res, next) {
     const {
-      user,
+      company,
       licenseNo,
       code,
-      companyName,
-      judiciary,
-      establishmentDate,
       dateOfIssue,
       expiryDate,
       request,
     } = req.body;
 
     if (
-      user != undefined &&
+      company != undefined &&
       licenseNo != undefined &&
       code != undefined &&
-      companyName != undefined &&
-      judiciary != undefined &&
-      establishmentDate != undefined &&
       dateOfIssue != undefined &&
       expiryDate != undefined &&
       request != undefined &&
@@ -31,6 +26,7 @@ class PostTradeLicenseController {
       var final_file = {
         file: req.file.filename,
         contentType: req.file.mimetype,
+        docOF: req.route.path,
       };
       File.create(final_file, function (err, result) {
         if (err) {
@@ -40,15 +36,12 @@ class PostTradeLicenseController {
         } else {
           tradeLicense.create(
             {
-              user: user,
-              licenseNo: licenseNo,
-              code: code,
-              companyName: companyName,
-              judiciary: judiciary,
-              establishmentDate: establishmentDate,
-              dateOfIssue: dateOfIssue,
-              expiryDate: expiryDate,
-              request: request,
+              company: company.trim(),
+              licenseNo: licenseNo.trim(),
+              code: code.trim(),
+              dateOfIssue: dateOfIssue.trim(),
+              expiryDate: expiryDate.trim(),
+              request: request.trim(),
               file: result._id,
             },
             (err, response) => {
@@ -58,11 +51,13 @@ class PostTradeLicenseController {
                 });
               } else {
                 res.status(200).json({
-                  message: `Trade License Saved.`,
+                  message: `trade license created successfully`,
                 });
+
               }
             }
           );
+
         }
       });
     } else {
