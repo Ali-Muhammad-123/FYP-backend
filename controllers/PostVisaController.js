@@ -27,7 +27,6 @@ class PostVisaController {
     console.log(req.body)
 
     if (
-      company != undefined &&
       firstName != undefined &&
       lastName != undefined &&
       passportNo != undefined &&
@@ -101,7 +100,6 @@ class PostVisaController {
 
       Visa.create(
         {
-          company: company.trim(),
           firstName: firstName.trim(),
           lastName: lastName.trim(),
           passportNo: passportNo.trim(),
