@@ -21,13 +21,12 @@ class PostVisaController {
       emiratesIdIssued,
       emiratesId,
       employee,
-      familyMember
+      familyMember,
     } = req.body;
 
-    console.log(req.body)
+    console.log(req.body);
 
     if (
-      company != undefined &&
       firstName != undefined &&
       lastName != undefined &&
       passportNo != undefined &&
@@ -39,9 +38,6 @@ class PostVisaController {
       emiratesIdIssued != undefined &&
       req.files != undefined
     ) {
-
-
-
       var PassportAllFiles = [];
 
       for (const file of req.files.passport) {
@@ -55,53 +51,52 @@ class PostVisaController {
         PassportAllFiles.push(fileNew._id);
       }
 
+      if (req.files.entryPermit) {
+        var entryPermitAllFiles = [];
+        for (const file of req.files.entryPermit) {
+          var final_file = {
+            file: file.filename,
+            contentType: file.mimetype,
+            docOF: req.route.path,
+          };
+          const fileNew = await File.create(final_file);
 
-      var entryPermitAllFiles = [];
-
-      for (const file of req.files.entryPermit) {
-        var final_file = {
-          file: file.filename,
-          contentType: file.mimetype,
-          docOF: req.route.path,
-        };
-        const fileNew = await File.create(final_file);
-
-        entryPermitAllFiles.push(fileNew._id);
+          entryPermitAllFiles.push(fileNew._id);
+        }
       }
 
+      if (req.files.residencyVisa) {
+        var residencyVisaAllFiles = [];
 
-      var residencyVisaAllFiles = [];
+        for (const file of req.files.residencyVisa) {
+          var final_file = {
+            file: file.filename,
+            contentType: file.mimetype,
+            docOF: req.route.path,
+          };
+          const fileNew = await File.create(final_file);
 
-      for (const file of req.files.residencyVisa) {
-        var final_file = {
-          file: file.filename,
-          contentType: file.mimetype,
-          docOF: req.route.path,
-        };
-        const fileNew = await File.create(final_file);
-
-        residencyVisaAllFiles.push(fileNew._id);
+          residencyVisaAllFiles.push(fileNew._id);
+        }
       }
 
+      if (req.files.emiratesId) {
+        var emiratesIdAllFiles = [];
 
-      var emiratesIdAllFiles = [];
+        for (const file of req.files.emiratesId) {
+          var final_file = {
+            file: file.filename,
+            contentType: file.mimetype,
+            docOF: req.route.path,
+          };
+          const fileNew = await File.create(final_file);
 
-      for (const file of req.files.emiratesId) {
-        var final_file = {
-          file: file.filename,
-          contentType: file.mimetype,
-          docOF: req.route.path,
-        };
-        const fileNew = await File.create(final_file);
-
-        emiratesIdAllFiles.push(fileNew._id);
+          emiratesIdAllFiles.push(fileNew._id);
+        }
       }
-
-
-
       Visa.create(
         {
-          company: company.trim(),
+          company: company,
           firstName: firstName.trim(),
           lastName: lastName.trim(),
           passportNo: passportNo.trim(),
@@ -116,6 +111,7 @@ class PostVisaController {
           residencyVisa: residencyVisaAllFiles,
           emiratesId: emiratesIdAllFiles,
           employee: employee,
+          visaUID: visaUID,
           familyMember: familyMember,
         },
         (err, response) => {
