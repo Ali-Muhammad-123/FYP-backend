@@ -85,9 +85,14 @@ const visaSchema = mongoose.Schema({
     require: false,
   },
   familyMember: {
+<<<<<<< HEAD
     type: mongoose.Schema.Types.ObjectId,
     ref: "familyMember",
     require: false,
+=======
+    type: Boolean,
+    require: false
+>>>>>>> 33db5ae675bc9b63a1491d5904824bf72e05f998
   },
 });
 
