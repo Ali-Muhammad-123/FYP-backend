@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const visaSchema = mongoose.Schema({
   company: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "company"
+    ref: "company",
+    required: false,
   },
   firstName: {
     type: String,
@@ -54,38 +55,38 @@ const visaSchema = mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "File",
-      required: false
+      required: false,
     },
   ],
   entryPermit: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "File",
-      required: false
+      required: false,
     },
   ],
   residencyVisa: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "File",
-      required: false
+      required: false,
     },
   ],
   emiratesId: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "File",
-      required: false
+      required: false,
     },
   ],
   employee: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "employee",
-    require: false
+    require: false,
   },
   familyMember: {
     type: Boolean,
-    require: false
+    require: false,
   },
 });
 
