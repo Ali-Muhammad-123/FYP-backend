@@ -55,17 +55,19 @@ class PostVisaController {
       }
 
 
-      var entryPermitAllFiles = [];
+      if (entryPermit) {
+        var entryPermitAllFiles = [];
 
-      for (const file of req.files.entryPermit) {
-        var final_file = {
-          file: file.filename,
-          contentType: file.mimetype,
-          docOF: req.route.path,
-        };
-        const fileNew = await File.create(final_file);
+        for (const file of req.files.entryPermit) {
+          var final_file = {
+            file: file.filename,
+            contentType: file.mimetype,
+            docOF: req.route.path,
+          };
+          const fileNew = await File.create(final_file);
 
-        entryPermitAllFiles.push(fileNew._id);
+          entryPermitAllFiles.push(fileNew._id);
+        }
       }
 
 

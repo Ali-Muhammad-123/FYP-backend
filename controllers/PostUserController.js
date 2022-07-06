@@ -48,11 +48,12 @@ class PostUserController {
                     message: `Email Address is already registered`,
                 });
             } else {
-                user.save((err, response) => {
+                user.save(async (err, response) => {
                     if (err) {
                         return res.status(400).send(err, response);
                     } else {
-                        var password = otpGenerator.generate(8, {
+                        console.log("hello");
+                        var password = await otpGenerator.generate(8, {
                             upperCaseAlphabets: false,
                             digits: true,
                             specialChars: false,
