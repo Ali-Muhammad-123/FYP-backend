@@ -6,11 +6,11 @@ const Schema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "company"
   },
-  file: {
+  file: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "File",
     required: true,
-  },
+  }],
   message: {
     type: String,
     required: true,

@@ -52,7 +52,6 @@ class PostUserController {
                     if (err) {
                         return res.status(400).send(err, response);
                     } else {
-                        console.log("hello");
                         var password = await otpGenerator.generate(8, {
                             upperCaseAlphabets: false,
                             digits: true,

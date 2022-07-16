@@ -3,6 +3,7 @@ const Credential = require("../models/credential");
 const bcrypt = require('bcrypt');
 const { response } = require("express");
 const saltRounds = 10;
+const otpGenerator = require("otp-generator");
 
 class SignupController {
 
@@ -61,8 +62,8 @@ class SignupController {
                             }
                             else {
                                 const credential = new Credential({
-                                    user: response._id.trim(),
-                                    email: response.email.trim(),
+                                    user: response._id,
+                                    email: response.email,
                                     password: hash,
                                     role: "client"
                                 });
@@ -77,6 +78,15 @@ class SignupController {
                                         });
                                     }
                                 })
+
+                                var password = await otpGenerator.generate(4, {
+                                    upperCaseAlphabets: false,
+                                    digits: true,
+                                    specialChars: false,
+                                    lowerCaseAlphabets: false
+                                });
+                                console.log(password);
+
                             }
                         });
 

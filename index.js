@@ -61,7 +61,7 @@ app.use(calculator);
 app.use(activity);
 app.use(emirates);
 app.use(employee)
-app.use(company)
+app.use(company(upload))
 app.use(allUser);
 app.use(familyMember);
 app.use(appointment(upload));

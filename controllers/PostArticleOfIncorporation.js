@@ -26,7 +26,7 @@ class PostArticleOfIncoporationController {
         } else {
           ArticleOfIncoporation.create(
             {
-              company: company.trim(),
+              company: company,
               file: result._id,
               message: message.trim(),
             },

@@ -24,7 +24,6 @@ class PostVisaController {
       familyMember,
     } = req.body;
 
-    console.log(req.body);
 
     if (
       firstName != undefined &&
