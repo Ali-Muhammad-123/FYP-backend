@@ -12,11 +12,11 @@ const UserSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   countryCode: {
     type: String,
-    required: true,
+    required: false,
   },
   mobile: {
     type: String,
@@ -24,7 +24,7 @@ const UserSchema = mongoose.Schema({
   },
   nationality: {
     type: String,
-    required: true,
+    required: false,
   },
   dateOfBirth: {
     type: Date,
@@ -36,9 +36,12 @@ const UserSchema = mongoose.Schema({
   },
   role: {
     type: String,
-    required: true
-  }
-
+    required: true,
+  },
+  isVerified: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("User", UserSchema);
