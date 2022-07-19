@@ -12,7 +12,7 @@ const UserSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   countryCode: {
     type: String,
@@ -36,9 +36,12 @@ const UserSchema = mongoose.Schema({
   },
   role: {
     type: String,
-    required: true
-  }
-
+    required: true,
+  },
+  isVerified: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("User", UserSchema);

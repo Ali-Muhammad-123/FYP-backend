@@ -4,6 +4,7 @@ const officeLease = require("../models/OfficeLeaseAgreement")
 const shareCertificate = require("../models/ShareCertificate")
 const articleOfIncorporation = require("../models/ArticleOfIncoporation")
 const File = require("../models/file");
+const incorporationCertificate = require("../models/IncorporationCertificate");
 
 class PostCompanyController {
 
@@ -14,7 +15,8 @@ class PostCompanyController {
             tradelicenseAttached, code, dateOfIssue, request,
             officeLeaseAttached,
             shareCertificateAttached,
-            articleOfIncorporationAttached, message } = req.body;
+            articleOfIncorporationAttached, message,
+            incorporationCertificateAttached } = req.body;
 
         if (owner != undefined &&
             name != undefined &&
@@ -130,6 +132,29 @@ class PostCompanyController {
                             {
                                 company: response._id,
                                 file: articleOfIncorporationAllFiles,
+                                message: message.trim(),
+                            },
+
+                        );
+
+                    }
+
+                    if (incorporationCertificateAttached == 'true' && req.files.incorporationCertificate) {
+                        var incorporationCertificateAllFiles = [];
+                        for (const file of req.files.incorporationCertificate) {
+                            var final_file = {
+                                file: file.filename,
+                                contentType: file.mimetype,
+                                docOF: req.route.path,
+                            };
+                            const fileNew = await File.create(final_file);
+                            incorporationCertificateAllFiles.push(fileNew._id);
+                        }
+
+                        incorporationCertificate.create(
+                            {
+                                company: response._id,
+                                file: incorporationCertificateAllFiles,
                                 message: message.trim(),
                             },
 

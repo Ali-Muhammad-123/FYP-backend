@@ -37,6 +37,7 @@ const company = require("./routes/company");
 const allUser = require("./routes/allUsers");
 const familyMember = require("./routes/familyMember");
 const filesRouter = require("./routes/Files");
+const OTPVerify = require("./routes/otpVerify");
 const upload = require("./middleware/upload");
 
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,7 +46,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(tradeLicenseRouter(upload));
 app.use(officeLeaseAgreementRouter(upload));
-app.use(signupRouter);
+//app.use(signupRouter);
 app.use(loginRouter);
 app.use(articleOfIncoporationRouter(upload));
 app.use(sharecertificateRouter(upload));
@@ -60,12 +61,13 @@ app.use(feedback);
 app.use(calculator);
 app.use(activity);
 app.use(emirates);
-app.use(employee)
-app.use(company(upload))
+app.use(employee);
+app.use(company(upload));
 app.use(allUser);
 app.use(familyMember);
 app.use(appointment(upload));
 app.use(filesRouter);
+app.use(OTPVerify);
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));
 
