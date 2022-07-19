@@ -16,7 +16,7 @@ const UserSchema = mongoose.Schema({
   },
   countryCode: {
     type: String,
-    required: true,
+    required: false,
   },
   mobile: {
     type: String,
@@ -24,7 +24,7 @@ const UserSchema = mongoose.Schema({
   },
   nationality: {
     type: String,
-    required: true,
+    required: false,
   },
   dateOfBirth: {
     type: Date,

@@ -3,7 +3,8 @@ const User = require("../models/user");
 class GetUserController {
     static async Execute(req, res) {
         const { id } = req.query;
-
+        console.log(id)
+        console.log("hello")
         if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
             User.findById(id, function (err, result) {
                 if (err) {
@@ -17,7 +18,7 @@ class GetUserController {
                         });
                     } else {
                         res.status(403).send({
-                            message: "No records found!",
+                            message: "No red!",
                         });
                     }
                 }

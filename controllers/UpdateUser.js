@@ -6,14 +6,15 @@ class UpdateUserController {
             dateOfBirth, passportDetails, role } = req.body;
 
         const { id } = req.query
-
-        if (firstName != undefined &&
-            lastName != undefined &&
-            email != undefined &&
-            countryCode != undefined &&
-            mobile != undefined &&
-            nationality != undefined &&
-            role != undefined &&
+        console.log(id)
+        if (
+            // firstName != undefined &&
+            // lastName != undefined &&
+            // email != undefined &&
+            // countryCode != undefined &&
+            // mobile != undefined &&
+            // nationality != undefined &&
+            // role != undefined &&
             id != undefined &&
             id.match(/^[0-9a-fA-F]{24}$/)
         ) {
@@ -23,15 +24,15 @@ class UpdateUserController {
                 {
                     $set:
                     {
-                        firstName: firstName.trim(),
-                        lastName: lastName.trim(),
-                        email: email.trim(),
-                        countryCode: countryCode.trim(),
-                        mobile: mobile.trim(),
-                        nationality: nationality.trim(),
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        countryCode: countryCode,
+                        mobile: mobile,
+                        nationality: nationality,
                         dateOfBirth: dateOfBirth,
                         passportDetails: passportDetails,
-                        role: role.trim(),
+                        role: role,
                     }
                 },
                 { upsert: true },

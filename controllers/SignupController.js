@@ -16,9 +16,9 @@ class SignupController {
         if (firstName != undefined &&
             lastName != undefined &&
             email != undefined &&
-            countryCode != undefined &&
+            //countryCode != undefined &&
             mobile != undefined &&
-            nationality != undefined &&
+            // nationality != undefined &&
             role != undefined &&
             password != undefined &&
             confirmPassword != undefined
@@ -32,15 +32,15 @@ class SignupController {
 
 
                     const User = new user({
-                        firstName: firstName.trim(),
-                        lastName: lastName.trim(),
-                        email: email.trim(),
-                        countryCode: countryCode.trim(),
-                        mobile: mobile.trim(),
-                        nationality: nationality.trim(),
-                        dateOfBirth: dateOfBirth.trim(),
-                        passportDetails: passportDetails.trim(),
-                        role: role.trim(),
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        countryCode: "countryCode",
+                        mobile: mobile,
+                        nationality: nationality,
+                        dateOfBirth: dateOfBirth,
+                        passportDetails: passportDetails,
+                        role: role,
                         password: hash,
                     })
 
@@ -75,6 +75,7 @@ class SignupController {
                                     else {
                                         res.status(200).json({
                                             message: `user Signup sucessfull`,
+                                            objectId: response._id
                                         });
                                     }
                                 })
