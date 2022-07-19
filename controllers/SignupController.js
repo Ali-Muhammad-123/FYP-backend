@@ -57,8 +57,8 @@ class SignupController {
             email: email,
           });
 
-<<<<<<< HEAD
-        if (firstName != undefined &&
+          if (
+            firstName != undefined &&
             lastName != undefined &&
             email != undefined &&
             //countryCode != undefined &&
@@ -67,85 +67,66 @@ class SignupController {
             role != undefined &&
             password != undefined &&
             confirmPassword != undefined
-        ) {
-
+          ) {
             if (password === confirmPassword) {
+              bcrypt.hash(password, saltRounds).then(async function (hash) {
+                // Store hash in your password DB.
 
-                bcrypt.hash(password, saltRounds).then(async function (hash) {
-                    // Store hash in your password DB.
-
-
-
-                    const User = new user({
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        countryCode: "countryCode",
-                        mobile: mobile,
-                        nationality: nationality,
-                        dateOfBirth: dateOfBirth,
-                        passportDetails: passportDetails,
-                        role: role,
-                        password: hash,
-                    })
-
-                    const existingUser = await user.find({
-                        email: email
-                    });
-
-                    if (existingUser.length > 0) {
-                        res.status(400).json({
-                            message: `Email Address is already registered`,
-                        });
-                    }
-                    else {
-
-
-                        await User.save(async (err, response) => {
-                            if (err) {
-                                return res.status(400).send(err);
-                            }
-                            else {
-                                const credential = new Credential({
-                                    user: response._id,
-                                    email: response.email,
-                                    password: hash,
-                                    role: "client"
-                                });
-
-                                await credential.save(async (err) => {
-                                    if (err) {
-                                        return res.status(400).send(err);
-                                    }
-                                    else {
-                                        res.status(200).json({
-                                            message: `user Signup sucessfull`,
-                                            objectId: response._id
-                                        });
-                                    }
-                                })
-
-                                var password = await otpGenerator.generate(4, {
-                                    upperCaseAlphabets: false,
-                                    digits: true,
-                                    specialChars: false,
-                                    lowerCaseAlphabets: false
-                                });
-                                console.log(password);
-
-                            }
-                        });
-
-                    }
-
+                const User = new user({
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: email,
+                  countryCode: "countryCode",
+                  mobile: mobile,
+                  nationality: nationality,
+                  dateOfBirth: dateOfBirth,
+                  passportDetails: passportDetails,
+                  role: role,
+                  password: hash,
                 });
-=======
-          if (existingUser.length > 0) {
-            if (existingUser[0].isVerified === true) {
-              res.status(400).json({
-                message: `Email Address is already registered`,
+
+                const existingUser = await user.find({
+                  email: email,
+                });
+
+                if (existingUser.length > 0) {
+                  res.status(400).json({
+                    message: `Email Address is already registered`,
+                  });
+                } else {
+                  await User.save(async (err, response) => {
+                    if (err) {
+                      return res.status(400).send(err);
+                    } else {
+                      const credential = new Credential({
+                        user: response._id,
+                        email: response.email,
+                        password: hash,
+                        role: "client",
+                      });
+
+                      await credential.save(async (err) => {
+                        if (err) {
+                          return res.status(400).send(err);
+                        } else {
+                          res.status(200).json({
+                            message: `user Signup sucessfull`,
+                            objectId: response._id,
+                          });
+                        }
+                      });
+
+                      var password = await otpGenerator.generate(4, {
+                        upperCaseAlphabets: false,
+                        digits: true,
+                        specialChars: false,
+                        lowerCaseAlphabets: false,
+                      });
+                      console.log(password);
+                    }
+                  });
+                }
               });
->>>>>>> b90cf341bd3dff9999a2c179483e67455a69fa9c
             } else {
               var password = await otpGenerator.generate(4, {
                 upperCaseAlphabets: false,
