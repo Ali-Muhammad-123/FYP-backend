@@ -21,10 +21,6 @@ const TradeLicenseSchema = mongoose.Schema({
     type: Date,
     required: true,
   },
-  request: {
-    type: String,
-    required: true,
-  },
   file: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "File",

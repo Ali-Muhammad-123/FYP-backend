@@ -11,7 +11,6 @@ class PostTradeLicenseController {
       code,
       dateOfIssue,
       expiryDate,
-      request,
     } = req.body;
 
     if (
@@ -20,7 +19,6 @@ class PostTradeLicenseController {
       code != undefined &&
       dateOfIssue != undefined &&
       expiryDate != undefined &&
-      request != undefined &&
       req.file != undefined
     ) {
       var final_file = {
@@ -41,7 +39,6 @@ class PostTradeLicenseController {
               code: code.trim(),
               dateOfIssue: dateOfIssue.trim(),
               expiryDate: expiryDate.trim(),
-              request: request.trim(),
               file: result._id,
             },
             (err, response) => {

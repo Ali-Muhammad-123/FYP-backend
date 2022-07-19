@@ -12,7 +12,7 @@ class PostCompanyController {
 
         const { owner, name, licenseNo, licenseCode, judiciary, establishmentDate,
             issueDate, expiryDate, activities,
-            tradelicenseAttached, code, dateOfIssue, request,
+            tradelicenseAttached, code, dateOfIssue,
             officeLeaseAttached,
             shareCertificateAttached,
             articleOfIncorporationAttached, message,
@@ -66,7 +66,6 @@ class PostCompanyController {
                                 code: code.trim(),
                                 dateOfIssue: dateOfIssue.trim(),
                                 expiryDate: expiryDate.trim(),
-                                request: request.trim(),
                                 file: tradelicenseAllFiles,
                             })
 
