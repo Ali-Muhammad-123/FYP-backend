@@ -6,7 +6,7 @@ const TradeLicenseSchema = mongoose.Schema({
     ref: "company"
   },
   licenseNo: {
-    type: Number,
+    type: String,
     required: true,
   },
   code: {

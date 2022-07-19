@@ -7,6 +7,11 @@ const companySchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
+    shareHolder: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ShareHolder",
+      required: false,
+    }],
     name: {
       type: String,
       required: true,
