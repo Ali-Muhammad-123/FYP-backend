@@ -52,7 +52,7 @@ class PostCompanyController {
             // shareholderObj.countryCode != undefined &&
             // shareholderObj.dateOfBirth != undefined
           ) {
-            var id = shareHolderSchema.create({
+            var id = await shareHolderSchema.create({
               firstName: shareholderObj.firstName,
               lastName: shareholderObj.lastName,
               email: shareholderObj.email,
