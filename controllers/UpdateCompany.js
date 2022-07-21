@@ -4,6 +4,7 @@ const officeLease = require("../models/OfficeLeaseAgreement");
 const shareCertificate = require("../models/ShareCertificate");
 const articleOfIncorporation = require("../models/ArticleOfIncoporation");
 const incorporationCertificate = require("../models/IncorporationCertificate");
+const immigrationCard = require("../models/ImmigrationCard")
 const shareHolderSchema = require("../models/shareHolder");
 const deleteFile = require("./DeleteFile")
 const File = require("../models/file");
@@ -131,6 +132,144 @@ class UpdateCompanyController {
                         console.log(err)
                     } else {
                         console.log("office lease updated")
+                    }
+                }
+            );
+
+            ////////sahre certificate/////////
+            var shareCertificateAllFiles = [];
+            if (Object.keys(req.files).includes("shareCertificate")) {
+                for (const file of req.files.shareCertificate) {
+                    var final_file = {
+                        file: file.filename,
+                        contentType: file.mimetype,
+                        docOF: req.route.path,
+                    };
+                    const fileNew = await File.create(final_file);
+                    shareCertificateAllFiles.push(fileNew._id);
+                }
+            }
+
+            console.log(`share certificate docs ${shareCertificateAllFiles}`)
+            shareCertificate.findOneAndUpdate(
+                { 'company': id },
+                {
+                    $set:
+                    {
+                        file: shareCertificateAllFiles,
+                    }
+                },
+                { upsert: true }, (err, response) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log("share certificate updated")
+                    }
+                }
+            );
+
+            ///////////articleOfIncorporation//////////////
+
+
+            var articleOfIncorporationAllFiles = [];
+            if (Object.keys(req.files).includes("articleOfIncorporation")) {
+                for (const file of req.files.articleOfIncorporation) {
+                    var final_file = {
+                        file: file.filename,
+                        contentType: file.mimetype,
+                        docOF: req.route.path,
+                    };
+                    const fileNew = await File.create(final_file);
+                    articleOfIncorporationAllFiles.push(fileNew._id);
+                }
+            }
+            console.log(`articleOfIncorporation docs ${articleOfIncorporationAllFiles}`)
+            articleOfIncorporation.findOneAndUpdate(
+                { 'company': id },
+                {
+                    $set:
+                    {
+                        file: articleOfIncorporationAllFiles,
+                        message: message,
+                    }
+                },
+                { upsert: true }, (err, response) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log("articleOfIncorporation updated")
+                    }
+                }
+            );
+
+
+            //////////////incorporationCertificate//////////////////
+
+            var incorporationCertificateAllFiles = [];
+            if (Object.keys(req.files).includes("incorporationCertificate")) {
+                for (const file of req.files.incorporationCertificate) {
+                    var final_file = {
+                        file: file.filename,
+                        contentType: file.mimetype,
+                        docOF: req.route.path,
+                    };
+                    const fileNew = await File.create(final_file);
+                    incorporationCertificateAllFiles.push(fileNew._id);
+                }
+            }
+            console.log(`incorporationCertificate docs ${incorporationCertificateAllFiles}`)
+
+            incorporationCertificate.findOneAndUpdate(
+                { 'company': id },
+                {
+                    $set:
+                    {
+                        file: incorporationCertificateAllFiles,
+                        message: message,
+                    }
+                },
+                { upsert: true }, (err, response) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log("incorporationCertificate updated")
+                    }
+                }
+            );
+
+
+            ///////////////immigrationCard/////////////////
+
+            var immigrationCardAllFiles = [];
+            if (Object.keys(req.files).includes("immigrationCard")) {
+                for (const file of req.files.incorporationCertificate) {
+                    var final_file = {
+                        file: file.filename,
+                        contentType: file.mimetype,
+                        docOF: req.route.path,
+                    };
+                    const fileNew = await File.create(final_file);
+                    immigrationCardAllFiles.push(fileNew._id);
+                }
+            }
+            console.log(`immigrationCard docs ${immigrationCardAllFiles}`)
+
+            immigrationCard.findOneAndUpdate(
+                { 'company': id },
+                {
+                    $set:
+                    {
+                        dateOfIssue: dateOfIssue,
+                        expiryDate: expiryDate,
+                        file: immigrationCardAllFiles,
+                    }
+                },
+                { upsert: true },
+                (err, response) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log("incorporationCertificate updated")
                     }
                 }
             );

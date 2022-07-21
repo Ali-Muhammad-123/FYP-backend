@@ -29,6 +29,7 @@ module.exports = (upload) => {
       { name: "shareCertificate", maxCount: 2 },
       { name: "articleOfIncorporation", maxCount: 2 },
       { name: "incorporationCertificate", maxCount: 2 },
+      { name: "immigrationCard", maxCount: 2 },
 
     ]),
     async (req, res) => {
