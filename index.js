@@ -54,7 +54,7 @@ app.use(incorporationCertificateRouter(upload));
 app.use(immigrationCardRouter(upload));
 app.use(request);
 app.use(visaRouter(upload));
-app.use(client);
+app.use(client(upload));
 app.use(salaryCertificate(upload));
 app.use(feedbackReply);
 app.use(feedback);

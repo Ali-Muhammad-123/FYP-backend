@@ -42,6 +42,13 @@ const UserSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  profilePicture: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "File",
+      required: false,
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", UserSchema);

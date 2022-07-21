@@ -5,20 +5,26 @@ const UpdateUserController = require("../controllers/UpdateUser");
 const DeleteUserController = require("../controllers/DeleteUser");
 const auth = require("../middleware/adminAuth");
 
-userRouter.get("/user", async (req, res) => {
-  GetUserController.Execute(req, res);
-});
 
-userRouter.post("/user", async (req, res) => {
-  PostUserController.Execute(req, res);
-});
+module.exports = (upload) => {
+  userRouter.get("/user", async (req, res) => {
+    GetUserController.Execute(req, res);
+  });
 
-userRouter.put("/user", async (req, res) => {
-  UpdateUserController.Execute(req, res);
-});
+  userRouter.post("/user", async (req, res) => {
+    PostUserController.Execute(req, res);
+  });
 
-userRouter.delete("/user", async (req, res) => {
-  DeleteUserController.Execute(req, res);
-});
+  userRouter.put("/user",
+    upload.single("profilePicture"),
+    async (req, res) => {
+      UpdateUserController.Execute(req, res);
+    });
 
-module.exports = userRouter;
+  userRouter.delete("/user", async (req, res) => {
+    DeleteUserController.Execute(req, res);
+  });
+
+  return userRouter;
+
+}
