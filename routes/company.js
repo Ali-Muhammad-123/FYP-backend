@@ -6,7 +6,6 @@ const Router = require("express").Router();
 const auth = require("../middleware/adminAuth");
 const commonauth = require("../middleware/commonauth");
 
-
 module.exports = (upload) => {
   Router.post(
     "/company",
@@ -16,12 +15,12 @@ module.exports = (upload) => {
       { name: "shareCertificate", maxCount: 2 },
       { name: "articleOfIncorporation", maxCount: 2 },
       { name: "incorporationCertificate", maxCount: 2 },
-
+      { name: "immigrationCard", maxCount: 2 },
     ]),
     async (req, res, next) => {
       PostCompany.Execute(req, res, next);
-    });
-
+    }
+  );
 
   Router.put("/company", async (req, res) => {
     UpdateCompany.Execute(req, res);
@@ -36,5 +35,4 @@ module.exports = (upload) => {
   });
 
   return Router;
-}
-
+};
