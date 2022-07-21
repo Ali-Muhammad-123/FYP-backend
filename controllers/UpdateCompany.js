@@ -8,6 +8,7 @@ const immigrationCard = require("../models/ImmigrationCard")
 const shareHolderSchema = require("../models/shareHolder");
 const deleteFile = require("./DeleteFile")
 const File = require("../models/file");
+const company = require("../models/company");
 
 class UpdateCompanyController {
 
@@ -44,6 +45,46 @@ class UpdateCompanyController {
             id.match(/^[0-9a-fA-F]{24}$/)
         ) {
 
+            if (shareHolder != undefined) {
+
+                var oldShareHolder = await company.find(
+                    { _id: id }
+                ).select("shareHolder");
+
+                console.log(`old share holder : ${oldShareHolder} end`)
+
+                var allShareHolder = [];
+                for (const shareholderObj of JSON.parse(shareHolder)) {
+                    console.log(shareholderObj);
+                    if (
+                        shareholderObj.firstName != undefined &&
+                        shareholderObj.lastName != undefined &&
+                        shareholderObj.email != undefined &&
+                        shareholderObj.mobile != undefined
+                        // shareholderObj.nationality != undefined &&
+                        // shareholderObj.countryCode != undefined &&
+                        // shareholderObj.dateOfBirth != undefined
+                    ) {
+                        var shareholder = shareHolderSchema.create({
+                            firstName: shareholderObj.firstName,
+                            lastName: shareholderObj.lastName,
+                            email: shareholderObj.email,
+                            mobile: shareholderObj.mobile,
+                            nationality: shareholderObj.nationality,
+                            countryCode: shareholderObj.countryCode,
+                            dateOfBirth: shareholderObj.dateOfBirth,
+                        });
+                        console.log(shareholder);
+                        allShareHolder.push(shareholder._id);
+                    } else {
+                        res.status(400).json({
+                            message: `Invalid share holder details`,
+                        });
+                        return;
+                    }
+                }
+            }
+
 
             Company.findOneAndUpdate(
                 { '_id': id },
@@ -51,7 +92,7 @@ class UpdateCompanyController {
                     $set:
                     {
                         owner: owner,
-                        //shareHolder: allShareHolder,
+                        shareHolder: allShareHolder,
                         name: name,
                         licenseNo: licenseNo,
                         licenseCode: licenseCode,
@@ -273,7 +314,6 @@ class UpdateCompanyController {
                     }
                 }
             );
-
 
 
 
