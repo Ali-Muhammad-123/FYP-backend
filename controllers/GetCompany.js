@@ -4,9 +4,10 @@ class GetCompanyController {
 	static async Execute(req, res) {
 		const { id, owner } = req.query;
 
-
-		if ((id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) || (owner != undefined && owner.match(/^[0-9a-fA-F]{24}$/))) {
-
+		if (
+			(id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) ||
+			(owner != undefined && owner.match(/^[0-9a-fA-F]{24}$/))
+		) {
 			if (owner) {
 				var company = await Company.find({
 					owner: owner,
@@ -17,6 +18,11 @@ class GetCompanyController {
 					.populate({
 						path: "owner",
 						select: "firstName lastName",
+					})
+					.populate({
+						path: "shareHolder",
+					}).populate({
+						path: "judiciary",
 					});
 			} else {
 				var company = await Company.find({
@@ -28,12 +34,13 @@ class GetCompanyController {
 					.populate({
 						path: "owner",
 						select: "firstName lastName",
+					})
+					.populate({
+						path: "shareHolder",
+					}).populate({
+						path: "judiciary",
 					});
-
 			}
-
-
-
 
 			if (company && company.length > 0) {
 				res.status(200).json({
@@ -46,13 +53,16 @@ class GetCompanyController {
 				});
 			}
 		} else {
-			var company = await Company.find().populate({
-				path: "activities",
-			}).populate({
-				path: "owner",
-				select: "firstName lastName",
-			});
-
+			var company = await Company.find()
+				.populate({
+					path: "activities",
+				})
+				.populate({
+					path: "owner",
+					select: "firstName lastName",
+				}).populate({
+					path: "judiciary",
+				});
 
 			if (company && company.length > 0) {
 				res.status(200).json({

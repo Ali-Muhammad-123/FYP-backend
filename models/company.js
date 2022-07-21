@@ -25,8 +25,8 @@ const companySchema = mongoose.Schema(
       required: false,
     },
     judiciary: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "emirates",
     },
     establishmentDate: {
       type: Date,
