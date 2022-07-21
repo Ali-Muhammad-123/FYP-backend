@@ -28,6 +28,7 @@ class UpdateTradeLicenseController {
             id != undefined &&
             id.match(/^[0-9a-fA-F]{24}$/)
         ) {
+
             if (req.file != undefined) {
 
                 const oldTradeLicense = await tradeLicense.findOne({ _id: id });

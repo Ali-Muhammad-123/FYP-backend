@@ -20,7 +20,7 @@ module.exports = (upload) => {
   tradeLicenseRouter.put(
     "/tradelicense",
     auth,
-    upload.single("trade-license"),
+    upload.single("tradelicense"),
     async (req, res, next) => {
       updatetradeLicenseController.Execute(req, res, next);
     }

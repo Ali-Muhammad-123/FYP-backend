@@ -23,9 +23,18 @@ module.exports = (upload) => {
     });
 
 
-  Router.put("/company", async (req, res) => {
-    UpdateCompany.Execute(req, res);
-  });
+  Router.put("/company",
+    upload.fields([
+      { name: "tradelicense", maxCount: 2 },
+      { name: "officeLease", maxCount: 2 },
+      { name: "shareCertificate", maxCount: 2 },
+      { name: "articleOfIncorporation", maxCount: 2 },
+      { name: "incorporationCertificate", maxCount: 2 },
+
+    ]),
+    async (req, res) => {
+      UpdateCompany.Execute(req, res);
+    });
 
   Router.get("/company", async (req, res) => {
     GetCompany.Execute(req, res);
