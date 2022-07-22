@@ -47,12 +47,6 @@ class UpdateCompanyController {
 
             if (shareHolder != undefined) {
 
-                var oldShareHolder = await company.find(
-                    { _id: id }
-                ).select("shareHolder");
-
-                console.log(`old share holder : ${oldShareHolder} end`)
-
                 var allShareHolder = [];
                 for (const shareholderObj of JSON.parse(shareHolder)) {
                     console.log(shareholderObj);

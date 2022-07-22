@@ -35,6 +35,7 @@ const appointment = require("./routes/appointment");
 const employee = require("./routes/employee");
 const company = require("./routes/company");
 const allUser = require("./routes/allUsers");
+const credential = require("./routes/credential")
 const familyMember = require("./routes/familyMember");
 const filesRouter = require("./routes/Files");
 const OTPVerify = require("./routes/otpVerify");
@@ -65,6 +66,7 @@ app.use(employee);
 app.use(company(upload));
 app.use(allUser);
 app.use(familyMember);
+app.use(credential);
 app.use(appointment(upload));
 app.use(filesRouter);
 app.use(OTPVerify);
