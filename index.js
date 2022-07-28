@@ -35,7 +35,7 @@ const appointment = require("./routes/appointment");
 const employee = require("./routes/employee");
 const company = require("./routes/company");
 const allUser = require("./routes/allUsers");
-const credential = require("./routes/credential")
+const credential = require("./routes/credential");
 const familyMember = require("./routes/familyMember");
 const filesRouter = require("./routes/Files");
 const OTPVerify = require("./routes/otpVerify");
@@ -47,7 +47,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(tradeLicenseRouter(upload));
 app.use(officeLeaseAgreementRouter(upload));
-//app.use(signupRouter);
+app.use(signupRouter);
 app.use(loginRouter);
 app.use(articleOfIncoporationRouter(upload));
 app.use(sharecertificateRouter(upload));

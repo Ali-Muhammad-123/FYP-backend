@@ -1,4 +1,5 @@
 const Credential = require("../models/credential");
+const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -12,7 +13,9 @@ class LoginController {
         email: email,
       });
 
-      console.log(existingUser);
+      const user = await User.find({ _id: existingUser.user });
+
+      console.log(user);
 
       if (existingUser) {
         await bcrypt
@@ -30,7 +33,8 @@ class LoginController {
               res.status(200).send({
                 message: "Login Successfull",
                 email: existingUser.email,
-                _id: existingUser._id,
+                _id: user[0]._id,
+                token: token,
               });
             } else {
               res.status(400).send({
