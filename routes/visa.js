@@ -3,7 +3,7 @@ const GetVisaController = require("../controllers/GetVisaController");
 const UpdateVisaController = require("../controllers/UpdateVisa");
 const DeleteVisaController = require("../controllers/DeleteVisa");
 const visaRouter = require("express").Router();
-const auth = require("../middleware/adminAuth");
+const auth = require("../middleware/clientAuth");
 
 module.exports = (upload) => {
   visaRouter.post(
