@@ -12,7 +12,7 @@ class LoginController {
       const existingUser = await Credential.findOne({
         email: email,
       });
-
+      console.log(existingUser);
       if (existingUser) {
         const user = await User.find({ _id: existingUser.user });
 

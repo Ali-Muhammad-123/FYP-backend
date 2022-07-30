@@ -8,15 +8,16 @@ class GetFile {
 
     if (id != undefined) {
       const file = await File.find({ _id: id });
-      console.log(file)
+      console.log(file);
 
       if (file[0] && file[0].file && file[0].docOF) {
         var fileObt = fs.readFileSync(
           path.resolve(__dirname, `../${file[0].docOF}/${file[0].file}`)
         );
+        console.log(fileObt);
         var bitmap = new Buffer(fileObt, "base64");
         res.contentType(file[0].contentType);
-        res.send(bitmap);
+        res.send({ bitmap, base64: Buffer.from(bitmap).toString("base64") });
       } else {
         res.status(403).json({
           message: `no record found`,
