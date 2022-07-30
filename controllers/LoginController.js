@@ -13,11 +13,10 @@ class LoginController {
         email: email,
       });
 
-      const user = await User.find({ _id: existingUser.user });
-
-      console.log(user);
-
       if (existingUser) {
+        const user = await User.find({ _id: existingUser.user });
+
+        console.log(user);
         await bcrypt
           .compare(password, existingUser.password)
           .then(function (result) {
