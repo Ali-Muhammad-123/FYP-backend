@@ -16,7 +16,9 @@ class GetFile {
         );
         var bitmap = new Buffer(fileObt, "base64");
         res.contentType(file[0].contentType);
+        res.setHeader("fileName", file[0].file);
         res.send(bitmap);
+
       } else {
         res.status(403).json({
           message: `no record found`,

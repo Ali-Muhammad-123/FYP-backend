@@ -22,39 +22,36 @@ class UpdateCredentialController {
                 const oldPass = await Credential.findOne({ user: id })
                 console.log(oldPass)
 
-                bcrypt.compare(oldPassword, oldPass.password, function (err, result) {
-                    if (result == false) {
-                        res.status(400).json({
-                            message: `inncorrect password`,
-                        });
-                    } else {
-                        bcrypt.hash(newPassword, saltRounds).then(function (hash) {
-                            Credential.findOneAndUpdate(
-                                { '_id': id },
-                                {
-                                    $set:
-                                    {
-                                        password: hash
-                                    }
-                                },
-                                { upsert: false },
-                                (err, response) => {
-                                    if (err) {
-                                        res.status(400).json({
-                                            message: `Error: ${err}`,
-                                        });
-                                    } else {
-                                        res.status(200).json({
-                                            message: `Password Updated.`,
-                                        });
-                                    }
-                                }
-                            );
-                        });
-
-                    }
-                });
-
+                const result = await bcrypt.compare(oldPassword, oldPass.password);
+                console.log(result)
+                if (result == false) {
+                    res.status(400).json({
+                        message: `inncorrect password`,
+                    });
+                } else {
+                    const hash = await bcrypt.hash(newPassword, saltRounds)
+                    Credential.findOneAndUpdate(
+                        { 'user': id },
+                        {
+                            $set:
+                            {
+                                password: hash
+                            }
+                        },
+                        (err, response) => {
+                            if (err) {
+                                res.status(400).json({
+                                    message: `Error: ${err}`,
+                                });
+                            } else {
+                                res.status(200).json({
+                                    message: `Password Updated.`,
+                                });
+                                console.log(response)
+                            }
+                        }
+                    );
+                }
 
             } else {
                 res.status(400).json({
