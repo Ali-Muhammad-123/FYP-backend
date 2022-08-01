@@ -38,6 +38,7 @@ const allUser = require("./routes/allUsers");
 const credential = require("./routes/credential");
 const familyMember = require("./routes/familyMember");
 const companyDocs = require("./routes/companyDocs")
+const contactRequest = require("./routes/contactRequest")
 const filesRouter = require("./routes/Files");
 const OTPVerify = require("./routes/otpVerify");
 const upload = require("./middleware/upload");
@@ -68,6 +69,7 @@ app.use(company(upload));
 app.use(allUser);
 app.use(familyMember);
 app.use(credential);
+app.use(contactRequest);
 app.use(companyDocs(upload));
 app.use(appointment(upload));
 app.use(filesRouter);

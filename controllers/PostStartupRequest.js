@@ -20,10 +20,10 @@ class PostRequestController {
 
             const request = new Request({
                 name: name,
-                email: name,
-                phoneNumber: name,
-                address: name,
-                comments: name,
+                email: email,
+                phoneNumber: phoneNumber,
+                address: address,
+                comments: comments,
                 requestStatus: requestStatus,
             })
 
