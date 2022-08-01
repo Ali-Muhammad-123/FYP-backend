@@ -1,4 +1,4 @@
-const Request = require("../models/request");
+const Request = require("../models/startupRequest");
 
 class GetRequestController {
 
