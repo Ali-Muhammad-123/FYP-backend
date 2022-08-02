@@ -109,6 +109,7 @@ class PostVisaController {
           entryPermit: entryPermitAllFiles,
           residencyVisa: residencyVisaAllFiles,
           emiratesId: emiratesIdAllFiles,
+          company: company,
           employee: employee,
           visaUID: visaUID,
           familyMember: familyMember,
