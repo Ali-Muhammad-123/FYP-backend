@@ -19,7 +19,7 @@ const calculatorSchema = mongoose.Schema({
     required: true,
   },
   visaAllocation: {
-    type: String,
+    type: Number,
     required: true,
   },
   freeZoneType: {
@@ -34,10 +34,18 @@ const calculatorSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  ownership: {
+    type: Boolean,
+    required: true,
+  },
   description: {
     type: String,
     required: true,
-  }
+  },
+  specialOffer: {
+    type: Boolean,
+    required: true,
+  },
 },
   { timestamps: true });
 

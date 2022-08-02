@@ -4,7 +4,7 @@ class PostCalculatorController {
 
     static async Execute(req, res) {
 
-        const { calculatorActivity, emirates, name, noOfShareholders, visaAllocation, freeZoneType,
+        const { calculatorActivity, emirates, name, noOfShareholders, visaAllocation, freeZoneType, ownership,
             freeZone, price, description } = req.body;
 
         if (calculatorActivity != undefined &&
@@ -14,19 +14,21 @@ class PostCalculatorController {
             visaAllocation != undefined &&
             freeZoneType != undefined &&
             freeZone != undefined &&
+            ownership != undefined &&
             price != undefined &&
             description != undefined) {
 
             const calculatorObj = new Calculator({
-                calculatorActivity: calculatorActivity.trim(),
-                emirates: emirates.trim(),
-                name: name.trim(),
-                noOfShareholders: noOfShareholders.trim(),
-                visaAllocation: visaAllocation.trim(),
-                freeZoneType: freeZoneType.trim(),
-                freeZone: freeZone.trim(),
-                price: price.trim(),
-                description: description.trim(),
+                calculatorActivity: calculatorActivity,
+                emirates: emirates,
+                name: name,
+                noOfShareholders: noOfShareholders,
+                visaAllocation: visaAllocation,
+                freeZoneType: freeZoneType,
+                freeZone: freeZone,
+                price: price,
+                ownership: ownership,
+                description: description,
             })
 
             await calculatorObj.save((err) => {
