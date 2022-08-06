@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require("dotenv");
 var cors = require("cors");
 const path = require("path");
+
 dotenv.config();
 
 const corsOptions = {
@@ -37,11 +38,14 @@ const company = require("./routes/company");
 const allUser = require("./routes/allUsers");
 const credential = require("./routes/credential");
 const familyMember = require("./routes/familyMember");
-const companyDocs = require("./routes/companyDocs")
-const contactRequest = require("./routes/contactRequest")
+const companyDocs = require("./routes/companyDocs");
+const contactRequest = require("./routes/contactRequest");
 const filesRouter = require("./routes/Files");
 const OTPVerify = require("./routes/otpVerify");
+const requests = require("./routes/requests");
 const upload = require("./middleware/upload");
+const requestModel = require("./models/requests");
+const userModel = require("./models/user");
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
@@ -74,10 +78,11 @@ app.use(companyDocs(upload));
 app.use(appointment(upload));
 app.use(filesRouter);
 app.use(OTPVerify);
+app.use(requests);
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));
 
-app.listen(process.env.API_PORT, (error) => {
+var server = app.listen(process.env.API_PORT, (error) => {
   if (error) {
     console.error("Error Occurred while connecting to server: ", error);
   } else {
@@ -93,4 +98,53 @@ app.listen(process.env.API_PORT, (error) => {
       }
     });
   }
+});
+var io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["role"],
+  },
+});
+
+io.on("connection", function (socket) {
+  if (socket.handshake.headers.role === "client") {
+    console.log("Connected succesfully to the socket ...");
+  } else {
+    console.log("Admin connected succesfully to the socket ...");
+  }
+
+  // console.log(socket.handshake.headers.role);
+  socket.on("disconnect", (reason) => {
+    console.log(reason);
+  });
+
+  socket.on(
+    "recieveNotification",
+    async (user, heading, message, createdAt) => {
+      const userRes = await userModel.find({
+        _id: user,
+      });
+      console.log(user, heading, message, createdAt);
+      io.sockets.sockets.forEach((value, key, map) => {
+        if (
+          value.handshake.headers.role === "admin" &&
+          value.connected === true
+        ) {
+          io.sockets.sockets
+            .get(key)
+            .emit("notifyAdmin", userRes[0], heading, message, createdAt);
+          console.log("admin conntected");
+        }
+      });
+
+      await requestModel.create({
+        user: user,
+        heading: heading,
+        message: message,
+        read: false,
+        createdAt: createdAt,
+      });
+    }
+  );
 });

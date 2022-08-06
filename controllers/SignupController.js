@@ -5,9 +5,7 @@ const { response } = require("express");
 const saltRounds = 10;
 const otpGenerator = require("otp-generator");
 
-const accountSid = "AC65faeb2c647e63d22f41b19959e9af2c";
-const authToken = "e28edfd23fccb5488e250af0a8fa78ce";
-const client = require("twilio")(accountSid, authToken);
+const client = require("twilio")(process.env.accountSid, process.env.authToken);
 
 class SignupController {
   static async Execute(req, res) {
@@ -150,7 +148,7 @@ class SignupController {
                 .create({
                   body: `Your OTP is : ${password}`,
                   from: "+18304832576",
-                  messagingServiceSid: "MGb5bdb5b5c08d371d82295bb3c6b322ec",
+                  messagingServiceSid: process.env.messagingServiceSid,
                   to: mobile,
                 })
                 .then((message) => {

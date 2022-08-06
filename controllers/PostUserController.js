@@ -3,6 +3,8 @@ const Credential = require("../models/credential");
 const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const mailer = require("../components/mailer");
+const client = require("twilio")(process.env.accountSid, process.env.authToken);
 
 class PostUserController {
   static async Execute(req, res) {
@@ -36,7 +38,7 @@ class PostUserController {
         mobile: mobile.trim(),
         nationality: nationality.trim(),
         dateOfBirth: dateOfBirth,
-        passportDetails: passportDetails.trim(),
+        passportDetails: passportDetails,
         isVerified: isVerified,
         role: role.trim(),
       });
@@ -54,20 +56,43 @@ class PostUserController {
           if (err) {
             return res.status(400).send(err, response);
           } else {
-            var password = await otpGenerator.generate(8, {
+            var password = await otpGenerator.generate(4, {
               upperCaseAlphabets: false,
               digits: true,
               specialChars: false,
+              lowerCaseAlphabets: false,
             });
             console.log(password);
+
+            const mailOptions = {
+              from: process.env.SMTP_MAIL,
+              to: email,
+              subject: "VIRTUZONE OTP VERIFICATION",
+              text: `Your OTP is : ${password}`,
+            };
+
+            await mailer.sendMail(mailOptions);
+
+            client.messages
+              .create({
+                body: `Your OTP is : ${password}`,
+                from: "+18304832576",
+                messagingServiceSid: process.env.messagingServiceSid,
+                to: mobile,
+              })
+              .then((message) => {
+                console.log(message.sid);
+              })
+              .catch((err) => console.log(err));
 
             bcrypt.hash(password, saltRounds).then(async function (hash) {
               // Store hash in your password DB.
               const credential = new Credential({
                 user: response._id,
                 email: response.email.trim(),
-                password: hash,
+                password: password,
                 role: "client",
+                OTP: password,
               });
 
               await credential.save((err) => {
