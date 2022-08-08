@@ -101,7 +101,7 @@ var server = app.listen(process.env.API_PORT, (error) => {
 });
 var io = require("socket.io")(server, {
 	cors: {
-		origin: "http://virtuzone-admin.netlify.app",
+		origin: "https://virtuzone-admin.netlify.app",
 		methods: ["GET", "POST"],
 		allowedHeaders: ["role"],
 	},
