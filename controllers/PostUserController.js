@@ -95,7 +95,7 @@ class PostUserController {
 								OTP: password,
 							});
 
-							await credential.save((err) => {
+							credential.save((err) => {
 								if (err) {
 									return res.status(400).send(err);
 								} else {
