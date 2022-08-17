@@ -18,6 +18,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: false,
   },
+  dialCode: {
+    type: String,
+    required: true,
+  },
   mobile: {
     type: String,
     required: true,

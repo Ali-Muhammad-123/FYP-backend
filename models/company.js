@@ -7,18 +7,20 @@ const companySchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    shareHolder: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ShareHolder",
-      required: false,
-    }],
+    shareHolder: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ShareHolder",
+        required: false,
+      },
+    ],
     name: {
       type: String,
-      required: true,
+      required: false,
     },
     licenseNo: {
       type: String,
-      required: true,
+      required: false,
     },
     licenseCode: {
       type: String,
@@ -30,21 +32,21 @@ const companySchema = mongoose.Schema(
     },
     establishmentDate: {
       type: Date,
-      required: true,
+      required: false,
     },
     issueDate: {
       type: Date,
-      required: true,
+      required: false,
     },
     expiryDate: {
       type: Date,
-      required: true,
+      required: false,
     },
     activities: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "activity",
-        required: true,
+        required: false,
       },
     ],
   },

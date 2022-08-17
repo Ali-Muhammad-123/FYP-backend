@@ -4,7 +4,7 @@ const visaSchema = mongoose.Schema({
   company: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "company",
-    required: false,
+    required: true,
   },
   firstName: {
     type: String,

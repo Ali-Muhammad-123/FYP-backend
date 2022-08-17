@@ -10,6 +10,7 @@ module.exports = (upload) => {
   Router.post(
     "/company",
     upload.fields([
+      { name: "establishmentCard", maxCount: 2 },
       { name: "tradelicense", maxCount: 2 },
       { name: "officeLease", maxCount: 2 },
       { name: "shareCertificate", maxCount: 2 },
@@ -22,19 +23,21 @@ module.exports = (upload) => {
     }
   );
 
-  Router.put("/company",
+  Router.put(
+    "/company",
     upload.fields([
+      { name: "establishmentCard", maxCount: 2 },
       { name: "tradelicense", maxCount: 2 },
       { name: "officeLease", maxCount: 2 },
       { name: "shareCertificate", maxCount: 2 },
       { name: "articleOfIncorporation", maxCount: 2 },
       { name: "incorporationCertificate", maxCount: 2 },
       { name: "immigrationCard", maxCount: 2 },
-
     ]),
     async (req, res) => {
       UpdateCompany.Execute(req, res);
-    });
+    }
+  );
 
   Router.get("/company", async (req, res) => {
     GetCompany.Execute(req, res);
