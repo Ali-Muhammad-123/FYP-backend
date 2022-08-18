@@ -7,7 +7,7 @@ const path = require("path");
 dotenv.config();
 
 const corsOptions = {
-  origin: "*",
+	origin: "*",
 };
 
 app.use(cors(corsOptions));
@@ -47,6 +47,7 @@ const upload = require("./middleware/upload");
 const requestModel = require("./models/requests");
 const userModel = require("./models/user");
 const promotions = require("./routes/promotions");
+const supportServices = require("./routes/supportServices");
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
@@ -81,73 +82,74 @@ app.use(promotions(upload));
 app.use(filesRouter);
 app.use(OTPVerify);
 app.use(requests);
+app.use(supportServices);
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));
 
 var server = app.listen(process.env.API_PORT, (error) => {
-  if (error) {
-    console.error("Error Occurred while connecting to server: ", error);
-  } else {
-    console.log("Connected to Server Successfully!");
+	if (error) {
+		console.error("Error Occurred while connecting to server: ", error);
+	} else {
+		console.log("Connected to Server Successfully!");
 
-    console.log("Trying to connect to database server...");
+		console.log("Trying to connect to database server...");
 
-    mongoose.connect(process.env.DB_CONNECTION_STRING, (dbError) => {
-      if (dbError) {
-        console.error("Error Occurred while connecting to database: ", dbError);
-      } else {
-        console.log("Connected to Database Successfully!");
-      }
-    });
-  }
+		mongoose.connect(process.env.DB_CONNECTION_STRING, (dbError) => {
+			if (dbError) {
+				console.error("Error Occurred while connecting to database: ", dbError);
+			} else {
+				console.log("Connected to Database Successfully!");
+			}
+		});
+	}
 });
 var io = require("socket.io")(server, {
-  cors: {
-    origin: "https://virtuzone-admin.netlify.app",
-    // origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["role"],
-  },
+	cors: {
+		origin: "https://virtuzone-admin.netlify.app",
+		// origin: "http://localhost:3000",
+		methods: ["GET", "POST"],
+		allowedHeaders: ["role"],
+	},
 });
 
 io.on("connection", function (socket) {
-  if (socket.handshake.headers.role === "client") {
-    console.log("Connected succesfully to the socket ...");
-  } else {
-    console.log("Admin connected succesfully to the socket ...");
-  }
+	if (socket.handshake.headers.role === "client") {
+		console.log("Connected succesfully to the socket ...");
+	} else {
+		console.log("Admin connected succesfully to the socket ...");
+	}
 
-  // console.log(socket.handshake.headers.role);
-  socket.on("disconnect", (reason) => {
-    console.log(reason);
-  });
+	// console.log(socket.handshake.headers.role);
+	socket.on("disconnect", (reason) => {
+		console.log(reason);
+	});
 
-  socket.on(
-    "recieveNotification",
-    async (user, heading, message, createdAt) => {
-      const userRes = await userModel.find({
-        _id: user,
-      });
-      console.log(user, heading, message, createdAt);
-      io.sockets.sockets.forEach((value, key, map) => {
-        if (
-          value.handshake.headers.role === "admin" &&
-          value.connected === true
-        ) {
-          io.sockets.sockets
-            .get(key)
-            .emit("notifyAdmin", userRes[0], heading, message, createdAt);
-          console.log("admin conntected");
-        }
-      });
+	socket.on(
+		"recieveNotification",
+		async (user, heading, message, createdAt) => {
+			const userRes = await userModel.find({
+				_id: user,
+			});
+			console.log(user, heading, message, createdAt);
+			io.sockets.sockets.forEach((value, key, map) => {
+				if (
+					value.handshake.headers.role === "admin" &&
+					value.connected === true
+				) {
+					io.sockets.sockets
+						.get(key)
+						.emit("notifyAdmin", userRes[0], heading, message, createdAt);
+					console.log("admin conntected");
+				}
+			});
 
-      await requestModel.create({
-        user: user,
-        heading: heading,
-        message: message,
-        read: false,
-        createdAt: createdAt,
-      });
-    }
-  );
+			await requestModel.create({
+				user: user,
+				heading: heading,
+				message: message,
+				read: false,
+				createdAt: createdAt,
+			});
+		}
+	);
 });
