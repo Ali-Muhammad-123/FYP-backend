@@ -1,15 +1,14 @@
 const Activity = require("../models/activity");
 
 
-class PostActivityController {
+class UpdateActivityController {
 
     static async Execute(req, res) {
 
-        const { name, emirates_id } = req.body;
+        const { name, mainland_id } = req.body;
         const { id } = req.query;
 
-        if (name != undefined &&
-            emirates_id != undefined &&
+        if (
             id != undefined &&
             id.match(/^[0-9a-fA-F]{24}$/)) {
 
@@ -19,8 +18,8 @@ class PostActivityController {
                 {
                     $set:
                     {
-                        name: name.trim(),
-                        emirates_id: emirates_id.trim(),
+                        name: name,
+                        mainland_id: mainland_id,
                     }
                 },
                 { upsert: true },
@@ -31,7 +30,7 @@ class PostActivityController {
                         });
                     } else {
                         res.status(200).json({
-                            message: `Incorporation Certificate Updated.`,
+                            message: `Activity Updated.`,
                         });
                     }
                 }
@@ -47,4 +46,4 @@ class PostActivityController {
     }
 }
 
-module.exports = PostActivityController;
+module.exports = UpdateActivityController;

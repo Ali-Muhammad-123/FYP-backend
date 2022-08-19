@@ -5,14 +5,14 @@ class PostActivityController {
 
     static async Execute(req, res) {
 
-        const { name, emirates_id } = req.body;
+        const { name, mainland_id } = req.body;
 
         if (name != undefined &&
-            emirates_id != undefined) {
+            mainland_id != undefined) {
 
             const activityObj = new Activity({
-                name: name.trim(),
-                emirates_id: emirates_id,
+                name: name,
+                mainland_id: mainland_id,
             })
 
             await activityObj.save((err) => {

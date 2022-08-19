@@ -5,9 +5,9 @@ const ActivitySchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  emirates_id: {
+  mainland_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "emirates"
+    ref: "mainland"
   }
 },
   { timestamps: true });

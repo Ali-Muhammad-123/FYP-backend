@@ -11,7 +11,7 @@ class GetActivityController {
 
 
             var activity = await Activity.find({
-                emirates_id: id
+                mainland_id: id
             });
 
             if (activity && activity.length > 0) {
