@@ -77,7 +77,13 @@ class UpdateCompanyController {
           }
         }
       }
-      console.log(activities);
+      console.log(name);
+      console.log(licenseNo);
+      console.log(licenseCode);
+      console.log(judiciary);
+      console.log(establishmentDate);
+      console.log(issueDate);
+      console.log(expiryDate);
       Company.findOneAndUpdate(
         { _id: id },
         {
@@ -90,7 +96,7 @@ class UpdateCompanyController {
             establishmentDate: establishmentDate,
             issueDate: issueDate,
             expiryDate: expiryDate,
-            activities: [activities],
+            activities: activities.split(","),
           },
         },
         { upsert: true, new: true },
@@ -362,7 +368,7 @@ class UpdateCompanyController {
 
       var immigrationCardAllFiles = [];
       if (Object.keys(req.files).includes("immigrationCard")) {
-        for (const file of req.files.incorporationCertificate) {
+        for (const file of req.files.immigrationCard) {
           var final_file = {
             file: file.filename,
             contentType: file.mimetype,
@@ -399,6 +405,7 @@ class UpdateCompanyController {
             $set: {
               dateOfIssue: dateOfIssue,
               expiryDate: expiryDate,
+              file: [],
             },
           },
           { upsert: true },
