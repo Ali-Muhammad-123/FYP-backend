@@ -50,6 +50,7 @@ const promotions = require("./routes/promotions");
 const supportServices = require("./routes/supportServices");
 const mainland = require("./routes/mainland");
 const consultant = require("./routes/consultant");
+const contact = require("./routes/contact");
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
@@ -87,6 +88,7 @@ app.use(requests);
 app.use(supportServices);
 app.use(mainland);
 app.use(consultant(upload));
+app.use(contact);
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));
 

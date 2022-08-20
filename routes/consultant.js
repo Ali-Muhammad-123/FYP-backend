@@ -28,7 +28,7 @@ module.exports = (upload) => {
 
         });
 
-    Router.get("/consultant", auth, async (req, res) => {
+    Router.get("/consultant", async (req, res) => {
         GetConsultant.Execute(req, res);
     });
 
