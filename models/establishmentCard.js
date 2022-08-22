@@ -14,6 +14,10 @@ const EstablishmentCardSchema = mongoose.Schema(
       type: Date,
       required: true,
     },
+    establishmentCardNo: {
+      type: String,
+      required: true,
+    },
     file: [
       {
         type: mongoose.Schema.Types.ObjectId,
