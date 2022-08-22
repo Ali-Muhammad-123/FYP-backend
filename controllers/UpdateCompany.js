@@ -320,9 +320,9 @@ class UpdateCompanyController {
               file: establishmentCardAllFiles,
               message: message,
               establishmentCardNo: establishmentCardNo,
-              establishmentDate: establismentDateEstablismentCard,
-              dateOfIssue: issueDateEstablismentCard,
-              expiryDate: expiryDateEstablismentCard
+              establismentDateEstablismentCard: establismentDateEstablismentCard,
+              issueDateEstablismentCard: issueDateEstablismentCard,
+              expiryDateEstablismentCard: expiryDateEstablismentCard
             },
           },
           { upsert: true },

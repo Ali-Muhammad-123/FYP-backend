@@ -6,15 +6,15 @@ const EstablishmentCardSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "company",
     },
-    dateOfIssue: {
+    issueDateEstablismentCard: {
       type: Date,
       required: true,
     },
-    establishmentDate: {
+    establismentDateEstablismentCard: {
       type: Date,
       required: true,
     },
-    expiryDate: {
+    expiryDateEstablismentCard: {
       type: Date,
       required: true,
     },
