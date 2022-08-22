@@ -35,7 +35,7 @@ class GetEmployeeController {
                 });
 
             } else {
-                res.status(403).json({
+                res.status(200).json({
                     message: "No Record found",
                 });
             }
@@ -55,7 +55,7 @@ class GetEmployeeController {
                 });
 
             } else {
-                res.status(403).json({
+                res.status(200).json({
                     message: "No Record found",
                 });
             }

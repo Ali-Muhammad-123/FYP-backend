@@ -17,8 +17,8 @@ class GetUserController {
                             user: result
                         });
                     } else {
-                        res.status(403).send({
-                            message: "No red!",
+                        res.status(200).send({
+                            message: "No result found!",
                         });
                     }
                 }
@@ -31,7 +31,7 @@ class GetUserController {
                     user: user,
                 });
             } else {
-                res.status(403).send({
+                res.status(200).send({
                     message: "No records found!",
                 });
             }

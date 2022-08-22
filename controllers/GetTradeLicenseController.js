@@ -16,7 +16,7 @@ class GetTradeLicenseController {
           tradeLicense: tradeLicense,
         });
       } else {
-        res.status(403).send({
+        res.status(200).send({
           message: "No records found!",
         });
       }
@@ -31,7 +31,7 @@ class GetTradeLicenseController {
           tradeLicense: tradeLicense,
         });
       } else {
-        res.status(403).send({
+        res.status(200).send({
           message: "No records found!",
         });
       }
@@ -47,7 +47,7 @@ class GetTradeLicenseController {
           createdAt: tradeLicense.createdAt,
         });
       } else {
-        res.status(403).send({
+        res.status(200).send({
           message: "No records found!",
         });
       }

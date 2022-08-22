@@ -42,7 +42,7 @@ class UpdateConsultantController {
                                     firstName: firstName,
                                     lastName: lastName,
                                     language: language,
-                                    file: result._id,
+                                    picture: result._id,
                                 }
                             },
                             { upsert: true },

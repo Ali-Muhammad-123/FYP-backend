@@ -1,4 +1,8 @@
 const Emirates = require("../models/emirates");
+const Mainland = require("../models/mainland");
+const Activity = require("../models/activity");
+const { options } = require("../routes/emirates");
+
 
 class DeleteEmiratesController {
 
@@ -7,6 +11,16 @@ class DeleteEmiratesController {
         const { id } = req.query;
 
         if (id != undefined && id.match(/^[0-9a-fA-F]{24}$/)) {
+
+            const mainland = await Mainland.find({ "emirates_id": id });
+
+            for (const file of mainland) {
+                await Activity.deleteMany({ "mainland_id": file._id });
+            }
+
+            const result = await Mainland.deleteMany({ "emirates_id": id }, { new: true });
+            console.log("fdsf")
+            console.log(result)
 
             Emirates.findOneAndDelete({ "_id": id }, function (err, response) {
                 if (!err) {
