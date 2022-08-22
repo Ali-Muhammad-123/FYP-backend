@@ -1,7 +1,7 @@
 const GetPromotions = require("../controllers/GetAllPromotions");
 const EditPromotions = require("../controllers/UpdatePromotion");
 const AddPromotions = require("../controllers/PostPromotion");
-const DeletePromotions = require("../controllers/GetAllPromotions");
+const DeletePromotions = require("../controllers/DeletePromotion");
 const PromotionsRouter = require("express").Router();
 const commonauth = require("../middleware/commonauth");
 
