@@ -5,7 +5,7 @@ const Router = require("express").Router();
 const auth = require("../middleware/adminAuth");
 const commonauth = require("../middleware/commonauth");
 
-Router.post("/emirates", auth, async (req, res) => {
+Router.post("/emirates", async (req, res) => {
 	PostEmirates.Execute(req, res);
 });
 

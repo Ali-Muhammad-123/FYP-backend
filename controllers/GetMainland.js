@@ -12,6 +12,8 @@ class GetMainlandController {
 
             var mainland = await Mainland.find({
                 emirates_id: id
+            }).populate({
+                path: 'emirates_id'
             });
 
             if (mainland && mainland.length > 0) {
@@ -30,7 +32,9 @@ class GetMainlandController {
 
         } else {
 
-            var mainland = await Mainland.find();
+            var mainland = await Mainland.find().populate({
+                path: 'emirates_id'
+            });
 
             if (mainland && mainland.length > 0) {
 

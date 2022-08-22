@@ -25,7 +25,7 @@ module.exports = (upload) => {
     commonauth,
     upload.single("promotion"),
     async (req, res) => {
-      GetPromotions.Execute(req, res);
+      EditPromotions.Execute(req, res);
     }
   );
 

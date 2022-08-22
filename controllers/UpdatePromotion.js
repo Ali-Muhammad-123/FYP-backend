@@ -4,10 +4,11 @@ class UpdatePromotionController {
   static async Execute(req, res) {
     const { image, link } = req.body;
     const { id } = req.query;
-
+    console.log(
+      'asdasd'
+    )
     if (
-      image != undefined &&
-      link != undefined &&
+
       id.match(/^[0-9a-fA-F]{24}$/)
     ) {
       var final_file = {
