@@ -17,6 +17,7 @@ class PostCompanyController {
       licenseCode,
       judiciary,
       establishmentDate,
+
       issueDate,
       expiryDate,
       activities,

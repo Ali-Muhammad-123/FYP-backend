@@ -21,6 +21,7 @@ class UpdateCompanyController {
       judiciary,
       establishmentDate,
       issueDate,
+      establishmentCardNo,
       expiryDate,
       activities,
       code,
@@ -315,6 +316,7 @@ class UpdateCompanyController {
             $set: {
               file: establishmentCardAllFiles,
               message: message,
+              establishmentCardNo: establishmentCardNo
             },
           },
           { upsert: true },
