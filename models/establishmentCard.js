@@ -10,6 +10,10 @@ const EstablishmentCardSchema = mongoose.Schema(
       type: Date,
       required: true,
     },
+    establishmentDate: {
+      type: Date,
+      required: true,
+    },
     expiryDate: {
       type: Date,
       required: true,

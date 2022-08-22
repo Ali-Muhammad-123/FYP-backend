@@ -22,6 +22,9 @@ class UpdateCompanyController {
       establishmentDate,
       issueDate,
       establishmentCardNo,
+      establismentDateEstablismentCard,
+      issueDateEstablismentCard,
+      expiryDateEstablismentCard,
       expiryDate,
       activities,
       code,
@@ -316,7 +319,10 @@ class UpdateCompanyController {
             $set: {
               file: establishmentCardAllFiles,
               message: message,
-              establishmentCardNo: establishmentCardNo
+              establishmentCardNo: establishmentCardNo,
+              establishmentDate: establismentDateEstablismentCard,
+              dateOfIssue: issueDateEstablismentCard,
+              expiryDate: expiryDateEstablismentCard
             },
           },
           { upsert: true },
