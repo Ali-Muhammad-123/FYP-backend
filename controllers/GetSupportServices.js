@@ -1,4 +1,4 @@
-const serviceSchema = require("../models/supportServices");
+const serviceSchema = require("../models/group");
 
 class GetSupportServiceController {
 	static async Execute(req, res) {

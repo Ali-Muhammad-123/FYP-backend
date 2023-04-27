@@ -1,4 +1,4 @@
-const supportServices = require("../models/supportServices");
+const supportServices = require("../models/group");
 
 class UpdateSupportServicesController {
 	static async Execute(req, res) {

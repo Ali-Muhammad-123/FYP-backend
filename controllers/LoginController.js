@@ -5,18 +5,15 @@ const bcrypt = require("bcrypt");
 
 class LoginController {
 	static async Execute(req, res) {
-		console.log(req.body);
 		const { email, password } = req.body;
 
 		if (email != undefined && password != undefined) {
 			const existingUser = await Credential.findOne({
 				email: email.toLowerCase(),
 			});
-			console.log(existingUser);
+
 			if (existingUser) {
 				const user = await User.find({ _id: existingUser.user });
-
-				console.log(user);
 				await bcrypt
 					.compare(password, existingUser.password)
 					.then(function (result) {
@@ -31,9 +28,12 @@ class LoginController {
 							res.setHeader("x-auth-token", token);
 							res.status(200).send({
 								message: "Login Successfull",
+
 								email: existingUser.email,
+								role: existingUser.role,
 								_id: user[0]._id,
 								token: token,
+								...user[0]._doc,
 							});
 						} else {
 							res.status(400).send({

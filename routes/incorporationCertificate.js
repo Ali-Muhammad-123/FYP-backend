@@ -6,39 +6,31 @@ const UpdateIncorporationCertificate = require("../controllers/UpdateIncorporati
 const DeleteIncorporationCertificate = require("../controllers/DeleteIncorporationCertificate");
 
 module.exports = (upload) => {
+	Router.post(
+		"/incorporationCertificate",
+		auth,
+		upload.single("incorporation-certificate"),
+		async (req, res, next) => {
+			PostIncorporationCertificate.Execute(req, res, next);
+		}
+	);
 
-    Router.post(
-        '/incorporationCertificate',
-        auth,
-        upload.single("incorporation-certificate"),
-        async (req, res, next) => {
+	Router.put(
+		"/incorporationCertificate",
+		auth,
+		upload.single("incorporation-certificate"),
+		async (req, res, next) => {
+			UpdateIncorporationCertificate.Execute(req, res, next);
+		}
+	);
 
-            PostIncorporationCertificate.Execute(req, res, next);
+	Router.get("/incorporationCertificate", auth, async (req, res) => {
+		GetIncorporationCertificate.Execute(req, res);
+	});
 
+	Router.delete("/incorporationCertificate", auth, async (req, res) => {
+		DeleteIncorporationCertificate.Execute(req, res);
+	});
 
-        });
-
-
-    Router.put(
-        '/incorporationCertificate',
-        auth,
-        upload.single("incorporation-certificate"),
-        async (req, res, next) => {
-
-            UpdateIncorporationCertificate.Execute(req, res, next);
-
-
-        });
-
-    Router.get("/incorporationCertificate", auth, async (req, res) => {
-        GetIncorporationCertificate.Execute(req, res);
-    });
-
-
-    Router.delete("/incorporationCertificate", auth, async (req, res) => {
-        DeleteIncorporationCertificate.Execute(req, res);
-    });
-
-    return Router;
-
-}
+	return Router;
+};
