@@ -20,6 +20,7 @@ const client = require("./routes/client");
 const loginRouter = require("./routes/login");
 const groupRouter = require("./routes/group");
 const panelRouter = require("./routes/panel");
+const examsRouter = require("./routes/activeExams");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +29,7 @@ app.use(client(upload));
 app.use(loginRouter);
 app.use(panelRouter);
 app.use(groupRouter);
+app.use(examsRouter);
 
 app.use(cors(corsOptions, { credentials: true, origin: true }));
 

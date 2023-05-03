@@ -107,10 +107,38 @@ class PostUserController {
 					var file = await File.create(final_file);
 				}
 
-				const mid1 = new Grade({});
-				const mid2 = new Grade({});
-				const final1 = new Grade({});
-				const final2 = new Grade({});
+				const mid1 = await new Grade({
+					remarks: "",
+					presentation: 0,
+					code: 0,
+					erd: 0,
+					srs: 0,
+					formatting: 0,
+				}).save();
+				const mid2 = await new Grade({
+					remarks: "",
+					presentation: 0,
+					code: 0,
+					erd: 0,
+					srs: 0,
+					formatting: 0,
+				}).save();
+				const final1 = await new Grade({
+					remarks: "",
+					presentation: 0,
+					code: 0,
+					erd: 0,
+					srs: 0,
+					formatting: 0,
+				}).save();
+				const final2 = await new Grade({
+					remarks: "",
+					presentation: 0,
+					code: 0,
+					erd: 0,
+					srs: 0,
+					formatting: 0,
+				}).save();
 				const user = new User({
 					name: name.trim(),
 					program: program.trim(),

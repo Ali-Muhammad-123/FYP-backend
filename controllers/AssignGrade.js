@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const Grade = require("../models/grade");
 
 class AssignGrade {
 	static async Execute(req, res) {
@@ -13,7 +13,7 @@ class AssignGrade {
 			srs != undefined ||
 			formatting != undefined
 		) {
-			User.updateOne(
+			Grade.updateOne(
 				{ _id: id },
 				{ remarks, presentation, code, erd, srs, formatting }
 			)
@@ -36,4 +36,4 @@ class AssignGrade {
 	}
 }
 
-module.exports = PostImmigrationCardController;
+module.exports = AssignGrade;

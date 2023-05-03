@@ -3,10 +3,10 @@ const GetGroup = require("../controllers/GetGroup");
 const SearchGroup = require("../controllers/SearchGroup");
 const UpdateCalculator = require("../controllers/UpdateCalculator");
 const DeleteCalculator = require("../controllers/DeleteCalculator");
+const AssignGrade = require("../controllers/AssignGrade");
 const groupRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
 const commonauth = require("../middleware/commonauth");
-const GetGroupsController = require("../controllers/UpdateCalculator");
 
 groupRouter.post("/group", async (req, res) => {
 	PostGroup.Execute(req, res);
@@ -17,11 +17,7 @@ groupRouter.get("/group/search", async (req, res) => {
 });
 
 groupRouter.put("/group", async (req, res) => {
-	UpdateCalculator.Execute(req, res);
-});
-
-groupRouter.put("/getGroups/:panel", async (req, res) => {
-	GetGroupsController.Execute(req, res);
+	// UpdateCalculator.Execute(req, res);
 });
 
 groupRouter.get("/group", async (req, res) => {
@@ -29,7 +25,11 @@ groupRouter.get("/group", async (req, res) => {
 });
 
 groupRouter.delete("/group", async (req, res) => {
-	DeleteCalculator.Execute(req, res);
+	// DeleteCalculator.Execute(req, res);
+});
+
+groupRouter.post("/assignGrade", async (req, res) => {
+	AssignGrade.Execute(req, res);
 });
 
 module.exports = groupRouter;
