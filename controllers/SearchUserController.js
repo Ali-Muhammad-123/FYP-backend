@@ -24,12 +24,15 @@ class SearchUserController {
 				role: role,
 			});
 			if (existingUser.length > 0) {
+				console.log(existingUser[0]._id);
+
 				var group = await Group.find({
 					$or: [
 						{ studentOne: existingUser[0]._id },
-						{ studenTwo: existingUser[0]._id },
+						{ studentTwo: existingUser[0]._id },
 					],
 				});
+				console.log(group);
 				if (group.length == 0) res.status(200).json(existingUser);
 				else
 					res.status(400).json({

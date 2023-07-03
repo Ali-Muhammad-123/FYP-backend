@@ -25,10 +25,12 @@
     "multer": "^1.4.4",
     "multer-gridfs-storage": "^5.0.2",
     "node-rsa": "^1.1.1",
-    "nodemailer": "^6.7.7",
+    "nodemailer": "^6.9.3",
+    "nodemailer-smtp-transport": "^2.7.4",
     "otp-generator": "^4.0.0",
     "socket.io": "^4.5.1",
-    "twilio": "^3.79.0"
+    "twilio": "^3.79.0",
+    "xoauth2": "^1.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"

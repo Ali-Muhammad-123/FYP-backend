@@ -1,9 +1,8 @@
 const PostGroup = require("../controllers/PostGroup");
 const GetGroup = require("../controllers/GetGroup");
 const SearchGroup = require("../controllers/SearchGroup");
-const UpdateCalculator = require("../controllers/UpdateCalculator");
-const DeleteCalculator = require("../controllers/DeleteCalculator");
 const AssignGrade = require("../controllers/AssignGrade");
+const GetGrades = require("../controllers/GetGrades");
 const groupRouter = require("express").Router();
 const auth = require("../middleware/adminAuth");
 const commonauth = require("../middleware/commonauth");
@@ -30,6 +29,10 @@ groupRouter.delete("/group", async (req, res) => {
 
 groupRouter.post("/assignGrade", async (req, res) => {
 	AssignGrade.Execute(req, res);
+});
+
+groupRouter.get("/getGrades", async (req, res) => {
+	GetGrades.Execute(req, res);
 });
 
 module.exports = groupRouter;
