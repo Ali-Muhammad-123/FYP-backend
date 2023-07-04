@@ -42,7 +42,7 @@ class AssignGrade {
 						from: "cs1912259@szabist.pk",
 
 						// Comma separated list of recipients
-						to: "alim.9171@gmail.com",
+						to: "adeel.karim@szabist.pk",
 
 						// Subject of the message
 						subject: "Marks Added ✔",
